@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ألوانك الخاصة */
+:root{
+  --brand-soft: #D8EAEC22;
+  --brand-head: #165C75;
+  --brand-link: #27AEB9;
+  --brand-footer: #165C75;
+}
+nav[aria-label="breadcrumb"],
+nav.breadcrumb {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
