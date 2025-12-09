@@ -1,8 +1,6 @@
-import './index.css'
-
 <template>
   <RouterLink
-    :to="{ name: 'ad-detail', params: { id } }"
+    :to="link"
     class="ad-card group rounded-[24px] overflow-hidden
            bg-[#E9F5F6] dark:bg-slate-800
            border border-[#D8EDEE] dark:border-slate-700
@@ -17,28 +15,31 @@ import './index.css'
 
     <!-- النص + الزر -->
     <div class="p-5 flex-1 flex flex-col gap-2">
-      <p class="text-xs text-[#165C75] dark:text-cyan-300 font-semibold opacity-80">
-        نوع: {{ type }} | التاريخ: {{ date }}
+      <!-- التاريخ (اختياري) -->
+      <p
+        v-if="date"
+        class="text-xs text-[#165C75] dark:text-cyan-300 font-semibold opacity-80"
+      >
+        التاريخ: {{ date }}
       </p>
 
+      <!-- العنوان -->
       <h2 class="text-[#165C75] dark:text-cyan-300 font-bold text-lg leading-snug">
         {{ title }}
       </h2>
 
+      <!-- الوصف -->
       <p class="text-slate-600 dark:text-slate-200 text-sm leading-relaxed line-clamp-3">
         {{ desc }}
       </p>
 
-
-<RouterLink
-  :to="{ name: 'ad-detail', params: { id } }"
-  class="btn btn-solid w-full mt-4"
->
-  عرض التفاصيل
-</RouterLink>
-
-
-
+      <!-- الزر -->
+      <RouterLink
+        :to="link"
+        class="btn btn-solid w-full mt-4"
+      >
+        معرفة المزيد
+      </RouterLink>
     </div>
   </RouterLink>
 </template>
@@ -47,17 +48,15 @@ import './index.css'
 import { RouterLink } from 'vue-router'
 
 defineProps({
-  id: [Number, String],
-  image: String,
-  title: String,
-  desc: String,
-  date: String,
-  type: String,
+  title: { type: String, required: true },
+  desc:  { type: String, required: true },
+  date:  { type: String, default: '' },
+  image: { type: String, required: true },
+  link:  { type: [String, Object], required: true },
 })
 </script>
 
 <style scoped>
-/* هوفر الكارد – نفس إحساس الرئيسية */
 .ad-card {
   transition:
     transform .35s cubic-bezier(.2,.9,.3,1),
@@ -72,6 +71,4 @@ defineProps({
   box-shadow: 0 22px 40px rgba(15,76,92,0.18);
   border-color: #C7E4E7;
 }
-
-
 </style>

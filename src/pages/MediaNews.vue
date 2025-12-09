@@ -1,7 +1,6 @@
 <template>
   <div class="mx-auto max-w-[1300px] px-4 mt-12" dir="rtl">
 
-    <!-- 🧭 breadcrumb (نفس خدمات) -->
     <div class="mx-auto max-w-[1300px] px-4 mt-6 mb-4">
       <nav class="text-slate-500 text-sm flex items-center gap-2">
         <RouterLink to="/" class="hover:text-[#165C75]">الرئيسية</RouterLink>
@@ -10,7 +9,6 @@
       </nav>
     </div>
 
-    <!-- 🔹 العنوان + وصف بسيط -->
     <div class="mx-auto max-w-[1300px] px-4 mb-6">
       <h1 class="text-3xl font-bold text-[#1A1A1A] mb-2 text-right">
         الأخبار
@@ -21,7 +19,6 @@
       </p>
     </div>
 
-    <!-- 🟦 الكارد الأبيض الكبير الموحد (نفس صفحة الخدمات) -->
     <div
       class="mx-auto max-w-[1300px] bg-white rounded-[40px] border border-[#E5EDF0]
              shadow-sm p-6 md:p-10"
@@ -50,7 +47,6 @@
             {{ item.desc }}
           </p>
 
-          <!-- رابط قراءة المزيد -->
           <RouterLink
             :to="item.link"
             class="text-[#27AEB9] font-semibold hover:underline"

@@ -112,7 +112,6 @@ const showPass2 = ref(false)
 const router = useRouter()
 
 const onSubmit = () => {
-  // هنا لاحقاً تضيفي استدعاء API للتسجيل، وبعد النجاح:
   router.push('/login')
 }
 </script>

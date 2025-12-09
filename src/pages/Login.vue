@@ -85,7 +85,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
 
 const showPass = ref(false)
@@ -93,12 +93,19 @@ const email = ref('')
 const password = ref('')
 
 const router = useRouter()
+const route = useRoute()
 const { login } = useAuth()
 
 function onSubmit() {
-  // هنا لاحقاً تتحققي من صحة البيانات مع الباك إند
-  // لو تمام:
+  // استدعاء منطق الأوث (لو عندك)
   login()
-  router.push('/')   // يروح للصفحة الرئيسية
+
+  // حفظ توكن تجريبي يكفي ليمر حارس الراوتر
+  localStorage.setItem('token', 'demo-token')
+
+  // الرجوع إما للصفحة المطلوبة (مثلاً الفورم) أو الرئيسية
+  const redirect = route.query.redirect || { name: 'home' }
+  router.push(redirect)
 }
 </script>
+

@@ -2,7 +2,6 @@
   <div class="min-h-screen bg-[#F4FAFB] py-10" dir="rtl">
     <div class="mx-auto max-w-[900px] px-4">
 
-      <!-- الهيدر الداخلي للفورم -->
       <div
         v-if="formDef"
         class="bg-white rounded-2xl shadow-sm overflow-hidden mb-6 border border-slate-100"
@@ -36,7 +35,6 @@
           v-for="field in formDef.fields"
           :key="field.name"
         >
-          <!-- نستخدم component ديناميكي حسب نوع الحقل -->
           <component
             :is="resolveFieldComponent(field)"
             v-model="formData[field.name]"
@@ -76,14 +74,11 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-// 👇 هنا نجيب تعريف الفورمات من الكونفيج المحلي
 import { formsConfig } from '@/data/formsConfig'
 
-// 👇 نستخدم نفس الـ Base Components اللي بنينا عليها شغلك
 import BaseTextField from '@/components/form/BaseTextField.vue'
 import BaseTextareaField from '@/components/form/BaseTextareaField.vue'
 import BaseFileUpload from '@/components/form/BaseFileUpload.vue'
-// مستقبلاً: BaseSelect, BaseCheckboxGroup, BaseRadioGroup ...
 import BaseRadioGroup from '@/components/form/BaseRadioGroup.vue'
 import BaseCheckboxGroup from '@/components/form/BaseCheckboxGroup.vue'
 
@@ -98,7 +93,6 @@ const error = ref('')
 const formData = reactive({})
 const errors = reactive({})
 
-// نحدد أي كومبوننت نستخدم حسب نوع الحقل
 const resolveFieldComponent = (field) => {
   switch (field.type) {
     case 'text':
@@ -118,7 +112,6 @@ case 'radio': return BaseRadioGroup
   }
 }
 
-// تحميل تعريف الفورم من الكونفيج (بدل API حالياً)
 const loadForm = () => {
   loading.value = true
   error.value = ''
@@ -132,7 +125,6 @@ const loadForm = () => {
   } else {
     formDef.value = def
 
-    // نهيئ formData و errors حسب الحقول
     def.fields.forEach((field) => {
       // checkbox مستقبلاً نخليه مصفوفة
       formData[field.name] = field.type === 'checkbox' ? [] : ''
@@ -172,7 +164,6 @@ const onSubmit = () => {
 
   const slug = route.params.slug
 
-  // 🔹 حالياً: بس نطبع في الكونسول ونعطي alert
   console.log('Dynamic form submit:', {
     slug,
     data: { ...formData },

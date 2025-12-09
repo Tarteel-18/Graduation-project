@@ -1,60 +1,65 @@
 <template>
   <div class="mx-auto max-w-[1300px] px-4 mt-12 pb-20" dir="rtl">
-    <!-- 🧭 breadcrumb -->
-    <nav class="text-slate-500 text-sm flex items-center gap-2 mb-6">
-      <RouterLink to="/" class="hover:text-[#165C75]">الرئيسية</RouterLink>
-      <span>›</span>
-      <RouterLink to="/media" class="hover:text-[#165C75]">
-        قسم الإعلام والتوعية
-      </RouterLink>
-      <span>›</span>
-      <span class="text-[#1A1A1A] font-semibold">حلقات إذاعية</span>
-    </nav>
 
-    <!-- العنوان الرئيسي -->
-<h1 class="text-2xl md:text-3xl font-bold text-[#1A1A1A] mb-8 text-right">
-  الحلقات الإذاعية
-</h1>
+    <!-- ✅ Breadcrumb -->
+    <div class="mx-auto max-w-[1300px] px-4 mt-6 mb-4">
+      <nav class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-2">
+        <RouterLink to="/" class="hover:text-[#165C75] dark:hover:text-cyan-300">الرئيسية</RouterLink>
+        <span>›</span>
+        <RouterLink to="/media" class="hover:text-[#165C75] dark:hover:text-cyan-300">
+          قسم الإعلام والتوعية
+        </RouterLink>
+        <span>›</span>
+        <span class="text-[#165C75] dark:text-cyan-300 font-semibold">
+          الحلقات الإذاعية
+        </span>
+      </nav>
+    </div>
 
-    <!-- 🟦 الكارد الأبيض (نفس عرض قسم الإعلام والتوعية = 1300px) -->
+    <!-- ✅ العنوان -->
+    <div class="mx-auto max-w-[1300px] px-4 mb-6">
+      <h1 class="text-3xl font-bold text-[#165C75] dark:text-cyan-300 text-right">
+        الحلقات الإذاعية
+      </h1>
+    </div>
+
+    <!-- ✅ الكارد الأبيض -->
     <div
-      class="mx-auto max-w-[1300px] bg-white rounded-[40px] border border-[#E5EDF0]
-             shadow-sm px-4 md:px-10 py-10"
+      class="mx-auto max-w-[1300px] bg-white dark:bg-slate-900 rounded-[40px]
+             border border-[#E5EDF0] dark:border-slate-700 shadow-sm
+             px-4 md:px-10 py-10"
     >
       <div class="flex flex-col gap-10">
-        
-        <!-- ⭐ الحلقة الرئيسية -->
+
+        <!-- ⭐️ الحلقة الرئيسية -->
         <div
           v-if="radios.length"
-          class="bg-[#ECF6F7] rounded-[26px] border border-[#D8EDEE] shadow p-6"
+          class="bg-[#ECF6F7] dark:bg-slate-800 rounded-[26px]
+                 border border-[#D8EDEE] dark:border-slate-700 shadow p-6"
         >
-          <h2 class="text-[#165C75] text-xl md:text-2xl font-bold mb-2">
+          <h2 class="text-[#165C75] dark:text-cyan-300 text-xl md:text-2xl font-bold mb-2">
             {{ radios[0].title }}
           </h2>
-
-          <p class="text-slate-600 mb-4">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">
             {{ radios[0].description }}
           </p>
-
           <audio controls class="w-full mt-3">
             <source :src="radios[0].audioUrl" type="audio/mpeg" />
           </audio>
         </div>
 
-        <!-- ⭐ باقي الحلقات -->
         <div
           v-for="(item, idx) in radios.slice(1)"
           :key="item.id || idx"
-          class="bg-[#ECF6F7] rounded-[26px] border border-[#D8EDEE] shadow p-6"
+          class="bg-[#ECF6F7] dark:bg-slate-800 rounded-[26px]
+                 border border-[#D8EDEE] dark:border-slate-700 shadow p-6"
         >
-          <h3 class="text-[#165C75] text-lg md:text-xl font-bold mb-2">
+          <h3 class="text-[#165C75] dark:text-cyan-300 text-lg md:text-xl font-bold mb-2">
             {{ item.title }}
           </h3>
-
-          <p class="text-slate-600 mb-4">
+          <p class="text-slate-600 dark:text-slate-300 mb-4">
             {{ item.description }}
           </p>
-
           <audio controls class="w-full mt-3">
             <source :src="item.audioUrl" type="audio/mpeg" />
           </audio>
@@ -62,6 +67,7 @@
 
       </div>
     </div>
+
   </div>
 </template>
 
@@ -91,4 +97,5 @@ const radios = ref([
 ]);
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

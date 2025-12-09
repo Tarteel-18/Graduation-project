@@ -1,28 +1,34 @@
 <template>
-  <!-- نفس عرض صفحة الخدمات / الشركاء -->
-  <div class="mx-auto max-w-[1300px] px-4 mt-12 pb-24" dir="rtl">
+   <div class="mx-auto max-w-[1300px] px-4 mt-12 pb-20" dir="rtl">
 
-    <!-- breadcrumb -->
-    <nav class="text-slate-500 text-sm flex items-center gap-2 mb-6">
-      <RouterLink to="/" class="hover:text-[#165C75]">الرئيسية</RouterLink>
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-[1300px] px-4 mt-6 mb-4">
+    <nav class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-2">
+      <RouterLink to="/" class="hover:text-[#165C75] dark:hover:text-cyan-300">الرئيسية</RouterLink>
       <span>›</span>
-      <span class="text-[#165C75] font-semibold">المشاريع</span>
+      <span class="text-[#000000] dark:text-cyan-300 font-semibold">المشاريع</span>
     </nav>
+  </div>
 
-    <!-- عنوان الصفحة -->
-    <h1 class="text-3xl font-bold text-[#165C75] mb-4 text-right">
+  <!-- عنوان ووصف الصفحة -->
+  <div class="mx-auto max-w-[1300px] px-4 mb-6">
+    <h1
+      class="text-3xl font-bold text-[#000000] dark:text-cyan-300 mb-2 text-right"
+    >
       مشاريع الهيئة
     </h1>
 
-    <!-- وصف -->
-    <p class="text-slate-600 leading-8 mb-8 max-w-[900px] text-right">
+    <p class="text-slate-600 dark:text-slate-300 text-lg leading-8 w-full md:w-[85%] text-right">
       تستعرض الهيئة أهم المشاريع المنفذة والمدعومة عبر برامج متنوعة في مختلف المحافظات.
     </p>
+  </div>
+
 
     <!-- 🟦 الكارد الأبيض (نفس صفحة الدراسات والشركاء 100%) -->
-    <div
-      class="bg-white rounded-[40px] border border-[#E5EDF0] shadow-sm p-10 max-w-[1300px] mx-auto"
-    >
+   <div
+  class="mx-auto max-w-[1300px] bg-white dark:bg-slate-900 rounded-[40px]
+         border border-[#E5EDF0] dark:border-slate-700 shadow-sm p-10"
+>
       <!-- GRID الكروت -->
       <div class="grid gap-8 md:grid-cols-3">
         <ProjectCard
