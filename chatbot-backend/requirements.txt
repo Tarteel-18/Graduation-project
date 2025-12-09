@@ -1,0 +1,36 @@
+# FastAPI and server
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.12
+
+# CORS is handled by FastAPI's built-in CORSMiddleware (no extra package needed)
+
+# RAG and LLM
+langchain==0.3.0
+langchain-community==0.3.0
+langchain-core==0.3.0
+
+# Vector Database
+chromadb==0.5.0
+
+# Embeddings (local, supports Arabic)
+sentence-transformers==3.0.1
+torch==2.5.0
+
+# Document processing
+pypdf2==3.0.1
+python-docx==1.1.2
+
+# Environment variables
+python-dotenv==1.0.1
+
+# HTTP client
+httpx==0.27.2
+
+# OpenAI API
+openai==1.54.0
+
+# Utilities
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
