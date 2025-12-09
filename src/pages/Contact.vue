@@ -50,35 +50,38 @@
           </p>
         </div>
 
- <!-- نموذج تواصل -->
-<div class="box hover-card flex items-center justify-between gap-3">
+  <!-- نموذج تواصل -->
+<div class="box hover-card flex flex-col justify-between">
   <div class="flex flex-col text-right">
     <div class="icon-box ml-auto">
       <img :src="iconForm" class="icon" />
     </div>
-    <h3 class="title flex items-center gap-2">
+    <h3 class="title">
       نموذج تواصل
-      <!-- سهم بسيط بدون خلفية -->
-      <RouterLink
-        :to="{ name: 'dynamic-form', params: { slug: 'contact-form' } }"
-        class="text-[#27AEB9] hover:text-[#165C75] transition-colors"
-        aria-label="فتح نموذج التواصل"
-      >
-        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </RouterLink>
     </h3>
     <p class="text">
       السبت – الأربعاء<br />
       8:00 صباحًا – 1:00 مساءً
     </p>
+  </div>
+
+  <!-- الزر الأخضر بالسهم في الشق الثاني (يمين) -->
+  <div class="mt-4 flex justify-end">
+    <RouterLink
+      :to="{ name: 'dynamic-form', params: { slug: 'contact-form' } }"
+      class="arrow-btn"
+      aria-label="فتح نموذج التواصل"
+    >
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M16 12H5M10 7l-5 5 5 5"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </RouterLink>
   </div>
 </div>
 
@@ -109,7 +112,60 @@
           </p>
 
           <div class="flex gap-3 justify-end">
-            <slot name="social"></slot>
+            <!-- فيسبوك -->
+            <a
+              href="https://www.facebook.com/share/1Lk2sKUtik/"
+              target="_blank" rel="noopener"
+              class="soc"
+              aria-label="Facebook"
+            >
+              <img src="@/assets/icons/facebook.png" alt="Facebook" class="w-6 h-6" />
+            </a>
+
+            <!-- تيليغرام -->
+            <a
+              href="https://t.me/samea777"
+              target="_blank" rel="noopener"
+              class="soc"
+              aria-label="Telegram"
+            >
+              <img src="@/assets/icons/telegram.png" alt="Telegram" class="w-6 h-6" />
+            </a>
+
+            <!-- واتساب رقم -->
+            <a
+              href="https://wa.me/967780040073"
+              target="_blank" rel="noopener"
+              class="soc"
+              aria-label="WhatsApp"
+            >
+              <img src="@/assets/icons/whatsapp.png" alt="WhatsApp" class="w-6 h-6" />
+            </a>
+
+            <!-- X أسود -->
+            <a
+              href="https://x.com/Gasmed28Gasmed?t=MTnUmxS6FGUDzKghkLtP9A&s=09"
+              target="_blank" rel="noopener"
+              class="soc"
+              aria-label="X"
+            >
+              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none">
+                <path
+                  d="M4 3h4l4 5 4-5h4l-7 8 7 10h-4l-5-7-5 7H4l7-10z"
+                  fill="#000000"
+                />
+              </svg>
+            </a>
+
+            <!-- يوتيوب -->
+            <a
+              href="https://youtube.com/channel/UCL-scONsm7whLMk2rc1aCaA?si=AJ-dMnJlO-RLQKGQ"
+              target="_blank" rel="noopener"
+              class="soc"
+              aria-label="YouTube"
+            >
+              <img src="@/assets/icons/youtube.png" alt="YouTube" class="w-6 h-6" />
+            </a>
           </div>
         </div>
 
@@ -154,13 +210,11 @@ import iconEmail from '@/assets/images/icon3.png'
     background-color .35s ease;
   box-shadow: 0 8px 22px rgba(15,76,92,0.10);
 }
-
 .hover-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 36px rgba(15,76,92,0.18);
   border-color: #C7E4E7;
 }
-
 .hover-card:active {
   transform: scale(0.97);
 }
@@ -177,4 +231,26 @@ import iconEmail from '@/assets/images/icon3.png'
 .text {
   @apply text-gray-700 dark:text-slate-200 leading-relaxed;
 }
+
+/* زر السهم أسفل الكارد */
+.arrow-link {
+  @apply text-[#27AEB9] hover:text-[#165C75] transition-colors;
+}
+
+/* دوائر أيقونات السوشال */
+.soc {
+  @apply inline-flex items-center justify-center
+         w-9 h-9 rounded-full
+         bg-white/80 hover:bg-white
+         border border-white
+         text-[#165C75] transition-colors duration-200;
+}
+.arrow-btn {
+  @apply inline-flex items-center justify-center
+         px-4 h-10 rounded-2xl
+         bg-[#0CA138] hover:bg-[#0a812d]
+         text-white transition-colors;
+}
+
+
 </style>

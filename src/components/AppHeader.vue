@@ -1,8 +1,7 @@
 <template>
   <header
     class="fixed top-0 left-0 right-0 z-40
-           bg-white/70 dark:bg-[#0f172a]/80
-           backdrop-blur-md
+           bg-white dark:bg-[#0f172a]
            border-b border-gray-100 dark:border-slate-700"
   >
     <nav class="mx-auto max-w-[1380px] px-4 h-20 flex items-center justify-between gap-6">
@@ -141,7 +140,7 @@
 
         <!-- زر الدارك مود -->
         <button
-          class="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-xl border bg-white dark:bg-[#020617] dark:border-slate-600 dark:text-slate-100"
+          class="inline-flex items-center justify-center w-9 h-9 rounded-xl border bg-white dark:bg-[#020617] dark:border-slate-600 dark:text-slate-100"
           :style="{ borderColor: linkColor, color: linkColor }"
           @click="toggleDark"
         >
@@ -166,10 +165,10 @@
           </svg>
         </button>
 
-        <!-- زر الحساب -->
+        <!-- زر الحساب (يبقى فوق فقط) -->
         <RouterLink
           :to="isLoggedIn ? '/profile' : '/login'"
-          class="hidden md:inline-flex items-center justify-center w-9 h-9 rounded-xl border bg-white dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100"
+          class="inline-flex items-center justify-center w-9 h-9 rounded-xl border bg-white dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100"
           :style="{ borderColor: linkColor, color: linkColor }"
         >
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -190,45 +189,85 @@
       </div>
     </nav>
 
-    <!-- قائمة الموبايل كما هي عندك (بدون تغيير كبير) -->
+    <!-- منيو الموبايل -->
     <transition name="fade">
       <div
         v-if="mobileOpen"
-        class="lg:hidden border-t border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900"
+        class="lg:hidden fixed inset-0 z-50 flex justify-start
+               bg-white/60 dark:bg-[#0f172a]/70 backdrop-blur-sm"
       >
         <div
-          class="mx-auto max-w-[1380px] px-3 py-3 space-y-2 text-[16px]"
+          class="relative w-[78%] max-w-xs h-full bg-white/90 dark:bg-[#0f172a]/95
+                 border-r border-slate-100 dark:border-slate-700
+                 pt-6 pb-8 px-4 space-y-4"
           :style="{ color: headColor }"
           dir="rtl"
         >
-          <details>
-            <summary class="py-2 cursor-pointer whitespace-nowrap">عن الهيئة</summary>
-            <div class="ps-3 mt-1 space-y-1">
-              <RouterLink class="block py-1" to="/about">من نحن</RouterLink>
-              <RouterLink class="block py-1" to="/faq">الأسئلة الشائعة</RouterLink>
-              <RouterLink class="block py-1" to="/partners">الشركاء</RouterLink>
-              <RouterLink class="block py-1" to="/studies">الدراسات</RouterLink>
-              <RouterLink class="block py-1" to="/contact">تواصل معنا</RouterLink>
-            </div>
-          </details>
+          <!-- الشعار في أعلى المنيو -->
+          <div class="flex items-center justify-between mb-6">
+            <img src="@/assets/logo.png" alt="شعار الهيئة" class="h-10 w-auto" />
 
-          <RouterLink class="block py-2" to="/services">الخدمات</RouterLink>
-          <RouterLink class="block py-2" to="/gov-facilities">التسهيلات الحكومية</RouterLink>
+            <button
+              class="w-8 h-8 flex items-center justify-center rounded-full
+                     border border-slate-200 dark:border-slate-600 text-slate-500"
+              @click="mobileOpen = false"
+            >
+              ✕
+            </button>
+          </div>
 
-          <details>
-            <summary class="py-2 cursor-pointer whitespace-nowrap">قسم الإعلام والتوعية</summary>
-            <div class="ps-3 mt-1 space-y-1">
-              <RouterLink class="block py-1" to="/media/flashes">فلاشات توعوية</RouterLink>
-              <RouterLink class="block py-1" :to="{ name: 'news-index' }">أخبار</RouterLink>
-              <RouterLink class="block py-1" to="/media/stories">قصص نجاح</RouterLink>
-              <RouterLink class="block py-1" to="/media/radio">حلقات إذاعية</RouterLink>
-              <RouterLink class="block py-1" to="/media/nasheed">أناشيد</RouterLink>
-            </div>
-          </details>
+          <!-- الروابط -->
+          <div class="space-y-2 text-[16px]">
+            <details class="mobile-item">
+              <summary>
+                <span>عن الهيئة</span>
+                <span class="circle-arrow">
+                  <span class="chevron"></span>
+                </span>
+              </summary>
+              <div class="children">
+                <RouterLink class="block py-1" to="/about" @click="mobileOpen = false">من نحن</RouterLink>
+                <RouterLink class="block py-1" to="/faq" @click="mobileOpen = false">الأسئلة الشائعة</RouterLink>
+                <RouterLink class="block py-1" to="/partners" @click="mobileOpen = false">الشركاء</RouterLink>
+                <RouterLink class="block py-1" to="/studies" @click="mobileOpen = false">الدراسات</RouterLink>
+                <RouterLink class="block py-1" to="/contact" @click="mobileOpen = false">تواصل معنا</RouterLink>
+              </div>
+            </details>
 
-          <RouterLink class="block py-2" to="/projects">المشاريع</RouterLink>
-          <RouterLink class="block py-2" to="/ads">الإعلانات</RouterLink>
-          <RouterLink class="block py-2" to="/start">روج لمشروعك</RouterLink>
+            <RouterLink class="mobile-link" to="/services" @click="mobileOpen = false">
+              الخدمات
+            </RouterLink>
+
+            <RouterLink class="mobile-link" to="/gov-facilities" @click="mobileOpen = false">
+              التسهيلات الحكومية
+            </RouterLink>
+
+            <details class="mobile-item">
+              <summary>
+                <span>قسم الإعلام والتوعية</span>
+                <span class="circle-arrow">
+                  <span class="chevron"></span>
+                </span>
+              </summary>
+              <div class="children">
+                <RouterLink class="block py-1" to="/media/flashes" @click="mobileOpen = false">فلاشات توعوية</RouterLink>
+                <RouterLink class="block py-1" :to="{ name: 'news-index' }" @click="mobileOpen = false">أخبار</RouterLink>
+                <RouterLink class="block py-1" to="/media/stories" @click="mobileOpen = false">قصص نجاح</RouterLink>
+                <RouterLink class="block py-1" to="/media/radio" @click="mobileOpen = false">حلقات إذاعية</RouterLink>
+                <RouterLink class="block py-1" to="/media/nasheed" @click="mobileOpen = false">أناشيد</RouterLink>
+              </div>
+            </details>
+
+            <RouterLink class="mobile-link" to="/projects" @click="mobileOpen = false">
+              المشاريع
+            </RouterLink>
+            <RouterLink class="mobile-link" to="/ads" @click="mobileOpen = false">
+              الإعلانات
+            </RouterLink>
+            <RouterLink class="mobile-link" to="/start" @click="mobileOpen = false">
+              روج لمشروعك
+            </RouterLink>
+          </div>
         </div>
       </div>
     </transition>
@@ -253,16 +292,14 @@ const mobileOpen = ref(false)
 const aboutMenu = ref(null)
 const mediaMenu = ref(null)
 
-// ⬅ استخدام sessionStorage بدل localStorage
 onMounted(() => {
-  const saved = sessionStorage.getItem('theme') // 'dark' أو 'light'
+  const saved = sessionStorage.getItem('theme')
 
   if (saved === 'dark') {
     isDark.value = true
   } else if (saved === 'light') {
     isDark.value = false
   } else {
-    // أول مرة في الجلسة → ابدأ باللايت
     isDark.value = false
     sessionStorage.setItem('theme', 'light')
   }
@@ -310,8 +347,6 @@ function goToRegisterProjectForm() {
 }
 </script>
 
-
-
 <style scoped>
 .dd-item {
   @apply block rounded-lg px-3 py-2 transition-colors duration-150;
@@ -326,7 +361,6 @@ function goToRegisterProjectForm() {
   color: #185974;
 }
 
-/* توحيد ارتفاع ومحاذاة عناوين الهيدر */
 .nav-link {
   @apply inline-flex items-center;
   height: 48px;
@@ -341,5 +375,95 @@ function goToRegisterProjectForm() {
 .fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
+}
+
+.mobile-item {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.7rem 0;
+}
+.dark .mobile-item {
+  border-color: #1f2937;
+}
+
+.mobile-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+}
+.mobile-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-item .children {
+  margin-top: 0.4rem;
+  padding-right: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* نفس شكل العناوين الرئيسية مع هوفر */
+.mobile-item .children a {
+  display: block;
+  padding: 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #185974;
+  transition: color 0.15s ease;
+}
+.dark .mobile-item .children a {
+  color: #E5F4F7;
+}
+.mobile-item .children a:hover {
+  color: #27aeb9;
+}
+
+.dark .mobile-item .children {
+  color: #cbd5f5;
+}
+
+.mobile-link {
+  display: block;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+.dark .mobile-link {
+  border-color: #1f2937;
+}
+.mobile-link:hover {
+  color: #27aeb9;
+}
+
+.mobile-item summary:hover {
+  color: #27aeb9;
+}
+
+/* دائرة + سهم */
+.circle-arrow {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 1px solid #27aeb9;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* سهم أنحف ومضبوط في الوسط */
+.circle-arrow .chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 1.8px solid #27aeb9;
+  border-bottom: 1.8px solid #27aeb9;
+  transform: rotate(45deg);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+/* عند الفتح: لفوق */
+.mobile-item[open] .circle-arrow .chevron {
+  transform: rotate(-135deg);
 }
 </style>

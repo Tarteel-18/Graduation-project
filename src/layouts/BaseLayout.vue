@@ -6,22 +6,22 @@
            text-slate-800 dark:text-slate-100
            transition-colors duration-300"
   >
-    <!-- الهيدر -->
-    <AppHeader v-if="!hideChrome" />
+    <!-- الهيدر (مخفي في السبلاش فقط) -->
+    <AppHeader v-if="!isSplash" />
 
     <!-- محتوى الصفحات -->
     <main
       class="min-h-[70vh] flex-1 pb-24"
-      :class="hideChrome ? '' : 'pt-14'"
+      :class="isSplash ? '' : 'pt-14'"
     >
       <slot />
     </main>
 
-    <!-- الفوتر -->
-    <AppFooter v-if="!hideChrome" />
+    <!-- الفوتر: مخفي في البروفايل والسبلاش -->
+    <AppFooter v-if="!hideFooter" />
 
-    <!-- الشات -->
-    <ChatWidget v-if="!hideChrome" />
+    <!-- الشات: مخفي في السبلاش فقط -->
+    <ChatWidget v-if="!isSplash" />
   </div>
 </template>
 
@@ -35,11 +35,11 @@ import ChatWidget from '../components/ChatWidget.vue'
 
 const route = useRoute()
 
-// ✅ الصفحات اللي نخبّي فيها الهيدر + الفوتر + الشات
-const hideChrome = computed(() => {
-  const noLayoutPaths = ['/login', '/register']
-  const byPath = noLayoutPaths.includes(route.path)
-  const byMeta = route.meta.hideLayout === true   // هنا نقرأ meta من الراوتر
-  return byPath || byMeta
-})
+// صفحة السبلاش (عدّل المسار لو مختلف)
+const isSplash = computed(() => route.path === '/splash')
+
+// إخفاء الفوتر في البروفايل والسبلاش
+const hideFooter = computed(() =>
+  route.path === '/profile' || isSplash.value
+)
 </script>
