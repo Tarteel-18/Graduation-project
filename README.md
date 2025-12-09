@@ -95,7 +95,7 @@ lsof -ti:5173 | xargs kill -9
 
 ### Running Both Servers
 
-You need **two terminal windows**:
+You need **two terminal windows** running simultaneously:
 
 **Terminal 1 - Backend:**
 ```bash
@@ -103,12 +103,16 @@ cd chatbot-backend
 source venv/bin/activate
 python -m app.main
 ```
+✅ Wait for: `INFO:     Uvicorn running on http://0.0.0.0:8001`
 
-**Terminal 2 - Frontend:**
+**Terminal 2 - Frontend (NEW TERMINAL):**
 ```bash
-cd ~/test/Graduation-project  # project root
+cd ~/path/to/Graduation-project  # project root
 npm run dev
 ```
+✅ Wait for: `➜  Local:   http://localhost:5173/`
+
+**Both terminals must stay open while using the app!**
 
 ### Testing
 
