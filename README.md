@@ -20,52 +20,76 @@ Graduation-project/
 - **Python** 3.8+ (for backend)
 - **OpenAI API Key** ([Get one here](https://platform.openai.com/api-keys))
 
-### 1. Backend Setup
+### Step 1: Clone and Setup
 
 ```bash
-# Navigate to backend
-cd chatbot-backend
+# Clone the repository
+git clone <repository-url>
+cd Graduation-project
+git checkout feature/chatbot-backend
 
-# Create virtual environment
+# Backend setup
+cd chatbot-backend
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Set up environment variables
 cp .env.example .env
-# Edit .env and add your OpenAI API key:
-# OPENAI_API_KEY=sk-your-key-here
+# Edit .env and add: OPENAI_API_KEY=sk-your-key-here
 
-# Run the backend server
+# Frontend setup (from project root)
+cd ..
+npm install
+```
+
+### Step 2: Start the Application
+
+**IMPORTANT: You need TWO terminal windows running simultaneously!**
+
+#### Terminal 1 - Backend:
+```bash
+cd chatbot-backend
+source venv/bin/activate
 python -m app.main
 ```
 
-Backend will run on `http://localhost:8001`
+Wait for: `INFO:     Uvicorn running on http://0.0.0.0:8001`
 
-### 2. Frontend Setup
+**Keep this terminal open!**
 
-Open a **new terminal** (keep backend running):
-
+#### Terminal 2 - Frontend (NEW TERMINAL):
 ```bash
-# Navigate to project root
-cd ~/test/Graduation-project  # or your project path
-
-# Install dependencies (first time only)
-npm install
-
-# Run development server
+cd ~/path/to/Graduation-project  # project root
 npm run dev
 ```
 
-Frontend will run on `http://localhost:5173`
+Wait for: `➜  Local:   http://localhost:5173/`
 
-### 3. Access the Application
+**Keep this terminal open too!**
 
-Open your browser and go to:
-- **Frontend**: http://localhost:5173
-- Click the chat widget icon to open the chatbot
+### Step 3: Access the Application
+
+1. Open your browser: **http://localhost:5173**
+2. Look for the chat widget icon (usually bottom-right corner)
+3. Click it to open the chatbot
+4. Start chatting!
+
+### Troubleshooting: Port Already in Use
+
+If you get "port already in use" errors:
+
+```bash
+# Use the cleanup script
+./KILL_ALL.sh
+
+# Then start again in two terminals
+```
+
+Or manually:
+```bash
+# Kill processes on ports
+lsof -ti:8001 | xargs kill -9
+lsof -ti:5173 | xargs kill -9
+```
 
 ## Development Workflow
 
