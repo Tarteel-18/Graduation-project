@@ -285,13 +285,14 @@ import './index.css'
               </span>
             </div>
 
-            <RouterLink
-              :to="mainNews.link"
-              class="inline-flex items-center gap-1 font-semibold hover:text-[#27AEB9] transition-colors"
-            >
-              <span>اقرأ الكل</span>
-              <span class="text-lg">⟵</span>
-            </RouterLink>
+       <RouterLink
+  :to="{ name: 'news-index' }"
+  class="inline-flex items-center gap-1 font-semibold hover:text-[#27AEB9] transition-colors"
+>
+  <span>اقرأ الكل</span>
+  <span class="text-lg">⟵</span>
+</RouterLink>
+
           </div>
         </div>
       </article>
