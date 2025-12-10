@@ -69,7 +69,7 @@ const stories = [
   },
   {
     id: 3,
-    title: 'مبادرة برايد كميونتي',
+    title: 'تجربتي في الريادة',
     image: story3,
     link: '/media/stories/story-3',
   },

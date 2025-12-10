@@ -6,22 +6,22 @@
            text-slate-800 dark:text-slate-100
            transition-colors duration-300"
   >
-    <!-- الهيدر (مخفي في السبلاش فقط) -->
-    <AppHeader v-if="!isSplash" />
+    <!-- الهيدر -->
+    <AppHeader v-if="!isNoChrome" />
 
     <!-- محتوى الصفحات -->
     <main
       class="min-h-[70vh] flex-1 pb-24"
-      :class="isSplash ? '' : 'pt-14'"
+      :class="isNoChrome ? '' : 'pt-14'"
     >
       <slot />
     </main>
 
-    <!-- الفوتر: مخفي في البروفايل والسبلاش -->
+    <!-- الفوتر: مخفي في البروفايل وكل صفحات noChrome -->
     <AppFooter v-if="!hideFooter" />
 
-    <!-- الشات: مخفي في السبلاش فقط -->
-    <ChatWidget v-if="!isSplash" />
+    <!-- الشات -->
+    <ChatWidget v-if="!isNoChrome" />
   </div>
 </template>
 
@@ -35,11 +35,19 @@ import ChatWidget from '../components/ChatWidget.vue'
 
 const route = useRoute()
 
-// صفحة السبلاش (عدّل المسار لو مختلف)
-const isSplash = computed(() => route.path === '/splash')
+// الصفحات اللي تريد تخفي فيها الهيدر + الفوتر + الشات
+const noChromePaths = ['/splash', '/login', '/register']
 
-// إخفاء الفوتر في البروفايل والسبلاش
-const hideFooter = computed(() =>
-  route.path === '/profile' || isSplash.value
+// كل ما كان المسار من نوع /form/... اعتبره بدون واجهة
+const isFormPage = computed(() => route.path.startsWith('/form/'))
+
+const isNoChrome = computed(
+  () => noChromePaths.includes(route.path) || isFormPage.value
+)
+
+// إخفاء الفوتر في البروفايل + كل صفحات noChrome
+const hideFooter = computed(
+  () => route.path === '/profile' || isNoChrome.value
 )
 </script>
+

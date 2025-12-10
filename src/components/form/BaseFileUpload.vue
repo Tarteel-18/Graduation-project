@@ -1,14 +1,19 @@
 <template>
-  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 px-8 py-5">
-    <label class="block text-sm font-semibold text-[#163B52] mb-2">
+  <div
+    class="bg-white dark:bg-slate-800
+           rounded-2xl shadow-sm
+           border border-slate-100 dark:border-slate-600
+           px-8 py-5"
+  >
+    <label class="block text-sm font-semibold text-[#163B52] dark:text-cyan-300 mb-2">
       {{ label }}
     </label>
-    <p v-if="description" class="text-xs text-slate-500 mb-4">
+    <p v-if="description" class="text-xs text-slate-500 dark:text-slate-300 mb-4">
       {{ description }}
     </p>
 
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-      <div class="text-xs text-slate-600 space-y-1">
+      <div class="text-xs text-slate-600 dark:text-slate-200 space-y-1">
         <p v-if="!files.length">لم تقم باختيار أي ملف بعد.</p>
         <ul v-else class="list-disc pr-4 space-y-1">
           <li v-for="(file, index) in files" :key="index">
@@ -29,7 +34,10 @@
         <button
           type="button"
           @click="trigger"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-[#06A6C8] text-[#06A6C8] text-sm font-semibold hover:bg-[#E8F8FB] transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl
+                 border border-[#06A6C8] text-[#06A6C8] text-sm font-semibold
+                 hover:bg-[#E8F8FB] dark:hover:bg-slate-700
+                 transition-colors"
         >
           <span>{{ buttonLabel }}</span>
           <span class="inline-block rotate-180 text-lg">➤</span>

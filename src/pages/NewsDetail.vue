@@ -10,6 +10,10 @@
 <nav class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-2 mb-6">
   <RouterLink to="/" class="hover:text-[#165C75] dark:hover:text-cyan-300">الرئيسية</RouterLink>
   <span>›</span>
+      <RouterLink to="/media" class="hover:text-[#165C75] dark:hover:text-cyan-300">
+        قسم الإعلام والتوعية
+      </RouterLink>
+      <span>›</span>
   <RouterLink to="/news" class="hover:text-[#165C75] dark:hover:text-cyan-300">الأخبار</RouterLink>
   <span>›</span>
   <span class="text-[#000000] dark:text-cyan-300 font-semibold">

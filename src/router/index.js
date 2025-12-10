@@ -75,7 +75,7 @@ const router = createRouter({
     { path: '/media/stories',       name: 'media-stories', component: MediaStories },
     { path: '/media/stories/:slug', name: 'story-detail',  component: StoryDetail },
 
-    { path: '/media/radio',   name: 'media-radio',   component: () => import('../pages/MediaRadio.vue') },
+    { path: '/media/radio',  name: 'media-radio',  component: () => import('../pages/MediaRadio.vue') },
     { path: '/media/nasheed', name: 'media-nasheed', component: () => import('../pages/MediaNasheed.vue') },
 
     // التسهيلات الحكومية
@@ -125,6 +125,14 @@ const router = createRouter({
     // صفحات أخرى
     { path: '/studies',  name: 'studies',  component: () => import('../pages/Studies.vue') },
     { path: '/projects', name: 'projects', component: () => import('../pages/Projects.vue') },
+
+    // صفحة الخريطة الجديدة للمشاريع
+    {
+      path: '/projects/map',
+      name: 'projects-map',
+      component: () => import('../pages/ProjectsMap.vue'),
+    },
+
     {
       path: '/projects/:id',
       name: 'project-detail',
@@ -148,11 +156,17 @@ const router = createRouter({
 
   scrollBehavior: () => ({ top: 0 }),
 })
+
 router.beforeEach((to, from, next) => {
   const isLoggedIn = !!localStorage.getItem('token')
   const hasSeenSplash = sessionStorage.getItem('hasSeenSplash') === 'true'
 
-  if (to.meta.requiresAuth && !isLoggedIn) {
+  // استثناء نموذج التواصل فقط من الحماية
+  const isContactForm =
+    to.name === 'dynamic-form' && to.params.slug === 'contact-form'
+
+  // حماية كل المسارات اللي تتطلب تسجيل، ما عدا contact-form
+  if (to.meta.requiresAuth && !isLoggedIn && !isContactForm) {
     next({
       name: 'login',
       query: { redirect: to.fullPath },
@@ -168,5 +182,6 @@ router.beforeEach((to, from, next) => {
 
   next()
 })
+
 
 export default router

@@ -3,9 +3,13 @@
     <!-- Breadcrumb -->
     <div class="mx-auto max-w-[1300px] px-4 mt-6 mb-4">
       <nav class="text-slate-500 dark:text-slate-400 text-sm flex items-center gap-2">
-        <RouterLink to="/" class="hover:text-[#165C75] dark:hover:text-cyan-300">الرئيسية</RouterLink>
+        <RouterLink to="/" class="hover:text-[#165C75] dark:hover:text-cyan-300">
+          الرئيسية
+        </RouterLink>
         <span>›</span>
-        <span class="text-[#000000] dark:text-cyan-300 font-semibold">الدراسات</span>
+        <span class="text-[#000000] dark:text-cyan-300 font-semibold">
+          الدراسات
+        </span>
       </nav>
     </div>
 
@@ -30,22 +34,22 @@
              border border-[#E5EDF0] dark:border-slate-700 shadow-sm px-4 md:px-6 py-5"
     >
       <div
-        class="study-card flex items-stretch
+        class="study-card flex flex-col md:flex-row items-stretch
                bg-[#E9F5F6] dark:bg-slate-700
                rounded-[24px] overflow-hidden"
       >
-        <!-- الصورة يمين، أضيق، بدون انحناء داخلي -->
-        <div class="w-[32%] hidden md:block">
+        <!-- الصورة: تظهر في الموبايل فوق، وفي الديسكتوب يمين -->
+        <div class="w-full md:w-[32%] mb-4 md:mb-0">
           <img
             src="@/assets/images/news-1.jpg"
             alt="صورة الدراسة"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover rounded-2xl md:rounded-none"
           />
         </div>
 
-        <!-- النص + الزر بمحاذاة يمين وارتفاع أقل -->
+        <!-- النص + الزر -->
         <div
-          class="flex-1 px-6 md:px-8 py-5 text-right
+          class="flex-1 px-4 md:px-8 py-3 md:py-5 text-right
                  flex flex-col justify-center gap-3"
         >
           <h2 class="text-xl md:text-[22px] font-bold text-[#165C75] dark:text-cyan-300">
@@ -59,13 +63,12 @@
           </p>
 
           <div class="mt-2">
-        <button
-  type="button"
-  class="btn btn-solid px-6 py-2 text-sm md:text-[15px]"
->
-  تحميل الدراسة
-</button>
-
+            <button
+              type="button"
+              class="btn btn-solid px-6 py-2 text-sm md:text-[15px]"
+            >
+              تحميل الدراسة
+            </button>
           </div>
         </div>
       </div>

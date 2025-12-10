@@ -1,8 +1,7 @@
-import './index.css'
 <template>
   <div :style="{ paddingTop: '25px' }" id="page-root">
     <!-- السلايدر -->
-    <section class=" relative w-full h-[500px] overflow-hidden mt-0 bg-black">
+    <section class="relative w-full h-[500px] overflow-hidden mt-0 bg-black">
       <div class="relative w-full h-full">
         <img
           :src="slides[currentSlide].image"
@@ -33,190 +32,191 @@ import './index.css'
           v-for="(s, index) in slides"
           :key="index"
           class="w-3 h-3 rounded-full transition-all"
-          :class="currentSlide === index ? 'bg-[#27AEB9] w-4' : 'bg-white/70 hover:bg-white/90'"
+          :class="
+            currentSlide === index
+              ? 'bg-[#27AEB9] w-4'
+              : 'bg-white/70 hover:bg-white/90'
+          "
           @click="setSlide(index)"
-          aria-label="'Slide ' + (index + 1)"
+          :aria-label="'Slide ' + (index + 1)"
         ></button>
       </div>
     </section>
 
-    <!-- الإحصائيات | خليّناه سكشن أبيض -->
-<section class="bg-section-alt py-10">
+    <!-- الإحصائيات -->
+    <section class="bg-section-alt py-10">
       <div class="mx-auto max-w-[1280px] px-6">
         <div class="grid sm:grid-cols-3 gap-6">
-        <div
-  v-for="(stat, i) in stats"
-  :key="i"
-  class="stat card-hover reveal"
-  aria-hidden="false"
->
-  <span class="num" :data-final="stat.number">{{ stat.number }}</span>
-  <span class="lbl">{{ stat.label }}</span>
-</div>
-
+          <div
+            v-for="(stat, i) in stats"
+            :key="i"
+            class="stat card-hover reveal"
+          >
+            <span class="num" :data-final="stat.number">
+              {{ stat.number }}
+            </span>
+            <span class="lbl">{{ stat.label }}</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- خدماتنا -->
-<section class="bg-section pt-5">
-  <div class="mx-auto max-w-[1280px] px-6 py-12">
-    <h2 class="section-title reveal">{{ sectionTitles.services }}</h2>
+    <section class="bg-section pt-5">
+      <div class="mx-auto max-w-[1280px] px-6 py-12">
+        <h2 class="section-title reveal">
+          {{ sectionTitles.services }}
+        </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
-      <div
-        v-for="(service, i) in services"
-        :key="i"
-        class="card-hover rounded-2xl border border-slate-200 dark:border-slate-700
-               bg-white dark:bg-slate-900 overflow-hidden
-               w-[360px] h-[270px] reveal"
-      >
-        <div class="w-full h-[150px] ph"></div>
-        <div class="p-4 text-center">
-          <h3 class="font-bold text-lg mb-1" :style="{ color: HEAD }">
-            {{ service.title }}
-          </h3>
-          <p class="text-slate-600 dark:text-slate-200 text-sm leading-relaxed line-clamp-2">
-            {{ service.text }}
-          </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+          <RouterLink
+            v-for="(service, i) in services"
+            :key="i"
+            :to="{ name: service.routeName }"
+            class="card-hover rounded-2xl border border-slate-200 dark:border-slate-700
+                   bg-white dark:bg-slate-900 overflow-hidden
+                   w-[360px] h-[270px] reveal block"
+          >
+            <div class="w-full h-[150px] ph"></div>
+            <div class="p-4 text-center">
+              <h3 class="font-bold text-lg mb-1" :style="{ color: HEAD }">
+                {{ service.title }}
+              </h3>
+              <p
+                class="text-slate-600 dark:text-slate-200 text-sm leading-relaxed line-clamp-2"
+              >
+                {{ service.text }}
+              </p>
+            </div>
+          </RouterLink>
+        </div>
+
+        <div class="text-center mt-6 reveal">
+          <RouterLink :to="{ name: 'services' }" class="btn btn-outline">
+            {{ ctaLabels.servicesMore }}
+          </RouterLink>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="text-center mt-6 reveal">
-      <RouterLink to="/services" class="btn btn-outline">
-        {{ ctaLabels.servicesMore }}
-      </RouterLink>
-    </div>
-  </div>
-</section>
+    <!-- التسهيلات الحكومية -->
+    <section class="bg-section-alt py-12">
+      <div class="mx-auto max-w-[1280px] px-6 pt-5 text-center reveal">
+        <h3 class="section-title section-title-wide mb-2">
+          {{ govSection.title }}
+        </h3>
 
-   <!-- التسهيلات الحكومية | سكشن لون ثانوي -->
-<section class="bg-section-alt py-12">
-  <div class="mx-auto max-w-[1280px] px-6 pt-5 text-center reveal">
-    <h3
-  class="section-title section-title-wide mb-2"
->
-  {{ govSection.title }}
-</h3>
+        <p
+          class="text-slate-600 dark:text-slate-200 mb-4 text-base md:text-lg"
+        >
+          {{ govSection.description }}
+        </p>
 
-
-    <p class="text-slate-600 dark:text-slate-200 mb-4 text-base md:text-lg">
-      {{ govSection.description }}
-    </p>
-
-    <RouterLink to="/gov-facilities" class="btn btn-solid">
-      {{ govSection.cta }}
-    </RouterLink>
-  </div>
-</section>
-
+        <RouterLink :to="{ name: 'GovFacilities' }" class="btn btn-solid">
+          {{ govSection.cta }}
+        </RouterLink>
+      </div>
+    </section>
 
     <!-- قصص النجاح -->
-<section class="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
-  <div class="relative z-10 mx-auto max-w-[1280px] px-6">
-    <h2 class="section-title section-title-wide mb-10 reveal">
-      {{ sectionTitles.successStories }}
-    </h2>
+    <section class="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
+      <div class="relative z-10 mx-auto max-w-[1280px] px-6">
+        <h2 class="section-title section-title-wide mb-10 reveal">
+          {{ sectionTitles.successStories }}
+        </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
-      <div
-        v-for="(story, i) in stories.slice(0, 3)"
-        :key="i"
-        class="card-hover group relative w-[360px] h-[230px]
-               rounded-2xl overflow-hidden cursor-pointer reveal"
-      >
-        <img
-          :src="story.image"
-          :alt="story.title"
-          class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-[1.06]"
-        />
-        <div class="absolute inset-0 bg-[#165C75]/0 group-hover:bg-[#0F3D52]/80 transition-colors duration-500 z-10"></div>
-        <img
-          :src="patternUrl"
-          alt=""
-          class="absolute right-0 top-0 h-full opacity-0 group-hover:opacity-80 transition-opacity duration-500 ease-out pointer-events-none z-20"
-        />
-        <div
-          class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out px-4"
-        >
-          <h3 class="text-lg font-bold mb-1 tracking-wide">{{ story.title }}</h3>
-          <p class="text-sm opacity-90">{{ story.name }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+          <RouterLink
+            v-for="(story, i) in stories"
+            :key="story.slug || i"
+            :to="{ name: 'story-detail', params: { slug: story.slug } }"
+            class="card-hover group relative w-[360px] h-[230px]
+                   rounded-2xl overflow-hidden cursor-pointer reveal block"
+          >
+            <img
+              :src="story.image"
+              :alt="story.title"
+              class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-[1.06]"
+            />
+            <div
+              class="absolute inset-0 bg-[#165C75]/0 group-hover:bg-[#0F3D52]/80 transition-colors duration-500 z-10"
+            ></div>
+            <img
+              :src="patternUrl"
+              alt=""
+              class="absolute right-0 top-0 h-full opacity-0 group-hover:opacity-80 transition-opacity duration-500 ease-out pointer-events-none z-20"
+            />
+            <div
+              class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out px-4"
+            >
+              <h3 class="text-lg font-bold mb-1 tracking-wide">
+                {{ story.title }}
+              </h3>
+              <p class="text-sm opacity-90">{{ story.name }}</p>
+            </div>
+          </RouterLink>
+        </div>
+
+        <div class="text-center mt-10 reveal">
+          <RouterLink
+            :to="{ name: 'media-stories' }"
+            class="btn btn-outline text-base"
+          >
+            {{ ctaLabels.storiesMore }}
+          </RouterLink>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="text-center mt-10 reveal">
-      <RouterLink
-        :to="{ name: 'media-stories' }"
-        class="btn btn-outline text-base"
-      >
-        {{ ctaLabels.storiesMore }}
-      </RouterLink>
-    </div>
-  </div>
-</section>
+    <!-- شركاؤنا -->
+    <section class="py-12 bg-section-alt">
+      <div class="mx-auto max-w-[1280px] px-6 pt-4">
+        <h2 class="section-title mb-8 reveal">شركاؤنا</h2>
 
-
-<!-- شركاؤنا -->
-<section class="py-12 bg-section-alt">
-  <div class="mx-auto max-w-[1280px] px-6 pt-4">
-    <h2 class="section-title mb-8 reveal">شركاؤنا</h2>
-
-    <div class="partners-viewport reveal">
-      <div class="partners-track">
-        <div
-          v-for="(logo, i) in partners"
-          :key="'p1-' + i"
-          class="partner-card"
-          :title="'شريك ' + (i + 1)"
-        >
-          <img
-            :src="logo"
-            alt="شعار شريك"
-            loading="lazy"
-          />
-        </div>
-        <!-- تكرار بسيط لنعطي إحساس اللانهاية -->
-        <div
-          v-for="(logo, i) in partners"
-          :key="'p2-' + i"
-          class="partner-card"
-          :title="'شريك ' + (i + 1)"
-        >
-          <img
-            :src="logo"
-            alt="شعار شريك"
-            loading="lazy"
-          />
+        <div class="partners-viewport reveal">
+          <div class="partners-track">
+            <div
+              v-for="(logo, i) in partners"
+              :key="'p1-' + i"
+              class="partner-card"
+            >
+              <img :src="logo" alt="شعار شريك" loading="lazy" />
+            </div>
+            <div
+              v-for="(logo, i) in partners"
+              :key="'p2-' + i"
+              class="partner-card"
+            >
+              <img :src="logo" alt="شعار شريك" loading="lazy" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-
+    </section>
 
     <!-- المشاريع -->
-<section class="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
+    <section class="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
       <div class="relative z-10 mx-auto max-w-[1280px] px-6">
-        <h2 class="section-title reveal">{{ sectionTitles.projects }}</h2>
+        <h2 class="section-title reveal">
+          {{ sectionTitles.projects }}
+        </h2>
 
         <div class="space-y-6">
-          <div
-  v-for="project in projects"
-  :key="project.id"
-  class="card-hover group relative w-full h-[240px]
-         rounded-3xl overflow-hidden cursor-pointer reveal"
->
-
+          <RouterLink
+            v-for="project in projects"
+            :key="project.id"
+            :to="{ name: 'project-detail', params: { id: project.id } }"
+            class="card-hover group relative w-full h-[240px]
+                   rounded-3xl overflow-hidden cursor-pointer reveal block"
+          >
             <img
               :src="project.image"
               :alt="project.title"
               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
             />
-            <div class="absolute inset-0 bg-[#165C75]/0 group-hover:bg-[#0F3D52]/80 transition-colors duration-500 z-10"></div>
+            <div
+              class="absolute inset-0 bg-[#165C75]/0 group-hover:bg-[#0F3D52]/80 transition-colors duration-500 z-10"
+            ></div>
             <img
               :src="patternUrl"
               alt=""
@@ -225,159 +225,162 @@ import './index.css'
             <div
               class="absolute inset-0 z-30 flex flex-col items-center justify-center text-center text-white opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out px-6"
             >
-              <h3 class="text-xl font-bold mb-2 leading-relaxed">{{ project.title }}</h3>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center mt-10 reveal">
-       <RouterLink to="/projects" class="btn btn-outline">
-  {{ ctaLabels.projectsMore }}
-</RouterLink>
-  </div>
-      </div>
-    </section>
-
-<!-- آخر الأخبار -->
-<section class="py-16 bg-section-alt">
-  <div class="mx-auto max-w-[1280px] px-6">
-    <h2 class="section-title mb-8 reveal">آخر الأخبار</h2>
-
-    <div class="grid lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.1fr)] gap-8 items-stretch">
-      <!-- الخبر الرئيسي (يسار) -->
-      <article
-        class="relative rounded-3xl overflow-hidden shadow-md bg-[#111827] text-white reveal flex flex-col justify-end"
-      >
-        <img
-          :src="mainNews.image"
-          alt=""
-          class="absolute inset-0 w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/5"></div>
-
-        <div class="relative z-10 px-8 pb-8 pt-20 flex flex-col gap-3">
-          <p class="text-xs md:text-sm opacity-90">
-            {{ mainNews.date }}
-          </p>
-          <h3 class="text-xl md:text-2xl font-bold leading-relaxed">
-            {{ mainNews.title }}
-          </h3>
-          <p class="text-xs md:text-sm opacity-90 leading-relaxed line-clamp-3">
-            {{ mainNews.summary }}
-          </p>
-
-          <div class="mt-4 flex items-center justify-between text-xs md:text-sm">
-            <div class="flex items-center gap-4">
-              <button
-                type="button"
-                class="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center hover:bg-white/10 transition"
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                class="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center hover:bg-white/10 transition"
-              >
-                ›
-              </button>
-              <span class="opacity-80">
-                1 / {{ news.length + 1 }}
-              </span>
-            </div>
-
-       <RouterLink
-  :to="{ name: 'news-index' }"
-  class="inline-flex items-center gap-1 font-semibold hover:text-[#27AEB9] transition-colors"
->
-  <span>اقرأ الكل</span>
-  <span class="text-lg">⟵</span>
-</RouterLink>
-
-          </div>
-        </div>
-      </article>
-
-      <!-- قائمة الأخبار (يمين) -->
-      <aside
-  class="bg-white dark:bg-slate-900
-         rounded-3xl border border-slate-200 dark:border-slate-700
-         shadow-sm overflow-hidden flex flex-col reveal"
->
-<div class="px-6 py-4 border-b border-slate-100">
-         <h3 class="text-sm font-semibold text-slate-600 dark:text-slate-100">
-  أحدث الأخبار
-</h3>
-
-        </div>
-
-        <div class="flex-1 divide-y divide-slate-100">
-          <RouterLink
-            v-for="(item, i) in news"
-            :key="i"
-            :to="item.link"
-            class="group flex items-start gap-3 px-6 py-4 hover:bg-slate-50 transition-colors relative"
-          >
-            <span
-              class="absolute right-0 top-0 h-full w-[3px] bg-[#27AEB9] opacity-0 group-hover:opacity-100 transition-opacity"
-            ></span>
-
-            <div class="flex-1">
-             <p class="text-[11px] text-slate-400 dark:text-slate-500 mb-1">
-  {{ item.date }}
-</p>
-<p
-  class="text-[14px] font-semibold text-slate-800 dark:text-slate-100
-         leading-snug group-hover:text-[#27AEB9] transition-colors"
->
-  {{ item.title }}
-</p>
-
+              <h3 class="text-xl font-bold mb-2 leading-relaxed">
+                {{ project.title }}
+              </h3>
             </div>
           </RouterLink>
         </div>
-      </aside>
-    </div>
 
-    <div class="mt-6 reveal flex justify-start">
-      <RouterLink
-        to="/news"
-        class="flex items-center gap-3 text-base text-[#185974] hover:text-[#0f3d52] transition-colors"
-      >
-       
-      </RouterLink>
-    </div>
-  </div>
-</section>
+        <div class="text-center mt-10 reveal">
+          <RouterLink :to="{ name: 'projects' }" class="btn btn-outline">
+            {{ ctaLabels.projectsMore }}
+          </RouterLink>
+        </div>
+      </div>
+    </section>
 
+    <!-- آخر الأخبار -->
+    <section class="py-16 bg-section-alt">
+      <div class="mx-auto max-w-[1280px] px-6">
+        <h2 class="section-title mb-8 reveal">
+          {{ sectionTitles.news }}
+        </h2>
 
+        <div
+          class="grid lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.1fr)] gap-8 items-stretch"
+        >
+          <!-- الخبر الرئيسي -->
+          <article
+            class="relative rounded-3xl overflow-hidden shadow-md bg-[#111827] text-white reveal flex flex-col justify-end"
+          >
+            <img
+              :src="mainNews.image"
+              alt=""
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/5"
+            ></div>
 
-<!-- الخريطة  -->
-<section class="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
-  <div class="mx-auto max-w-[1280px] px-6 pb-4 pt-0 text-center reveal">
-    <h3 class="section-title section-title-wide">
-      {{ mapSection.title }}
-    </h3>
+            <div
+              class="relative z-10 px-8 pb-8 pt-20 flex flex-col gap-3"
+            >
+              <p class="text-xs md:text-sm opacity-90">
+                {{ mainNews.date }}
+              </p>
+              <h3 class="text-xl md:text-2xl font-bold leading-relaxed">
+                {{ mainNews.title }}
+              </h3>
+              <p
+                class="text-xs md:text-sm opacity-90 leading-relaxed line-clamp-3"
+              >
+                {{ mainNews.summary }}
+              </p>
 
-    <p class="text-slate-600 mb-3">
-      {{ mapSection.description }}
-    </p>
+              <div
+                class="mt-4 flex items-center justify-between text-xs md:text-sm"
+              >
+                <div class="flex items-center gap-4">
+                  <button
+                    type="button"
+                    class="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center hover:bg-white/10 transition"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    class="w-8 h-8 rounded-full border border-white/60 flex items-center justify-center hover:bg-white/10 transition"
+                  >
+                    ›
+                  </button>
+                  <span class="opacity-80">
+                    1 / {{ news.length + 1 }}
+                  </span>
+                </div>
 
-    <div class="rounded-2xl overflow-hidden border border-slate-200">
-      <iframe
-        class="w-full h-[380px]"
-        style="border:0"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=31.0,10.0,55.0,20.5&layer=mapnik&marker=15.5,48.5"
-      ></iframe>
-    </div>
+                <RouterLink
+                  :to="{ name: 'news-index' }"
+                  class="inline-flex items-center gap-1 font-semibold hover:text-[#27AEB9] transition-colors"
+                >
+                  <span>اقرأ الكل</span>
+                  <span class="text-lg">⟵</span>
+                </RouterLink>
+              </div>
+            </div>
+          </article>
 
-    <div class="mt-3">
-      <RouterLink to="/projects/map" class="btn btn-outline">
-        {{ mapSection.cta }}
-      </RouterLink>
-    </div>
-  </div>
-</section>
+          <!-- قائمة الأخبار -->
+          <aside
+            class="bg-white dark:bg-slate-900
+                   rounded-3xl border border-slate-200 dark:border-slate-700
+                   shadow-sm overflow-hidden flex flex-col reveal"
+          >
+            <div class="px-6 py-4 border-b border-slate-100">
+              <h3
+                class="text-sm font-semibold text-slate-600 dark:text-slate-100"
+              >
+                أحدث الأخبار
+              </h3>
+            </div>
 
+            <div class="flex-1 divide-y divide-slate-100">
+              <RouterLink
+                v-for="(item, i) in news"
+                :key="i"
+                :to="item.link"
+                class="group flex items-start gap-3 px-6 py-4 hover:bg-slate-50 transition-colors relative"
+              >
+                <span
+                  class="absolute right-0 top-0 h-full w-[3px] bg-[#27AEB9] opacity-0 group-hover:opacity-100 transition-opacity"
+                ></span>
+
+                <div class="flex-1">
+                  <p
+                    class="text-[11px] text-slate-400 dark:text-slate-500 mb-1"
+                  >
+                    {{ item.date }}
+                  </p>
+                  <p
+                    class="text-[14px] font-semibold text-slate-800 dark:text-slate-100
+                           leading-snug group-hover:text-[#27AEB9] transition-colors"
+                  >
+                    {{ item.title }}
+                  </p>
+                </div>
+              </RouterLink>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- الخريطة -->
+    <section class="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
+      <div class="mx-auto max-w-[1280px] px-6 pb-4 pt-0 text-center reveal">
+        <h3 class="section-title section-title-wide">
+          {{ mapSection.title }}
+        </h3>
+
+        <p class="text-slate-600 mb-3">
+          {{ mapSection.description }}
+        </p>
+
+        <div class="rounded-2xl overflow-hidden border border-slate-200">
+          <iframe
+            class="w-full h-[380px]"
+            style="border: 0"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=31.0,10.0,55.0,20.5&layer=mapnik&marker=15.5,48.5"
+          ></iframe>
+        </div>
+
+        <div class="mt-3">
+          <RouterLink to="/projects/map" class="btn btn-outline">
+            {{ mapSection.cta }}
+          </RouterLink>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -393,7 +396,6 @@ import story1 from '@/assets/images/STORY.png'
 import project1 from '@/assets/images/project1.png'
 import newsMainImage from '@/assets/logo.png'
 
-// مؤقتاً لوجوهات شركاء
 import partnerLogo1 from '@/assets/logo.png'
 import partnerLogo2 from '@/assets/logo2.png'
 
@@ -414,7 +416,8 @@ const ctaLabels = ref({
 
 const govSection = ref({
   title: 'التسهيلات الحكومية',
-  description: 'تعرّف على التسهيلات الحكومية التي تقدمها الهيئة، واحصل على الخدمات بكل سهولة.',
+  description:
+    'تعرّف على التسهيلات الحكومية التي تقدمها الهيئة، واحصل على الخدمات بكل سهولة.',
   cta: 'عرض التسهيلات الحكومية',
 })
 
@@ -426,35 +429,27 @@ const mapSection = ref({
 
 /* السلايدر */
 const slides = ref([
-  { title: 'مبادرة اليوم .. مستقبل الغد', subtitle: 'دعم المشاريع الصغيرة والمتوسطة لتمكين رواد الأعمال في اليمن', image: slide1 },
-  { title: 'تمكين القدرات المحلية لبناء صناعة غذائية مستدامة', subtitle: 'التنمية تبدأ بإتقان', image: slide2 },
-  { title: 'نجاحك .. مسؤوليتنا', subtitle: 'نرافقك في كل خطوة من رحلتك الريادية', image: slide3 },
+  {
+    title: 'مبادرة اليوم .. مستقبل الغد',
+    subtitle: 'دعم المشاريع الصغيرة والمتوسطة لتمكين رواد الأعمال في اليمن',
+    image: slide1,
+  },
+  {
+    title: 'تمكين القدرات المحلية لبناء صناعة غذائية مستدامة',
+    subtitle: 'التنمية تبدأ بإتقان',
+    image: slide2,
+  },
+  {
+    title: 'نجاحك .. مسؤوليتنا',
+    subtitle: 'نرافقك في كل خطوة من رحلتك الريادية',
+    image: slide3,
+  },
 ])
 const currentSlide = ref(0)
 let sliderTimer = null
-
-const setSlide = (i) => { currentSlide.value = i }
-
-/* قياس ارتفاع الهيدر ديناميكياً */
-/* قياس ارتفاع الهيدر ديناميكياً */
-const headerHeight = ref(40)   // قللها أكثر
-
-const HEADER_SELECTORS = ['header', '#header', '.site-header']  // تأكد هذا موجود فوق
-
-const updateHeaderHeight = () => {
-  for (const sel of HEADER_SELECTORS) {
-    const el = document.querySelector(sel)
-    if (el) {
-      headerHeight.value = Math.max(
-        32,                                    // أقل قيمة padding
-        Math.ceil(el.getBoundingClientRect().height) - 4
-      )
-      return
-    }
-  }
-  headerHeight.value = 40                     // قيمة احتياطية صغيرة
+const setSlide = (i) => {
+  currentSlide.value = i
 }
-
 
 /* الإحصائيات */
 const stats = ref([
@@ -465,22 +460,56 @@ const stats = ref([
 
 /* خدمات */
 const services = ref([
-  { title: 'التمويل', text: 'خدمات تمويل مبتكرة تساعد في نمو مشروعك.' },
-  { title: 'التسويق', text: 'دعم تسويقي على المنصات الرقمية وقنوات أخرى.' },
-  { title: 'التدريب', text: 'برامج تدريبية واستشارات متخصصة لرواد الأعمال.' },
+  {
+    title: 'التمويل',
+    text: 'خدمات تمويل مبتكرة تساعد في نمو مشروعك.',
+    routeName: 'service-funding',
+  },
+  {
+    title: 'التسويق',
+    text: 'دعم تسويقي على المنصات الرقمية وقنوات أخرى.',
+    routeName: 'service-marketing',
+  },
+  {
+    title: 'التدريب',
+    text: 'برامج تدريبية واستشارات متخصصة لرواد الأعمال.',
+    routeName: 'service-training',
+  },
 ])
 
 /* المشاريع */
 const projects = ref([
-  { id: 1, title: 'مشروع تدريب المدرّبات في خياطة القطنيات بطرق صناعية', location: 'صنعاء', category: 'القطاع الحرفي', status: 'قيد التنفيذ', image: project1 },
-  { id: 2, title: 'مشروع دعم سلاسل الإمداد الغذائية', location: 'عدن', category: 'القطاع الغذائي', status: 'منجز', image: project1 },
-  { id: 3, title: 'برنامج تمكين رواد الأعمال الشباب', location: 'تعز', category: 'برامج تمويل', status: 'جارِ الإطلاق', image: project1 },
+  {
+    id: 1,
+    title: 'مشروع تدريب المدرّبات في خياطة القطنيات بطرق صناعية',
+    location: 'صنعاء',
+    category: 'القطاع الحرفي',
+    status: 'قيد التنفيذ',
+    image: project1,
+  },
+  {
+    id: 2,
+    title: 'مشروع دعم سلاسل الإمداد الغذائية',
+    location: 'عدن',
+    category: 'القطاع الغذائي',
+    status: 'منجز',
+    image: project1,
+  },
+  {
+    id: 3,
+    title: 'برنامج تمكين رواد الأعمال الشباب',
+    location: 'تعز',
+    category: 'برامج تمويل',
+    status: 'جارِ الإطلاق',
+    image: project1,
+  },
 ])
 
 /* الأخبار */
 const mainNews = ref({
   title: '“الهيئة” قامت بتحديث نظام الدعم الفني',
-  summary: 'تم تحديث نظام الدعم الفني لتحسين سرعة الاستجابة وجودة الخدمة المقدمة للمشاريع الصغيرة والمتوسطة عبر مختلف المحافظات.',
+  summary:
+    'تم تحديث نظام الدعم الفني لتحسين سرعة الاستجابة وجودة الخدمة المقدمة للمشاريع الصغيرة والمتوسطة عبر مختلف المحافظات.',
   date: '25 يوليو 2025',
   link: '/news/1',
   image: newsMainImage,
@@ -492,84 +521,43 @@ const news = ref([
   { title: 'نتائج المبادرات السابقة للمشاريع الصغيرة', date: '15 يوليو 2025', link: '/news/5' },
 ])
 
-/* قصص النجاح */
 const stories = ref([
-  { title: 'مبادرة برايد كميونتي', name: 'عائشة العاقل - رئيس المبادرة', image: story1 },
-  { title: 'حلم تحقق', name: 'عبدالرحمن محمد - رائد أعمال', image: 'https://via.placeholder.com/600x400?text=قصة+2' },
-  { title: 'تجربتي في الريادة', name: 'صالح أحمد - مستفيد من المبادرة', image: 'https://via.placeholder.com/600x400?text=قصة+3' },
-  { title: 'من الفكرة إلى النجاح', name: 'ريم ناصر - مؤسسة المشروع', image: 'https://via.placeholder.com/600x400?text=قصة+4' },
+  {
+    title: 'قصة أثر',
+    name: 'نبذة قصيرة عن قصة أثر',
+    image: story1,
+    slug: 'story-1',      // 👈 لازم يطابق /media/stories/story-1
+  },
+  {
+    title: 'قصة ملهم ',
+    name: 'عبدالرحمن محمد - رائد أعمال',
+    image: 'https://via.placeholder.com/600x400?text=قصة+2',
+    slug: 'story-2',
+  },
+  {
+    title: 'تجربتي في الريادة',
+    name: 'صالح أحمد - مستفيد من المبادرة',
+    image: 'https://via.placeholder.com/600x400?text=قصة+3',
+    slug: 'story-3',
+  },
 ])
 
+
 /* شركاء */
-const partners = ref([partnerLogo1, partnerLogo2, partnerLogo2, partnerLogo2, partnerLogo2,partnerLogo2, partnerLogo1, partnerLogo2])
+const partners = ref([
+  partnerLogo1,
+  partnerLogo2,
+  partnerLogo2,
+  partnerLogo2,
+  partnerLogo2,
+  partnerLogo2,
+  partnerLogo1,
+  partnerLogo2,
+])
 
-/* أنيميشن عد الأرقام */
-const animateStatsNumbers = () => {
-  const els = document.querySelectorAll('.stat .num')
-  els.forEach((el) => {
-    const targetText = el.getAttribute('data-final') || el.textContent.trim()
-    const hasPlus = /\+/.test(targetText)
-    const digits = targetText.replace(/[^\d]/g, '') || '0'
-    const target = parseInt(digits, 10)
-    const duration = 900
-    const startTime = performance.now()
-    const step = (now) => {
-      const t = Math.min(1, (now - startTime) / duration)
-      const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
-      const val = Math.floor(eased * target)
-      el.textContent = hasPlus ? `+${val}` : `${val}`
-      if (t < 1) requestAnimationFrame(step)
-      else el.textContent = targetText
-    }
-    requestAnimationFrame(step)
-  })
-}
+/* أنيميشن الأرقام (لو حاب تشغّله شف الكود السابق عندك) */
 
-let revealObserver = null
-onMounted(() => {
-  updateHeaderHeight()
-  window.addEventListener('resize', updateHeaderHeight)
-
-  // سلايدر أوتوماتيكي
-  sliderTimer = setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % slides.value.length
-    triggerHeroAnimation()
-  }, 5000)
-
-// reveal observer عام
-revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show')   // يدخل في الفيو – شغّل الأنيميشن
-      } else {
-        entry.target.classList.remove('show') // يطلع من الفيو – رجّع الحالة الأصلية
-      }
-    })
-  },
-  { threshold: 0.15 }
-)
-
-document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el))
-
-
-  // partners track tweaks
-  nextTick(() => {
-    const track = document.querySelector('.partners-track')
-    if (track) {
-      track.style.willChange = 'transform'
-      track.style.animationTimingFunction = 'linear'
-    }
-  })
-})
-
-onUnmounted(() => {
-  if (sliderTimer) clearInterval(sliderTimer)
-  window.removeEventListener('resize', updateHeaderHeight)
-  if (revealObserver) revealObserver.disconnect()
-})
-
-/* إعادة تشغيل أنيميشن نص السلايدر */
+/* hero animation */
 const heroTitle = ref(null)
 const heroSub = ref(null)
 const triggerHeroAnimation = () => {
@@ -587,7 +575,42 @@ const triggerHeroAnimation = () => {
   }
 }
 
-/* راقب تغيّر currentSlide لتشغيل أنيميشن العناوين */
+let revealObserver = null
+
+onMounted(() => {
+  sliderTimer = setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % slides.value.length
+    triggerHeroAnimation()
+  }, 5000)
+
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('show')
+        else entry.target.classList.remove('show')
+      })
+    },
+    { threshold: 0.15 },
+  )
+
+  document
+    .querySelectorAll('.reveal')
+    .forEach((el) => revealObserver.observe(el))
+
+  nextTick(() => {
+    const track = document.querySelector('.partners-track')
+    if (track) {
+      track.style.willChange = 'transform'
+      track.style.animationTimingFunction = 'linear'
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (sliderTimer) clearInterval(sliderTimer)
+  if (revealObserver) revealObserver.disconnect()
+})
+
 watch(currentSlide, () => {
   triggerHeroAnimation()
 })
@@ -596,6 +619,15 @@ watch(currentSlide, () => {
 <style scoped>
 /* لا نحتاج @import هنا؛ Rubik معرف في index.css */
 
+/* خلفيات السكشن في اللايت */
+.bg-section {
+  background: #F6F9F9;
+}
+.bg-section-alt {
+  background: #E6F3F5;
+}
+
+/* الداكن */
 .dark .bg-section {
   background: #020617;
 }
