@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     
     # LLM settings (OpenAI)
     OPENAI_API_KEY: Optional[str] = None
-    OPENAI_MODEL: str = "gpt-4o-mini"  # GPT-4o-mini (fast, cheap, good quality)
+    OPENAI_MODEL: str = "gpt-4o"  # GPT-4o (better quality, excellent Arabic support)
     
     # Fallback to Ollama (optional)
     USE_OLLAMA_FALLBACK: bool = False
@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     OLLAMA_MODEL: str = "phi3:mini"
     
     # Embeddings settings
-    EMBEDDING_MODEL: str = "paraphrase-multilingual-MiniLM-L12-v2"
+    EMBEDDING_MODEL: str = "aubmindlab/bert-base-arabertv2"
     EMBEDDING_DEVICE: str = "cpu"  # Use CPU (no GPU required)
     
     # Reranking settings
