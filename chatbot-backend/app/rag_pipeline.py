@@ -1,6 +1,8 @@
 """RAG (Retrieval Augmented Generation) pipeline."""
 import logging
 import httpx
+import re
+import unicodedata
 from typing import List, Dict, Optional
 from chromadb import ClientAPI, Collection
 import chromadb
@@ -124,52 +126,101 @@ class RAGPipeline:
         
         logger.info(f"Successfully added {len(documents)} documents")
     
+    def _normalize_text(self, text: str) -> str:
+        """
+        Normalize Arabic text to handle variations and improve matching.
+        
+        Args:
+            text: Input text
+            
+        Returns:
+            Normalized text
+        """
+        # Normalize Arabic characters (e.g., different forms of alef)
+        text = unicodedata.normalize('NFKD', text)
+        
+        # Remove diacritics (tashkeel) for better matching
+        # But keep essential ones that change meaning
+        text = re.sub(r'[\u064B-\u065F\u0670]', '', text)  # Remove most diacritics
+        
+        # Normalize whitespace
+        text = re.sub(r'\s+', ' ', text).strip()
+        
+        return text
+    
     def _expand_query(self, query: str) -> str:
         """
-        Expand query with synonyms to improve retrieval.
+        Expand query with synonyms and normalization to improve retrieval.
+        Handles typos, synonyms, and variations.
         
         Args:
             query: Original query
             
         Returns:
-            Expanded query with synonyms
+            Expanded query with synonyms and variations
         """
-        # Common Arabic synonyms mapping - more comprehensive
+        # Normalize the query first
+        normalized_query = self._normalize_text(query)
+        
+        # Common Arabic synonyms mapping - comprehensive
         synonyms = {
-            "أصغر": ["أدنى", "أقل", "الحد الأدنى", "الحد الأقل", "الحد الأدنى للتمويل"],
-            "قرض": ["تمويل", "قروض", "التمويل", "القروض"],
-            "متاح": ["متوفر", "موجود", "متاحة"],
-            "مجاني": ["بدون مقابل", "مجاناً", "مجانية"],
-            "تدريب": ["دورات", "برامج تدريبية", "التدريب"],
-            "استشارة": ["استشارات", "نصيحة", "الاستشارات"],
-            "ماذا تفعل": ["ما هي", "ما مهمة", "ما دور", "ما وظيفة"],
-            "الهيئة": ["المؤسسة", "الجهة", "المنظمة"],
-            "فوائد": ["فائدة", "فوائد على القروض", "بفوائد"],
-            "تفرضون": ["تفرض", "يوجد", "هناك"]
+            "أصغر": ["أدنى", "أقل", "الحد الأدنى", "الحد الأقل", "الحد الأدنى للتمويل", "أصغر قرض", "أصغر تمويل"],
+            "قرض": ["تمويل", "قروض", "التمويل", "القروض", "قرض", "التمويلات"],
+            "متاح": ["متوفر", "موجود", "متاحة", "متوفرة", "يوجد", "موجودة"],
+            "مجاني": ["بدون مقابل", "مجاناً", "مجانية", "مجانا", "مجاني", "مجان"],
+            "تدريب": ["دورات", "برامج تدريبية", "التدريب", "دورة", "كورس", "كورسات"],
+            "استشارة": ["استشارات", "نصيحة", "الاستشارات", "نصائح", "مشورة"],
+            "ماذا تفعل": ["ما هي", "ما مهمة", "ما دور", "ما وظيفة", "ما عمل", "ماذا", "ما"],
+            "الهيئة": ["المؤسسة", "الجهة", "المنظمة", "الهيئة", "المؤسسة العامة"],
+            "فوائد": ["فائدة", "فوائد على القروض", "بفوائد", "فائدة", "فوائد", "مصاريف"],
+            "تفرضون": ["تفرض", "يوجد", "هناك", "هل يوجد", "هل تفرض"],
+            "كيف": ["كيفية", "طريقة", "كيف", "ما هي طريقة"],
+            "أين": ["مكان", "موقع", "أين", "في أي مكان"],
+            "متى": ["وقت", "تاريخ", "متى", "في أي وقت"],
+            "كم": ["مقدار", "عدد", "كم", "ما مقدار"],
         }
         
-        expanded = query
+        expanded = normalized_query
+        
+        # Add synonyms for each word found in query
         for word, syns in synonyms.items():
-            if word in query:
-                # Add synonyms to query
+            if word in normalized_query:
                 expanded += " " + " ".join(syns)
         
-        # Also add common question patterns - more aggressive for synonyms
-        if "أصغر" in query or "أدنى" in query or "أقل" in query or "الحد الأدنى" in query:
-            expanded += " الحد الأدنى للتمويل الحد الأقل الحد الأدنى للقرض الحد الأدنى للتمويل يبدأ من 50 ألف"
-        if "قرض" in query or "قروض" in query:
-            expanded += " تمويل قروض التمويل"
-        # Special case: if asking about smallest/minimum loan
-        if ("أصغر" in query or "أدنى" in query) and ("قرض" in query or "تمويل" in query):
-            expanded += " ما الحد الأدنى للتمويل الحد الأدنى للتمويل يبدأ من 50 ألف ريال"
-        # Special case: if asking about interest/fees
-        if "فوائد" in query or "فائدة" in query:
-            expanded += " هل القروض بفوائد فوائد على القروض"
+        # Add common variations and misspellings
+        variations = {
+            "قرض": ["قرص", "قروض", "قروضات"],  # Common typos
+            "تمويل": ["تمويل", "تمويلات", "تمويل"],
+            "أصغر": ["أصغر", "أصغر", "أصغر"],
+            "الهيئة": ["الهيئة", "الهيئه", "الهيئة"],
+        }
         
-        # Special handling for general "about" questions
-        general_about_keywords = ["ماذا تفعل", "ما هي", "ما مهمة", "ما دور", "ما وظيفة", "ما عمل", "تعريف", "ما هي الهيئة"]
-        if any(keyword in query for keyword in general_about_keywords):
+        for word, vars_list in variations.items():
+            if word in normalized_query:
+                expanded += " " + " ".join(vars_list)
+        
+        # Add context-specific expansions
+        if any(word in normalized_query for word in ["أصغر", "أدنى", "أقل", "الحد الأدنى"]):
+            expanded += " الحد الأدنى للتمويل الحد الأقل الحد الأدنى للقرض الحد الأدنى للتمويل يبدأ من 50 ألف"
+        
+        if any(word in normalized_query for word in ["قرض", "قروض", "تمويل"]):
+            expanded += " تمويل قروض التمويل القروض"
+        
+        # Special case: minimum loan questions
+        if any(word in normalized_query for word in ["أصغر", "أدنى"]) and any(word in normalized_query for word in ["قرض", "تمويل"]):
+            expanded += " ما الحد الأدنى للتمويل الحد الأدنى للتمويل يبدأ من 50 ألف ريال"
+        
+        # Interest/fees questions
+        if any(word in normalized_query for word in ["فوائد", "فائدة", "مصاريف"]):
+            expanded += " هل القروض بفوائد فوائد على القروض مصاريف"
+        
+        # General "about" questions
+        general_about_keywords = ["ماذا تفعل", "ما هي", "ما مهمة", "ما دور", "ما وظيفة", "ما عمل", "تعريف", "ما هي الهيئة", "ماذا", "ما"]
+        if any(keyword in normalized_query for keyword in general_about_keywords):
             expanded += " الهيئة العامة لتنمية المشاريع الصغيرة والأصغر تعريف دعم تمكين أهداف خدمات"
+        
+        # Normalize the expanded query
+        expanded = self._normalize_text(expanded)
         
         return expanded
     
@@ -248,11 +299,12 @@ class RAGPipeline:
         query_embedding = self.embedding_generator.generate_embedding(expanded_query)
         
         # Determine how many candidates to retrieve
-        # If reranking is enabled, retrieve more candidates for better reranking
+        # Retrieve more candidates to handle typos/synonyms better
         if settings.USE_RERANKING and self.reranker:
-            retrieve_k = min(settings.RERANK_TOP_K, 15)  # Retrieve more for reranking
+            retrieve_k = min(settings.RERANK_TOP_K, 20)  # Retrieve more for reranking
         else:
-            retrieve_k = min(top_k + 2, 10)  # Just a few more without reranking
+            # Retrieve more candidates to improve recall (handles typos/synonyms)
+            retrieve_k = settings.RETRIEVE_K if hasattr(settings, 'RETRIEVE_K') else min(top_k * 2, 15)
         
         # Search in ChromaDB
         results = self.collection.query(
@@ -275,10 +327,25 @@ class RAGPipeline:
         if settings.USE_RERANKING and self.reranker and len(chunks) > 2:
             chunks = self._rerank_chunks(query, chunks, preserve_top_n=2)
         
-        # Return top_k after reranking
-        chunks = chunks[:top_k]
+        # Filter by distance threshold to remove very poor matches
+        # Keep chunks with reasonable similarity (distance < 1.5 for cosine distance)
+        filtered_chunks = []
+        for chunk in chunks:
+            distance = chunk.get('distance', 999)
+            # ChromaDB uses cosine distance: lower is better, typically 0-2 range
+            # Keep chunks with distance < 1.5 (reasonable similarity)
+            # This helps filter out irrelevant results from expanded queries
+            if distance is None or distance < 1.5:
+                filtered_chunks.append(chunk)
         
-        logger.info(f"Found {len(chunks)} relevant chunks (after reranking: {settings.USE_RERANKING and self.reranker is not None})")
+        # If we filtered too many, keep at least top_k (don't be too aggressive)
+        if len(filtered_chunks) < top_k:
+            filtered_chunks = chunks[:top_k]
+        
+        # Return top_k after filtering
+        chunks = filtered_chunks[:top_k]
+        
+        logger.info(f"Found {len(chunks)} relevant chunks (retrieved {retrieve_k}, filtered to {len(filtered_chunks)}, final: {len(chunks)})")
         return chunks
     
     def generate_response(

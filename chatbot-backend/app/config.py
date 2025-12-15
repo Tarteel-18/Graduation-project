@@ -48,7 +48,8 @@ class Settings(BaseSettings):
     # RAG settings
     CHUNK_SIZE: int = 500  # Characters per chunk
     CHUNK_OVERLAP: int = 50  # Overlap between chunks
-    TOP_K_RESULTS: int = 5  # Increased to 5 for better coverage and context
+    TOP_K_RESULTS: int = 8  # Increased to 8 for better coverage (handles typos/synonyms better)
+    RETRIEVE_K: int = 15  # Retrieve more candidates initially, then filter to top_k
     
     # FAQ document path
     FAQ_DOCUMENT_PATH: Optional[str] = "./data/faq.txt"
