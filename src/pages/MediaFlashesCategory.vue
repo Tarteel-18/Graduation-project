@@ -1,5 +1,4 @@
 <template>
-  <!-- الكومبوننت الموحّد -->
   <FlashesCategoryLayout
     :title="current.title"
     :breadcrumb-label="current.breadcrumbLabel"
@@ -14,7 +13,6 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import FlashesCategoryLayout from '@/components/FlashesCategoryLayout.vue'
 
-// صور (بدّلي المسارات حسب ملفاتك)
 import imgHome1 from '@/assets/images/home-vid-1.png'
 import imgHome2 from '@/assets/images/home-vid-1.png'
 import imgHome3 from '@/assets/images/home-vid-1.png'
@@ -35,19 +33,18 @@ import imgLearn6 from '@/assets/images/home-vid-1.png'
 
 const route = useRoute()
 
-// 🔹 بيانات كل فرع (ديناميكي)
 const CATEGORIES = {
   'home-industry': {
     breadcrumbLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     title: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'مجموعة فيديوهات توضح خطوات الصناعات الغذائية المنزلية بطريقة آمنة وسهلة.',
     videos: [
-      { id: 1, slug: 'cream-cheese',  title: 'إنتاج الجبن السائل (الكريمي) في البيت',      image: imgHome1 },
-      { id: 2, slug: 'salty-cheese',  title: 'إنتاج الجبن المالح في البيت',                 image: imgHome2 },
-      { id: 3, slug: 'milk-powder',   title: 'إنتاج الزبادي من الحليب البودرة في المنزل',   image: imgHome3 },
-      { id: 4, slug: 'apple-jam',     title: 'إنتاج مربى التفاح الطبيعي في البيت',           image: imgHome4 },
-      { id: 5, slug: 'strawberry-jam',title: 'إنتاج مربى الفراولة الطبيعي في البيت',         image: imgHome5 },
-      { id: 6, slug: 'dry-tomato',    title: 'تجفيف الطماطم خلال مواسم الوفرة',              image: imgHome6 },
+      { id: 1, slug: 'cream-cheese',   title: 'إنتاج الجبن السائل (الكريمي) في البيت',      image: imgHome1 },
+      { id: 2, slug: 'salty-cheese',   title: 'إنتاج الجبن المالح في البيت',                 image: imgHome2 },
+      { id: 3, slug: 'milk-powder',    title: 'إنتاج الزبادي من الحليب البودرة في المنزل',  image: imgHome3 },
+      { id: 4, slug: 'apple-jam',      title: 'إنتاج مربى التفاح الطبيعي في البيت',          image: imgHome4 },
+      { id: 5, slug: 'strawberry-jam', title: 'إنتاج مربى الفراولة الطبيعي في البيت',        image: imgHome5 },
+      { id: 6, slug: 'dry-tomato',     title: 'تجفيف الطماطم خلال مواسم الوفرة',             image: imgHome6 },
     ],
   },
 
@@ -77,11 +74,7 @@ const CATEGORIES = {
   },
 }
 
-// 🔸 slug الحالي (أو default = home-industry)
 const currentSlug = computed(() => route.params.slug || 'home-industry')
 
-// البيانات الحالية حسب الـ slug
-const current = computed(() => {
-  return CATEGORIES[currentSlug.value] || CATEGORIES['home-industry']
-})
+const current = computed(() => CATEGORIES[currentSlug.value] || CATEGORIES['home-industry'])
 </script>

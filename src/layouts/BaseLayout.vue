@@ -7,21 +7,21 @@
            transition-colors duration-300"
   >
     <!-- الهيدر -->
-    <AppHeader v-if="!hideChrome" />
+    <AppHeader v-if="!isNoChrome" />
 
     <!-- محتوى الصفحات -->
     <main
       class="min-h-[70vh] flex-1 pb-24"
-      :class="hideChrome ? '' : 'pt-14'"
+      :class="isNoChrome ? '' : 'pt-14'"
     >
       <slot />
     </main>
 
-    <!-- الفوتر -->
-    <AppFooter v-if="!hideChrome" />
+    <!-- الفوتر: مخفي في البروفايل وكل صفحات noChrome -->
+    <AppFooter v-if="!hideFooter" />
 
     <!-- الشات -->
-    <ChatWidget v-if="!hideChrome" />
+    <ChatWidget v-if="!isNoChrome" />
   </div>
 </template>
 
@@ -35,11 +35,19 @@ import ChatWidget from '../components/ChatWidget.vue'
 
 const route = useRoute()
 
-// ✅ الصفحات اللي نخبّي فيها الهيدر + الفوتر + الشات
-const hideChrome = computed(() => {
-  const noLayoutPaths = ['/login', '/register']
-  const byPath = noLayoutPaths.includes(route.path)
-  const byMeta = route.meta.hideLayout === true   // هنا نقرأ meta من الراوتر
-  return byPath || byMeta
-})
+// الصفحات اللي تريد تخفي فيها الهيدر + الفوتر + الشات
+const noChromePaths = ['/splash', '/login', '/register']
+
+// كل ما كان المسار من نوع /form/... اعتبره بدون واجهة
+const isFormPage = computed(() => route.path.startsWith('/form/'))
+
+const isNoChrome = computed(
+  () => noChromePaths.includes(route.path) || isFormPage.value
+)
+
+// إخفاء الفوتر في البروفايل + كل صفحات noChrome
+const hideFooter = computed(
+  () => route.path === '/profile' || isNoChrome.value
+)
 </script>
+

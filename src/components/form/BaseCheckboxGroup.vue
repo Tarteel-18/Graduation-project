@@ -2,12 +2,16 @@
   <div class="space-y-2 w-full">
 
     <!-- عنوان الحقل -->
-    <label class="block text-[#165C75] font-semibold text-[15px]">
+    <label class="block text-[#165C75] dark:text-cyan-300 font-semibold text-[15px]">
       {{ label }}
     </label>
 
     <!-- مجموعة الشيك بوكس -->
-    <div class="bg-white border border-slate-200 rounded-2xl p-4 space-y-3">
+    <div
+      class="bg-white dark:bg-slate-800
+             border border-slate-200 dark:border-slate-600
+             rounded-2xl p-4 space-y-3"
+    >
 
       <div
         v-for="opt in normalizedOptions"
@@ -21,7 +25,7 @@
           :checked="modelValue.includes(opt.value)"
           @change="toggle(opt.value)"
         />
-        <span class="text-slate-700">{{ opt.label }}</span>
+        <span class="text-slate-700 dark:text-slate-100">{{ opt.label }}</span>
       </div>
 
     </div>

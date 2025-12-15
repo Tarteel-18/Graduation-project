@@ -1,25 +1,33 @@
 <template>
-  <div class="min-h-screen bg-[#F4FAFB] py-10" dir="rtl">
+  <div
+    class="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10
+           transition-colors duration-300"
+    dir="rtl"
+  >
     <div class="mx-auto max-w-[900px] px-4">
 
-      <!-- الهيدر الداخلي للفورم -->
+      <!-- كرت العنوان -->
       <div
         v-if="formDef"
-        class="bg-white rounded-2xl shadow-sm overflow-hidden mb-6 border border-slate-100"
+        class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm overflow-hidden mb-6
+               border border-slate-100 dark:border-slate-700"
       >
         <div class="h-3 bg-[#06A6C8]"></div>
         <div class="px-8 py-6">
-          <h1 class="text-xl md:text-2xl font-extrabold text-[#163B52] mb-2">
+          <h1 class="text-xl md:text-2xl font-extrabold text-[#163B52] dark:text-cyan-300 mb-2">
             {{ formDef.title }}
           </h1>
-          <p v-if="formDef.description" class="text-sm text-slate-500">
+          <p
+            v-if="formDef.description"
+            class="text-sm text-slate-500 dark:text-slate-300"
+          >
             {{ formDef.description }}
           </p>
         </div>
       </div>
 
       <!-- تحميل -->
-      <div v-if="loading" class="text-center text-slate-500">
+      <div v-if="loading" class="text-center text-slate-500 dark:text-slate-300">
         جاري تحميل النموذج...
       </div>
 
@@ -29,14 +37,18 @@
       </div>
 
       <!-- المحتوى الأساسي للفورم -->
-      <form v-else @submit.prevent="onSubmit" class="space-y-5">
-
+      <form
+        v-else
+        @submit.prevent="onSubmit"
+        class="space-y-5 bg-white dark:bg-slate-900
+               rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700
+               px-6 md:px-8 py-6"
+      >
         <!-- الحقول -->
         <div
           v-for="field in formDef.fields"
           :key="field.name"
         >
-          <!-- نستخدم component ديناميكي حسب نوع الحقل -->
           <component
             :is="resolveFieldComponent(field)"
             v-model="formData[field.name]"
@@ -53,19 +65,19 @@
           <button
             type="button"
             @click="resetForm"
-            class="text-sm text-[#06A6C8] hover:underline"
+            class="text-sm text-[#06A6C8] dark:text-cyan-300 hover:underline"
           >
             محو النموذج
           </button>
 
           <button
             type="submit"
-            class="px-10 py-2.5 rounded-xl bg-[#06A6C8] text-white font-semibold text-sm hover:bg-[#0587A2] transition-colors"
+            class="px-10 py-2.5 rounded-xl bg-[#06A6C8] hover:bg-[#0587A2]
+                   text-white font-semibold text-sm transition-colors"
           >
             إرسال
           </button>
         </div>
-
       </form>
 
     </div>
@@ -76,17 +88,13 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-// 👇 هنا نجيب تعريف الفورمات من الكونفيج المحلي
 import { formsConfig } from '@/data/formsConfig'
 
-// 👇 نستخدم نفس الـ Base Components اللي بنينا عليها شغلك
 import BaseTextField from '@/components/form/BaseTextField.vue'
 import BaseTextareaField from '@/components/form/BaseTextareaField.vue'
 import BaseFileUpload from '@/components/form/BaseFileUpload.vue'
-// مستقبلاً: BaseSelect, BaseCheckboxGroup, BaseRadioGroup ...
 import BaseRadioGroup from '@/components/form/BaseRadioGroup.vue'
 import BaseCheckboxGroup from '@/components/form/BaseCheckboxGroup.vue'
-
 
 const route = useRoute()
 const router = useRouter()
@@ -98,7 +106,6 @@ const error = ref('')
 const formData = reactive({})
 const errors = reactive({})
 
-// نحدد أي كومبوننت نستخدم حسب نوع الحقل
 const resolveFieldComponent = (field) => {
   switch (field.type) {
     case 'text':
@@ -110,15 +117,15 @@ const resolveFieldComponent = (field) => {
       return BaseTextareaField
     case 'file':
       return BaseFileUpload
-      case 'checkbox': return BaseCheckboxGroup
-case 'radio': return BaseRadioGroup
-
+    case 'checkbox':
+      return BaseCheckboxGroup
+    case 'radio':
+      return BaseRadioGroup
     default:
       return BaseTextField
   }
 }
 
-// تحميل تعريف الفورم من الكونفيج (بدل API حالياً)
 const loadForm = () => {
   loading.value = true
   error.value = ''
@@ -131,10 +138,7 @@ const loadForm = () => {
     formDef.value = null
   } else {
     formDef.value = def
-
-    // نهيئ formData و errors حسب الحقول
     def.fields.forEach((field) => {
-      // checkbox مستقبلاً نخليه مصفوفة
       formData[field.name] = field.type === 'checkbox' ? [] : ''
       errors[field.name] = ''
     })
@@ -143,7 +147,6 @@ const loadForm = () => {
   loading.value = false
 }
 
-// تحقق بسيط حسب required
 const validate = () => {
   let ok = true
   if (!formDef.value) return false
@@ -172,7 +175,6 @@ const onSubmit = () => {
 
   const slug = route.params.slug
 
-  // 🔹 حالياً: بس نطبع في الكونسول ونعطي alert
   console.log('Dynamic form submit:', {
     slug,
     data: { ...formData },
@@ -180,7 +182,6 @@ const onSubmit = () => {
 
   alert('تم إرسال النموذج (واجهة فقط – جاهز للربط مع الباك لاحقاً).')
 
-  // نرجع للرئيسية بعد الإرسال
   router.push({ name: 'home' })
 }
 
