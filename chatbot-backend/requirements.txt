@@ -6,12 +6,12 @@ python-multipart==0.0.12
 # CORS is handled by FastAPI's built-in CORSMiddleware (no extra package needed)
 
 # RAG and LLM
-langchain==0.3.0
-langchain-community==0.3.0
-langchain-core==0.3.0
+# langchain==0.3.0
+# langchain-community==0.3.0
+# langchain-core==0.3.0
 
 # Vector Database
-chromadb==0.5.0
+# chromadb==0.5.0
 
 # Embeddings and Reranking (OPTIONAL - only needed for local models/reranking)
 # Cloud embeddings (OpenAI API) are used by default - NO local models needed!
