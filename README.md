@@ -163,11 +163,12 @@ PORT=8002
 - Check your OpenAI account has credits
 - Ensure API key starts with `sk-`
 
-**Vector database issues:**
+**Vector database issues / Embedding dimension mismatch:**
 ```bash
-# Delete and rebuild
+# If you see "Embedding dimension X does not match collection dimensionality Y"
+# This happens when switching embedding models - delete and rebuild:
 rm -rf chatbot-backend/vector_db/
-# Restart server (will rebuild automatically)
+# Restart server (will rebuild automatically with correct dimensions)
 ```
 
 ### Frontend Issues
