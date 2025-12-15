@@ -2,6 +2,12 @@
 
 A Vue.js frontend with a Python FastAPI backend implementing a RAG-based chatbot for answering questions about the الهيئة العامة لتنمية المشاريع الصغيرة والأصغر.
 
+## 🚀 Quick Start
+
+**New to this project?** Check out our setup guides:
+- **🪟 [Complete Windows Setup Guide](./WINDOWS_SETUP_GUIDE.md)** - Step-by-step instructions for absolute beginners on Windows
+- **🐧 [Linux/Mac Setup](./README.md#quick-start)** - Instructions below
+
 ## Project Structure
 
 ```
