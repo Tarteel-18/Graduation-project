@@ -15,15 +15,23 @@ This guide will walk you through setting up the entire project on a Windows mach
 7. [Step 6: Run the Application](#step-6-run-the-application)
 8. [Troubleshooting](#troubleshooting)
 
-## ✨ Good News: Cloud-Based Setup!
+## ✨ Good News: 100% Cloud-Based Setup!
 
-**This project uses cloud-based AI models by default!** This means:
-- ✅ **No large model downloads** (saves gigabytes of disk space)
-- ✅ **Faster setup** (no waiting for model downloads)
-- ✅ **Easier for beginners** (less configuration needed)
-- ✅ **Better performance** (cloud models are optimized)
+**This project uses cloud-based AI models by default - NO local model downloads needed!** This means:
+- ✅ **Zero large model downloads** (saves gigabytes of disk space)
+- ✅ **Faster setup** (2-5 minutes vs 30+ minutes with local models)
+- ✅ **Easier for beginners** (just install Python packages, add API key, done!)
+- ✅ **Better performance** (cloud models are optimized and always up-to-date)
+- ✅ **No GPU needed** (everything runs in the cloud)
 
-You only need your OpenAI API key - everything else runs in the cloud!
+**What you need:**
+- Just your OpenAI API key (we'll get this in Step 5)
+- Everything else runs in the cloud - no model downloads, no GPU, no hassle!
+
+**Default configuration:**
+- ✅ Cloud embeddings (OpenAI API) - no local models
+- ✅ Cloud LLM (GPT-4o) - no local models  
+- ✅ Reranking disabled (optional, not needed for good results) - no local models
 
 ---
 
