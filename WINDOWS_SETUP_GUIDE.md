@@ -444,15 +444,29 @@ OPENAI_API_KEY=sk-proj-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ### Problem: "Embedding dimension mismatch" error
 
+**Error message:** `Embedding dimension 1536 does not match collection dimensionality 768`
+
 **Solution:**
-This happens if you changed the embedding model. Delete and recreate the vector database:
+This happens when you switch between different embedding models (e.g., from local to cloud, or between different cloud models). The vector database needs to be recreated with the new dimensions.
 
-```cmd
-cd chatbot-backend
-rmdir /s /q vector_db
-```
+**Fix:**
 
-Then restart the backend server (it will recreate automatically).
+1. Stop the backend server (press `Ctrl + C` in the backend terminal)
+
+2. Delete the vector database:
+   ```cmd
+   cd chatbot-backend
+   rmdir /s /q vector_db
+   ```
+
+3. Restart the backend server:
+   ```cmd
+   python -m app.main
+   ```
+
+4. The server will automatically recreate the vector database with the correct dimensions and reload your FAQ documents.
+
+**Note:** This is normal when switching embedding models. The vector database will be automatically rebuilt with the correct dimensions.
 
 ---
 
