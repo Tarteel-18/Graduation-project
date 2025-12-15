@@ -194,12 +194,16 @@ pip install -r requirements.txt
 
 **This will take 2-5 minutes** - it's downloading packages. You'll see progress bars.
 
-**Good news:** The project uses **cloud embeddings by default**, so you don't need to download large AI models locally! This saves gigabytes of space and time.
+**✅ Great news:** The project uses **100% cloud-based AI models by default**:
+- ✅ **No large model downloads** - everything runs in the cloud via OpenAI API
+- ✅ **Saves gigabytes of disk space** - no local AI models needed
+- ✅ **Faster setup** - just install Python packages, no model downloads
+- ✅ **Works immediately** - just add your OpenAI API key
 
 **Common issues:**
 - If you get "pip is not recognized": Make sure Python was added to PATH during installation
 - If download is slow: This is normal, just wait
-- If you see warnings about sentence-transformers: That's fine - it's only needed if you want local embeddings (not required)
+- If you see warnings about sentence-transformers: That's fine - it's completely optional and not needed for the default setup
 
 ### 3.6 Create Environment File
 

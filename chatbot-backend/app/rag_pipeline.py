@@ -6,7 +6,7 @@ from chromadb import ClientAPI, Collection
 import chromadb
 from chromadb.config import Settings as ChromaSettings
 from openai import OpenAI
-from sentence_transformers import CrossEncoder
+# CrossEncoder is optional - only imported if reranking is enabled
 
 from app.embeddings import EmbeddingGenerator
 from app.config import settings
@@ -69,19 +69,24 @@ class RAGPipeline:
             )
             logger.info(f"Created new collection: {settings.VECTOR_DB_COLLECTION_NAME}")
         
-        # Initialize cross-encoder reranker if enabled
+        # Initialize cross-encoder reranker if enabled (optional - requires sentence-transformers)
         if settings.USE_RERANKING:
             try:
+                from sentence_transformers import CrossEncoder
                 logger.info(f"Loading reranker model: {settings.RERANKER_MODEL}")
                 self.reranker = CrossEncoder(settings.RERANKER_MODEL, max_length=512)
                 logger.info("Reranker initialized successfully")
+            except ImportError:
+                logger.error("sentence-transformers not installed. Install with: pip install sentence-transformers")
+                logger.warning("Continuing without reranking")
+                self.reranker = None
             except Exception as e:
                 logger.error(f"Failed to initialize reranker: {e}")
                 logger.warning("Continuing without reranking")
                 self.reranker = None
         else:
             self.reranker = None
-            logger.info("Reranking disabled")
+            logger.info("Reranking disabled (set USE_RERANKING=True to enable)")
         
         logger.info("RAG pipeline initialized")
     

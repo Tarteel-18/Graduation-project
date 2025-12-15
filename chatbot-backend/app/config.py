@@ -36,9 +36,9 @@ class Settings(BaseSettings):
     # Cloud embedding settings (OpenAI)
     OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-small"  # Options: text-embedding-3-small, text-embedding-3-large, text-embedding-ada-002
     
-    # Reranking settings
-    USE_RERANKING: bool = True  # Enable cross-encoder reranking
-    RERANKER_MODEL: str = "cross-encoder/ms-marco-MiniLM-L-12-v2"  # Fast, multilingual reranker
+    # Reranking settings (optional - disabled by default for simplest setup)
+    USE_RERANKING: bool = False  # Enable cross-encoder reranking (requires sentence-transformers)
+    RERANKER_MODEL: str = "cross-encoder/ms-marco-MiniLM-L-12-v2"  # Only used if USE_RERANKING=True
     RERANK_TOP_K: int = 10  # Retrieve more candidates, then rerank (but preserve top 2 from embedding)
     
     # Vector Database settings
