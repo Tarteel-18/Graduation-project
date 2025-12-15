@@ -21,11 +21,34 @@ class RAGPipeline:
         """Initialize the RAG pipeline."""
         logger.info("Initializing RAG pipeline...")
         
-        # Initialize embedding generator
-        self.embedding_generator = EmbeddingGenerator(
-            model_name=settings.EMBEDDING_MODEL,
-            device=settings.EMBEDDING_DEVICE
-        )
+        # Initialize OpenAI client FIRST (needed for cloud embeddings)
+        if settings.OPENAI_API_KEY:
+            self.openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
+            logger.info("OpenAI client initialized")
+        else:
+            self.openai_client = None
+            if settings.USE_CLOUD_EMBEDDINGS:
+                raise ValueError(
+                    "OPENAI_API_KEY is required when USE_CLOUD_EMBEDDINGS=True. "
+                    "Set it in .env file or disable cloud embeddings."
+                )
+            logger.warning("OpenAI API key not found, will use Ollama fallback")
+        
+        # Initialize embedding generator (cloud or local)
+        if settings.USE_CLOUD_EMBEDDINGS:
+            self.embedding_generator = EmbeddingGenerator(
+                use_cloud=True,
+                openai_client=self.openai_client,
+                openai_model=settings.OPENAI_EMBEDDING_MODEL
+            )
+            logger.info(f"Using cloud embeddings: {settings.OPENAI_EMBEDDING_MODEL}")
+        else:
+            self.embedding_generator = EmbeddingGenerator(
+                use_cloud=False,
+                model_name=settings.EMBEDDING_MODEL,
+                device=settings.EMBEDDING_DEVICE
+            )
+            logger.info(f"Using local embeddings: {settings.EMBEDDING_MODEL}")
         
         # Initialize ChromaDB
         self.chroma_client = chromadb.PersistentClient(
@@ -45,14 +68,6 @@ class RAGPipeline:
                 metadata={"description": "FAQ documents for RAG"}
             )
             logger.info(f"Created new collection: {settings.VECTOR_DB_COLLECTION_NAME}")
-        
-        # Initialize OpenAI client
-        if settings.OPENAI_API_KEY:
-            self.openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
-            logger.info("OpenAI client initialized")
-        else:
-            self.openai_client = None
-            logger.warning("OpenAI API key not found, will use Ollama fallback")
         
         # Initialize cross-encoder reranker if enabled
         if settings.USE_RERANKING:

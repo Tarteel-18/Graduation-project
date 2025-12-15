@@ -15,6 +15,16 @@ This guide will walk you through setting up the entire project on a Windows mach
 7. [Step 6: Run the Application](#step-6-run-the-application)
 8. [Troubleshooting](#troubleshooting)
 
+## ✨ Good News: Cloud-Based Setup!
+
+**This project uses cloud-based AI models by default!** This means:
+- ✅ **No large model downloads** (saves gigabytes of disk space)
+- ✅ **Faster setup** (no waiting for model downloads)
+- ✅ **Easier for beginners** (less configuration needed)
+- ✅ **Better performance** (cloud models are optimized)
+
+You only need your OpenAI API key - everything else runs in the cloud!
+
 ---
 
 ## 📦 Prerequisites
@@ -182,11 +192,14 @@ Example:
 pip install -r requirements.txt
 ```
 
-**This will take 5-10 minutes** - it's downloading many packages. You'll see progress bars.
+**This will take 2-5 minutes** - it's downloading packages. You'll see progress bars.
+
+**Good news:** The project uses **cloud embeddings by default**, so you don't need to download large AI models locally! This saves gigabytes of space and time.
 
 **Common issues:**
 - If you get "pip is not recognized": Make sure Python was added to PATH during installation
 - If download is slow: This is normal, just wait
+- If you see warnings about sentence-transformers: That's fine - it's only needed if you want local embeddings (not required)
 
 ### 3.6 Create Environment File
 

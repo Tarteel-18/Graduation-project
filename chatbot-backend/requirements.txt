@@ -13,9 +13,11 @@ langchain-core==0.3.0
 # Vector Database
 chromadb==0.5.0
 
-# Embeddings (local, supports Arabic)
-sentence-transformers==3.0.1
-torch==2.5.0
+# Embeddings (optional - only needed if USE_CLOUD_EMBEDDINGS=False)
+# Cloud embeddings (OpenAI API) are used by default - no local models needed!
+# Uncomment below only if you want to use local embeddings instead:
+# sentence-transformers==3.0.1
+# torch==2.5.0
 
 # Document processing
 pypdf2==3.0.1

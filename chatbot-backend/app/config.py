@@ -28,8 +28,13 @@ class Settings(BaseSettings):
     OLLAMA_MODEL: str = "phi3:mini"
     
     # Embeddings settings
-    EMBEDDING_MODEL: str = "aubmindlab/bert-base-arabertv2"
-    EMBEDDING_DEVICE: str = "cpu"  # Use CPU (no GPU required)
+    # Use cloud embeddings (OpenAI API) - recommended for beginners, no model downloads needed
+    USE_CLOUD_EMBEDDINGS: bool = True  # Set to False to use local models
+    EMBEDDING_MODEL: str = "aubmindlab/bert-base-arabertv2"  # Only used if USE_CLOUD_EMBEDDINGS=False
+    EMBEDDING_DEVICE: str = "cpu"  # Only used if USE_CLOUD_EMBEDDINGS=False
+    
+    # Cloud embedding settings (OpenAI)
+    OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-small"  # Options: text-embedding-3-small, text-embedding-3-large, text-embedding-ada-002
     
     # Reranking settings
     USE_RERANKING: bool = True  # Enable cross-encoder reranking
