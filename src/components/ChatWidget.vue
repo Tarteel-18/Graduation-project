@@ -1,13 +1,24 @@
 <template>
+  <!-- زر فتح الشات -->
   <div class="fixed bottom-6 left-6 z-40">
     <button
-      @click="isOpen = !isOpen"
+      @click="toggleOpen"
       class="flex items-center justify-center hover:scale-110 transition-transform duration-200"
     >
       <img :src="chatIcon" alt="chat" class="w-20 h-20 object-contain" />
     </button>
   </div>
 
+  <!-- طبقة الخلفية لإغلاق الشات عند الضغط خارج -->
+  <transition name="fade">
+    <div
+      v-if="isOpen"
+      class="fixed inset-0 z-30"
+      @click="closeChat"
+    ></div>
+  </transition>
+
+  <!-- نافذة الشات -->
   <transition name="fade">
     <div
       v-if="isOpen"
@@ -18,10 +29,10 @@
           ? 'inset-0 w-full h-full rounded-none'
           : 'bottom-24 left-6 w-[400px] h-[520px] rounded-2xl'
       ]"
+      @click.stop
     >
-
+      <!-- الهيدر -->
       <div class="flex items-center justify-between px-4 py-3 bg-[#0A8096] dark:bg-slate-800 text-white">
-
         <div class="flex items-center gap-3">
           <div
             class="w-9 h-9 rounded-full bg-white/20 border border-white/40
@@ -40,60 +51,78 @@
 
       <!-- محتوى الرسائل -->
       <div
-        class="flex-1 px-4 py-5 overflow-y-auto"
+        class="flex-1 px-4 py-5 overflow-y-auto bg-[#F4F7F8] dark:bg-slate-800"
         dir="rtl"
         ref="messagesContainer"
-        :class="[
-          'bg-[#F4F7F8] dark:bg-slate-800'
-        ]"
       >
-
-        <!-- رسائل المحادثة -->
-        <div v-for="(msg, index) in messages" :key="index" class="mb-6">
-          <!-- رسالة المستخدم -->
-          <div v-if="msg.type === 'user'" class="flex justify-end mb-2">
-            <div class="max-w-[75%] bg-[#0A8096] text-white rounded-2xl rounded-tr-none px-4 py-2 text-sm shadow">
-              {{ msg.text }}
-            </div>
-          </div>
-
-          <!-- رسالة البوت -->
-          <div v-else class="flex justify-start">
-            <div class="flex items-start gap-3">
-              <!-- الأيقونة -->
+        <div v-for="(msg, index) in messages" :key="index" class="mb-2">
+          <!-- رسالة المستخدم (يمين) -->
+          <div v-if="msg.type === 'user'" class="mb-4 flex justify-end">
+            <div class="flex flex-col items-end max-w-[75%]">
               <div
-                class="w-8 h-8 rounded-full bg-white dark:bg-slate-700
-                       border border-slate-300 dark:border-slate-600
-                       flex items-center justify-center overflow-hidden shrink-0"
+                class="bg-[#0A8096] text-white
+                       rounded-2xl rounded-tr-none px-4 py-3 text-sm shadow"
               >
-                <img :src="chatIcon" class="w-full h-full object-cover" />
-              </div>
-
-              <!-- الفقاعة -->
-              <div
-                class="max-w-[75%] rounded-2xl rounded-tl-none px-4 py-2 text-sm shadow
-                       bg-white dark:bg-slate-700
-                       text-slate-900 dark:text-slate-100"
-              >
-                <div v-if="msg.loading" class="flex items-center gap-2">
-                  <span class="animate-pulse">جاري الكتابة</span>
-                  <span class="animate-bounce">...</span>
+                <div class="whitespace-pre-wrap">
+                  {{ msg.text }}
                 </div>
-                <div v-else class="whitespace-pre-wrap">{{ msg.text }}</div>
               </div>
+
+              <span
+                v-if="msg.timestamp"
+                class="mt-1 text-[10px] text-slate-500 dark:text-slate-400"
+              >
+                {{ formatTime(msg.timestamp) }}
+              </span>
             </div>
           </div>
 
-          <!-- الوقت -->
-          <div
-            v-if="msg.timestamp"
-            :class="msg.type === 'user' ? 'text-right' : 'text-left pl-12'"
-            class="text-[11px] text-slate-500 dark:text-slate-400 mt-1"
-          >
-            {{ formatTime(msg.timestamp) }}
+          <!-- رسالة البوت + حالة جاري الكتابة -->
+          <div v-else>
+            <!-- رسالة البوت العادية -->
+            <div v-if="!msg.loading" class="flex flex-col items-end">
+              <div class="flex items-start gap-2">
+                <!-- الأيقونة -->
+                <div
+                  class="w-8 h-8 rounded-full bg-white dark:bg-slate-700
+                         border border-slate-300 dark:border-slate-600
+                         flex items-center justify-center overflow-hidden shrink-0"
+                >
+                  <img :src="chatIcon" class="w-full h-full object-cover" />
+                </div>
+
+                <!-- فقاعة الرد -->
+                <div
+                  class="max-w-[75%] rounded-2xl rounded-tr-none px-4 py-3 text-sm shadow
+                         bg-white dark:bg-slate-700
+                         text-slate-900 dark:text-slate-100 text-right"
+                >
+                  <div class="whitespace-pre-wrap">
+                    {{ msg.text }}
+                  </div>
+                </div>
+              </div>
+
+              <span
+                v-if="msg.timestamp"
+                class="mt-1 text-[10px] text-slate-500 dark:text-slate-400 text-right w-full pr-10"
+              >
+                {{ formatTime(msg.timestamp) }} · الهيئة بوت
+              </span>
+            </div>
+
+            <!-- فقاعة "جاري الكتابة..." في الشق الثاني -->
+            <div v-else class="flex justify-start mt-1">
+              <div
+                class="ml-10 max-w-[70%] rounded-2xl rounded-tl-none px-4 py-2 text-sm shadow
+                       bg-white/80 dark:bg-slate-700/80
+                       text-slate-700 dark:text-slate-100 text-right"
+              >
+                جاري الكتابة ...
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
 
       <!-- إدخال الرسائل -->
@@ -124,10 +153,8 @@
           >
             ➤
           </button>
-
         </div>
       </div>
-
     </div>
   </transition>
 </template>
@@ -151,6 +178,14 @@ const messages = ref([
 ])
 const messagesContainer = ref(null)
 
+// فتح/إغلاق الشات من الزر
+const toggleOpen = () => {
+  isOpen.value = !isOpen.value
+  if (isOpen.value) {
+    nextTick(scrollToBottom)
+  }
+}
+
 // تنسيق الوقت
 const formatTime = (date) => {
   if (!date) return ''
@@ -159,7 +194,7 @@ const formatTime = (date) => {
   const minutes = d.getMinutes()
   const ampm = hours >= 12 ? 'PM' : 'AM'
   const hours12 = hours % 12 || 12
-  return `${hours12}:${minutes.toString().padStart(2, '0')} ${ampm}`
+  return `${hours12}:${minutes.toString().padStart(2, '0')}${ampm}`
 }
 
 // إرسال الرسالة
@@ -169,14 +204,12 @@ const sendMessage = async () => {
   const userMessage = message.value.trim()
   message.value = ''
 
-  // إضافة رسالة المستخدم
   messages.value.push({
     type: 'user',
     text: userMessage,
     timestamp: new Date()
   })
 
-  // إضافة رسالة تحميل للبوت
   const loadingMessage = {
     type: 'bot',
     text: '',
@@ -194,9 +227,7 @@ const sendMessage = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        message: userMessage
-      })
+      body: JSON.stringify({ message: userMessage })
     })
 
     if (!response.ok) {
@@ -205,20 +236,19 @@ const sendMessage = async () => {
 
     const data = await response.json()
 
-    // تحديث رسالة التحميل بالرد
     const loadingIndex = messages.value.findIndex(m => m.loading)
     if (loadingIndex !== -1) {
       messages.value[loadingIndex] = {
         type: 'bot',
         text: data.response || 'عذراً، لم أتمكن من توليد إجابة.',
         loading: false,
+        typeBot: true,
         timestamp: new Date()
       }
     }
   } catch (error) {
     console.error('Error sending message:', error)
-    
-    // تحديث رسالة التحميل بخطأ
+
     const loadingIndex = messages.value.findIndex(m => m.loading)
     if (loadingIndex !== -1) {
       messages.value[loadingIndex] = {
@@ -253,7 +283,6 @@ const toggleMax = () => {
   scrollToBottom()
 }
 
-// عند فتح الشات، التمرير للأسفل
 onMounted(() => {
   scrollToBottom()
 })
