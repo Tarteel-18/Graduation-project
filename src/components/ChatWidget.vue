@@ -163,7 +163,8 @@
 import { ref, nextTick, onMounted } from 'vue'
 import chatIcon from '@/assets/images/chat-icon.png'
 
-const API_BASE_URL = 'http://localhost:8001'
+// Use environment variable for production, fallback to localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001'
 
 const isOpen = ref(false)
 const isMaximized = ref(false)
