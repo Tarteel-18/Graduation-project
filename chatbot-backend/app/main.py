@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List, Dict
 import logging
+import os
 from pathlib import Path
 
 from app.config import settings
@@ -25,9 +26,10 @@ app = FastAPI(
 )
 
 # CORS middleware
+# Temporarily allow all origins for debugging - REMOVE IN PRODUCTION
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=["*"],  # TEMPORARY: Allow all origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -138,6 +140,15 @@ async def health_check():
     except Exception as e:
         logger.error(f"Health check error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/debug/cors")
+async def debug_cors():
+    """Debug endpoint to check configured CORS origins."""
+    return {
+        "configured_origins": settings.CORS_ORIGINS,
+        "cors_origins_extra": os.getenv("CORS_ORIGINS_EXTRA", "not set")
+    }
 
 
 @app.post("/api/chat", response_model=ChatResponse)
