@@ -163,7 +163,7 @@
 import { ref, nextTick, onMounted } from 'vue'
 import chatIcon from '@/assets/images/chat-icon.png'
 
-const API_BASE_URL = 'http://localhost:8001'
+const API_BASE_URL = 'https://graduation-project-w0wk.onrender.com' || 'http://localhost:8001'
 
 const isOpen = ref(false)
 const isMaximized = ref(false)
