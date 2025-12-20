@@ -57,15 +57,16 @@
         </ul>
       </section>
 
-      <div class="mt-4 flex justify-center">
-        <button
-          type="button"
-          class="btn btn-solid btn-long-full max-w-[320px]"
-          @click="goToRegisterForm"
-        >
-          اطلب الخدمة
-        </button>
-      </div>
+    <div class="mt-4 flex justify-center">
+  <button
+    type="button"
+    class="btn-long-full"
+    @click="goToRegisterForm"
+  >
+    اطلب الخدمة
+  </button>
+</div>
+
     </section>
   </div>
 </template>
