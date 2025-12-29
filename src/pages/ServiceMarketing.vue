@@ -57,7 +57,7 @@
         </ul>
       </section>
 
-    <div class="mt-4 flex justify-center">
+        <div class="mt-4 flex justify-center">
   <button
     type="button"
     class="btn-long-full"
@@ -66,7 +66,6 @@
     اطلب الخدمة
   </button>
 </div>
-
     </section>
   </div>
 </template>

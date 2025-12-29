@@ -111,7 +111,7 @@
               </span>
             </div>
 
-            <!-- فقاعة "جاري الكتابة..." في الشق الثاني -->
+            <!-- فقاعة "جاري الكتابة..." -->
             <div v-else class="flex justify-start mt-1">
               <div
                 class="ml-10 max-w-[70%] rounded-2xl rounded-tl-none px-4 py-2 text-sm shadow
@@ -124,6 +124,34 @@
           </div>
         </div>
       </div>
+
+     <!-- الأسئلة المقترحة -->
+<div
+  v-if="showSuggestions && suggestedQuestions.length"
+  class="px-4 pt-3 pb-4 bg-[#F4F7F8] dark:bg-slate-800 border-t border-slate-200/0"
+  dir="rtl"
+>
+  <div class="flex flex-wrap gap-2">
+    <button
+      v-for="(q, i) in suggestedQuestions"
+      :key="i"
+      @click="sendSuggested(q)"
+      class="px-4 py-2
+             rounded-full
+             text-sm
+             bg-white
+             text-slate-800
+             border border-slate-300
+             shadow-sm
+             hover:bg-slate-50
+             active:bg-slate-100
+             transition-colors"
+    >
+      {{ q }}
+    </button>
+  </div>
+</div>
+
 
       <!-- إدخال الرسائل -->
       <div
@@ -169,6 +197,7 @@ const isOpen = ref(false)
 const isMaximized = ref(false)
 const message = ref('')
 const isLoading = ref(false)
+
 const messages = ref([
   {
     type: 'bot',
@@ -176,6 +205,20 @@ const messages = ref([
     timestamp: new Date()
   }
 ])
+
+// الأسئلة المقترحة
+const suggestedQuestions = ref([
+  'ما هي الهيئة العامة لتنمية المشاريع الصغيرة والأصغر؟',
+  'هل تقدم الهيئة خدمات إلكترونية؟',
+  'هل الهيئة جهة تمويلية مباشرة؟',
+  'استفسارات عامة',
+  'هل تساعد الهيئة في إنشاء مشروع من الصفر؟',
+
+])
+
+// تظهر فقط في بداية المحادثة، وتختفي بعد أول ضغط
+const showSuggestions = ref(true)
+
 const messagesContainer = ref(null)
 
 // فتح/إغلاق الشات من الزر
@@ -195,6 +238,14 @@ const formatTime = (date) => {
   const ampm = hours >= 12 ? 'PM' : 'AM'
   const hours12 = hours % 12 || 12
   return `${hours12}:${minutes.toString().padStart(2, '0')}${ampm}`
+}
+
+// إرسال رسالة من سؤال مقترح
+const sendSuggested = (q) => {
+  if (isLoading.value) return
+  message.value = q
+  showSuggestions.value = false   // إخفاء الأسئلة بعد أول استخدام
+  sendMessage()
 }
 
 // إرسال الرسالة
