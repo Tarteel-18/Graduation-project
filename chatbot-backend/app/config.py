@@ -1,4 +1,5 @@
 """Configuration settings for the chatbot backend."""
+import os
 from pydantic_settings import BaseSettings
 from typing import Optional
 
@@ -8,14 +9,18 @@ class Settings(BaseSettings):
     
     # Server settings
     HOST: str = "0.0.0.0"
-    PORT: int = 8001  # Changed from 8000 to avoid conflicts
+    PORT: int = int(os.getenv("PORT", "8001"))  # Use PORT from environment (Render uses 10000)
     DEBUG: bool = False
     
     # CORS settings
+    # Allow localhost for development and Netlify URL for production
+    # Add your Netlify URL after deployment (update in Render environment variables)
     CORS_ORIGINS: list[str] = [
-        "http://localhost:5173",  # Vite dev server
+        "http://localhost:5173",  # Vite dev server (for local development)
         "http://localhost:3000",  # Alternative frontend port
         "http://127.0.0.1:5173",
+        # Production Netlify URL will be added via CORS_ORIGINS_EXTRA environment variable
+        # Set in Render: CORS_ORIGINS_EXTRA="https://your-app.netlify.app"
     ]
     
     # LLM settings (OpenAI)
@@ -60,4 +65,9 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+# Add additional CORS origins from environment variable (comma-separated)
+# Set CORS_ORIGINS_EXTRA in Render: "https://your-app.netlify.app,https://another-domain.com"
+if os.getenv("CORS_ORIGINS_EXTRA"):
+    settings.CORS_ORIGINS.extend([origin.strip() for origin in os.getenv("CORS_ORIGINS_EXTRA").split(",")])
 

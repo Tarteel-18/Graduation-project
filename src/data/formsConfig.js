@@ -1,198 +1,199 @@
 // src/data/formsConfig.js
 
 export const formsConfig = {
-// 1) 🔹 فورم روج مشروعك
-"promote-project": {
-  slug: "promote-project",
-  title: "استمارة تسجيل خدمة روج لمشروعك لدى الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
-  description: "يمكنك التسجيل في قائمة الراغبين في هذه الخدمة",
-  fields: [
-    {
-      name: "projectName",
-      type: "text",
-      label: "اسم المشروع",
-      placeholder: "اكتب اسم المشروع",
-      required: true,
-    },
-    {
-      name: "projectDescription",
-      type: "textarea",
-      label: "وصف المشروع",
-      placeholder: "اكتب وصفاً مختصراً عن مشروعك ومنتجاتك",
-      required: true,
-    },
-    {
-      name: "price",
-      type: "text",
-      label: "سعر المنتج (اختياري)",
-      placeholder: "أدخل السعر التقريبي إن رغبت",
-      required: false, // اختياري
-    },
-    {
-      name: "files",
-      type: "file",
-      label: "يرجى إرفاق صور لمنتجاتك (حتى 3 صور)",
-      description: "يمكنك رفع حتى 3 ملفات — صور فقط — الحد الأقصى 10MB للملف الواحد",
-      maxFiles: 3,          // تحتاج تستخدمها في BaseFileUpload لو حبيت تطبّق الحد
-      accept: '.jpg,.jpeg,.png',
-    },
-  ],
-},
-"small-project-register": {
-  slug: "small-project-register",
-  title: "استمارة تسجيل مشروعك لدى الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
-  description: "نرجو تعبئة البيانات التالية حول صاحب المشروع ومشروعه.",
-  fields: [
-    // -----------------------------
-    // أولاً: بيانات صاحب المشروع
-    // -----------------------------
-    {
-      name: "ownerFullName",
-      type: "text",
-      label: "الاسم الرباعي",
-      placeholder: "اكتب الاسم الرباعي",
-      required: true,
-    },
-    {
-      name: "governorate",
-      type: "text",
-      label: "المحافظة",
-      placeholder: "اكتب اسم المحافظة",
-      required: true,
-    },
-    {
-      name: "district",
-      type: "text",
-      label: "المديرية",
-      placeholder: "اكتب اسم المديرية",
-      required: true,
-    },
-    {
-      name: "neighborhood",
-      type: "text",
-      label: "الحي",
-      placeholder: "اكتب اسم الحي",
-      required: true,
-    },
-    {
-      name: "street",
-      type: "text",
-      label: "الشارع",
-      placeholder: "اكتب اسم الشارع",
-      required: true,
-    },
-    {
-      name: "age",
-      type: "text",
-      label: "العمر",
-      placeholder: "اكتب عمرك",
-      required: true,
-    },
-    {
-      name: "primaryPhone",
-      type: "tel",
-      label: "رقم التواصل الأول",
-      placeholder: "أدخل رقم الهاتف الأساسي",
-      required: true,
-    },
-    {
-      name: "secondaryPhone",
-      type: "tel",
-      label: "رقم التواصل الثاني أو رقم أقرب شخص",
-      placeholder: "أدخل رقم تواصل آخر",
-      required: false,
-    },
-    {
-      name: "email",
-      type: "email",
-      label: "البريد الإلكتروني",
-      placeholder: "example@mail.com",
-      required: false,
-    },
-    {
-      name: "educationPlace",
-      type: "text",
-      label: "المؤسسة التعليمية (جامعة / معهد / مدرسة)",
-      placeholder: "اكتب اسم الجامعة أو المعهد أو المدرسة",
-      required: false,
-    },
-    {
-      name: "educationMajor",
-      type: "text",
-      label: "التخصص",
-      placeholder: "اكتب التخصص",
-      required: false,
-    },
-    {
-      name: "graduationYear",
-      type: "text",
-      label: "سنة التخرج",
-      placeholder: "اكتب سنة التخرج",
-      required: false,
-    },
+  // 1) 🔹 فورم روج مشروعك
+  "promote-project": {
+    slug: "promote-project",
+    title: "استمارة تسجيل خدمة روج لمشروعك لدى الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
+    description: "يمكنك التسجيل في قائمة الراغبين في هذه الخدمة",
+    fields: [
+      {
+        name: "projectName",
+        type: "text",
+        label: "اسم المشروع",
+        placeholder: "اكتب اسم المشروع",
+        required: true,
+      },
+      {
+        name: "projectDescription",
+        type: "textarea",
+        label: "وصف المشروع",
+        placeholder: "اكتب وصفاً مختصراً عن مشروعك ومنتجاتك",
+        required: true,
+      },
+      {
+        name: "price",
+        type: "text",
+        label: "سعر المنتج (اختياري)",
+        placeholder: "أدخل السعر التقريبي إن رغبت",
+        required: false, // اختياري
+      },
+      {
+        name: "files",
+        type: "file",
+        label: "يرجى إرفاق صور لمنتجاتك (حتى 3 صور)",
+        description: "يمكنك رفع حتى 3 ملفات — صور فقط — الحد الأقصى 10MB للملف الواحد",
+        maxFiles: 3,          // تحتاج تستخدمها في BaseFileUpload لو حبيت تطبّق الحد
+        accept: ".jpg,.jpeg,.png",
+      },
+    ],
+  },
 
-    // -----------------------------
-    // ثانياً: بيانات المشروع
-    // -----------------------------
-    {
-      name: "projectName",
-      type: "text",
-      label: "اسم المشروع",
-      placeholder: "اكتب اسم المشروع",
-      required: true,
-    },
-    {
-      name: "projectStatus",
-      type: "radio",
-      label: "حالة المشروع",
-      options: ["قيد الفكرة", "قيد التنفيذ", "قائم"],
-      required: true,
-    },
-    {
-      name: "capital",
-      type: "text",
-      label: "رأس المال",
-      placeholder: "أدخل رأس مال المشروع",
-      required: true,
-    },
-    {
-      name: "workersCount",
-      type: "text",
-      label: "عدد العمال",
-      placeholder: "أدخل عدد العمال",
-      required: true,
-    },
-    {
-      name: "startDate",
-      type: "text",
-      label: "تاريخ بدء المشروع",
-      placeholder: "مثال: 2020-01-01 أو سنة البدء",
-      required: true,
-    },
-    {
-      name: "products",
-      type: "textarea",
-      label: "ما الذي ينتجه مشروعك؟",
-      placeholder: "اذكر المنتجات أو الخدمات التي يقدمها المشروع",
-      required: true,
-    },
-    {
-      name: "projectDescription",
-      type: "textarea",
-      label: "أوصف مشروعك بإختصار",
-      placeholder: "اكتب وصفًا مختصرًا عن فكرة المشروع ونشاطه",
-      required: true,
-    },
-    {
-      name: "idCardImage",
-      type: "file",
-      label: "أرسل صورة البطاقة الشخصية",
-      description: "قم برفع صورة واضحة للبطاقة الشخصية",
-      required: true,
-    },
-  ],
-},
+  // 2) 🔹 فورم تسجيل مشروع صغير
+  "small-project-register": {
+    slug: "small-project-register",
+    title: "استمارة تسجيل مشروعك لدى الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
+    description: "نرجو تعبئة البيانات التالية حول صاحب المشروع ومشروعه.",
+    fields: [
+      // -----------------------------
+      // أولاً: بيانات صاحب المشروع
+      // -----------------------------
+      {
+        name: "ownerFullName",
+        type: "text",
+        label: "الاسم الرباعي",
+        placeholder: "اكتب الاسم الرباعي",
+        required: true,
+      },
+      {
+        name: "governorate",
+        type: "text",
+        label: "المحافظة",
+        placeholder: "اكتب اسم المحافظة",
+        required: true,
+      },
+      {
+        name: "district",
+        type: "text",
+        label: "المديرية",
+        placeholder: "اكتب اسم المديرية",
+        required: true,
+      },
+      {
+        name: "neighborhood",
+        type: "text",
+        label: "الحي",
+        placeholder: "اكتب اسم الحي",
+        required: true,
+      },
+      {
+        name: "street",
+        type: "text",
+        label: "الشارع",
+        placeholder: "اكتب اسم الشارع",
+        required: true,
+      },
+      {
+        name: "age",
+        type: "text",
+        label: "العمر",
+        placeholder: "اكتب عمرك",
+        required: true,
+      },
+      {
+        name: "primaryPhone",
+        type: "tel",
+        label: "رقم التواصل الأول",
+        placeholder: "أدخل رقم الهاتف الأساسي",
+        required: true,
+      },
+      {
+        name: "secondaryPhone",
+        type: "tel",
+        label: "رقم التواصل الثاني أو رقم أقرب شخص",
+        placeholder: "أدخل رقم تواصل آخر",
+        required: false,
+      },
+      {
+        name: "email",
+        type: "email",
+        label: "البريد الإلكتروني",
+        placeholder: "example@mail.com",
+        required: false,
+      },
+      {
+        name: "educationPlace",
+        type: "text",
+        label: "المؤسسة التعليمية (جامعة / معهد / مدرسة)",
+        placeholder: "اكتب اسم الجامعة أو المعهد أو المدرسة",
+        required: false,
+      },
+      {
+        name: "educationMajor",
+        type: "text",
+        label: "التخصص",
+        placeholder: "اكتب التخصص",
+        required: false,
+      },
+      {
+        name: "graduationYear",
+        type: "text",
+        label: "سنة التخرج",
+        placeholder: "اكتب سنة التخرج",
+        required: false,
+      },
 
+      // -----------------------------
+      // ثانياً: بيانات المشروع
+      // -----------------------------
+      {
+        name: "projectName",
+        type: "text",
+        label: "اسم المشروع",
+        placeholder: "اكتب اسم المشروع",
+        required: true,
+      },
+      {
+        name: "projectStatus",
+        type: "radio",
+        label: "حالة المشروع",
+        options: ["قيد الفكرة", "قيد التنفيذ", "قائم"],
+        required: true,
+      },
+      {
+        name: "capital",
+        type: "text",
+        label: "رأس المال",
+        placeholder: "أدخل رأس مال المشروع",
+        required: true,
+      },
+      {
+        name: "workersCount",
+        type: "text",
+        label: "عدد العمال",
+        placeholder: "أدخل عدد العمال",
+        required: true,
+      },
+      {
+        name: "startDate",
+        type: "text",
+        label: "تاريخ بدء المشروع",
+        placeholder: "مثال: 2020-01-01 أو سنة البدء",
+        required: true,
+      },
+      {
+        name: "products",
+        type: "textarea",
+        label: "ما الذي ينتجه مشروعك؟",
+        placeholder: "اذكر المنتجات أو الخدمات التي يقدمها المشروع",
+        required: true,
+      },
+      {
+        name: "projectDescription",
+        type: "textarea",
+        label: "أوصف مشروعك بإختصار",
+        placeholder: "اكتب وصفًا مختصرًا عن فكرة المشروع ونشاطه",
+        required: true,
+      },
+      {
+        name: "idCardImage",
+        type: "file",
+        label: "أرسل صورة البطاقة الشخصية",
+        description: "قم برفع صورة واضحة للبطاقة الشخصية",
+        required: true,
+      },
+    ],
+  },
 
   // ======================================================
   // 3) 🔹 فورم انضم لبرنامج التدريب
@@ -222,7 +223,12 @@ export const formsConfig = {
       { name: "phone", type: "tel", label: "رقم الهاتف", required: true },
       { name: "city", type: "text", label: "مكان الإقامة", required: true },
       { name: "age", type: "number", label: "العمر", required: true },
-      { name: "favField", type: "text", label: "مجال التطوع المفضل", required: true },
+      {
+        name: "favField",
+        type: "text",
+        label: "مجال التطوع المفضل",
+        required: true,
+      },
       {
         name: "summary",
         type: "textarea",
@@ -388,10 +394,34 @@ export const formsConfig = {
     title: "استمارة إعلان برنامج التدريب",
     description: "يرجى تعبئة البيانات التالية للتسجيل في برنامج التدريب.",
     fields: [
-      { name: "fullName", type: "text", label: "الاسم الكامل", placeholder: "اكتب اسمك الكامل", required: true },
-      { name: "phone", type: "tel", label: "رقم الهاتف", placeholder: "أدخل رقم الهاتف", required: true },
-      { name: "city", type: "text", label: "مكان الإقامة", placeholder: "اكتب المدينة / المنطقة", required: true },
-      { name: "age", type: "number", label: "العمر", placeholder: "اكتب عمرك", required: true },
+      {
+        name: "fullName",
+        type: "text",
+        label: "الاسم الكامل",
+        placeholder: "اكتب اسمك الكامل",
+        required: true,
+      },
+      {
+        name: "phone",
+        type: "tel",
+        label: "رقم الهاتف",
+        placeholder: "أدخل رقم الهاتف",
+        required: true,
+      },
+      {
+        name: "city",
+        type: "text",
+        label: "مكان الإقامة",
+        placeholder: "اكتب المدينة / المنطقة",
+        required: true,
+      },
+      {
+        name: "age",
+        type: "number",
+        label: "العمر",
+        placeholder: "اكتب عمرك",
+        required: true,
+      },
       {
         name: "reason",
         type: "textarea",
@@ -408,11 +438,41 @@ export const formsConfig = {
     title: "استمارة التقديم على فرصة التعاقد",
     description: "يرجى تعبئة البيانات التالية وإرفاق السيرة الذاتية للتقديم على فرصة التعاقد.",
     fields: [
-      { name: "fullName", type: "text", label: "الاسم الكامل", placeholder: "اكتب اسمك الثلاثي", required: true },
-      { name: "phone", type: "tel", label: "رقم الهاتف", placeholder: "أدخل رقم هاتفك", required: true },
-      { name: "email", type: "email", label: "البريد الإلكتروني", placeholder: "example@mail.com", required: true },
-      { name: "specialization", type: "text", label: "التخصص", placeholder: "اكتب تخصصك", required: true },
-      { name: "experienceYears", type: "number", label: "سنوات الخبرة", placeholder: "مثال: 5", required: true },
+      {
+        name: "fullName",
+        type: "text",
+        label: "الاسم الكامل",
+        placeholder: "اكتب اسمك الثلاثي",
+        required: true,
+      },
+      {
+        name: "phone",
+        type: "tel",
+        label: "رقم الهاتف",
+        placeholder: "أدخل رقم هاتفك",
+        required: true,
+      },
+      {
+        name: "email",
+        type: "email",
+        label: "البريد الإلكتروني",
+        placeholder: "example@mail.com",
+        required: true,
+      },
+      {
+        name: "specialization",
+        type: "text",
+        label: "التخصص",
+        placeholder: "اكتب تخصصك",
+        required: true,
+      },
+      {
+        name: "experienceYears",
+        type: "number",
+        label: "سنوات الخبرة",
+        placeholder: "مثال: 5",
+        required: true,
+      },
       {
         name: "field",
         type: "text",
@@ -443,7 +503,8 @@ export const formsConfig = {
       },
     ],
   },
-    // 9) 🔹 فورم نموذج تواصل
+
+  // 9) 🔹 فورم نموذج تواصل
   "contact-form": {
     slug: "contact-form",
     title: "نموذج تواصل مع الهيئة",
@@ -487,5 +548,3 @@ export const formsConfig = {
     ],
   },
 }
-
-
