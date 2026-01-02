@@ -45,20 +45,55 @@
                px-6 md:px-8 py-6"
       >
         <!-- الحقول -->
-        <div
-          v-for="field in formDef.fields"
-          :key="field.name"
-        >
-          <component
-            :is="resolveFieldComponent(field)"
-            v-model="formData[field.name]"
-            :label="field.label"
-            :placeholder="field.placeholder"
-            :description="field.description"
-            :options="field.options"
-            :error="errors[field.name]"
-          />
-        </div>
+      <div
+  v-for="field in formDef.fields"
+  :key="field.name"
+>
+  <!-- سكشن الاتصال في حالات الطوارئ -->
+  <template v-if="field.name === 'emergencyContactName'">
+    <div class="my-6 border-t border-slate-200 dark:border-slate-700"></div>
+    <h3 class="text-base font-extrabold text-[#163B52] dark:text-cyan-300 mb-3">
+      الاتصال في حالات الطوارئ
+    </h3>
+  </template>
+
+  <!-- سكشن بيانات الاتصال -->
+  <template v-if="field.name === 'mobile'">
+    <div class="my-6 border-t border-slate-200 dark:border-slate-700"></div>
+    <h3 class="text-base font-extrabold text-[#163B52] dark:text-cyan-300 mb-3">
+      بيانات الاتصال
+    </h3>
+  </template>
+
+  <!-- سكشن المؤهلات العلمية -->
+  <template v-if="field.name === 'educations'">
+    <div class="my-6 border-t border-slate-200 dark:border-slate-700"></div>
+    <h3 class="text-base font-extrabold text-[#163B52] dark:text-cyan-300 mb-3">
+      المؤهلات العلمية
+    </h3>
+  </template>
+
+  <!-- سكشن تفاصيل المشروع -->
+  <template v-if="field.name === 'projects'">
+    <div class="my-6 border-t border-slate-200 dark:border-slate-700"></div>
+    <h3 class="text-base font-extrabold text-[#163B52] dark:text-cyan-300 mb-3">
+      تفاصيل المشروع
+    </h3>
+  </template>
+
+  <!-- الحقل نفسه -->
+  <component
+    :is="resolveFieldComponent(field)"
+    v-model="formData[field.name]"
+    :label="field.label"
+    :placeholder="field.placeholder"
+    :description="field.description"
+    :options="field.options"
+    :error="errors[field.name]"
+    :field="field"
+  />
+</div>
+
 
         <!-- الأزرار -->
         <div class="flex items-center justify-between pt-2">
@@ -95,6 +130,7 @@ import BaseTextareaField from '@/components/form/BaseTextareaField.vue'
 import BaseFileUpload from '@/components/form/BaseFileUpload.vue'
 import BaseRadioGroup from '@/components/form/BaseRadioGroup.vue'
 import BaseCheckboxGroup from '@/components/form/BaseCheckboxGroup.vue'
+import BaseTableField from '@/components/form/BaseTableField.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -121,6 +157,8 @@ const resolveFieldComponent = (field) => {
       return BaseCheckboxGroup
     case 'radio':
       return BaseRadioGroup
+    case 'table':
+      return BaseTableField
     default:
       return BaseTextField
   }
@@ -139,7 +177,13 @@ const loadForm = () => {
   } else {
     formDef.value = def
     def.fields.forEach((field) => {
-      formData[field.name] = field.type === 'checkbox' ? [] : ''
+      if (field.type === 'checkbox') {
+        formData[field.name] = []
+      } else if (field.type === 'table') {
+        formData[field.name] = []
+      } else {
+        formData[field.name] = ''
+      }
       errors[field.name] = ''
     })
   }
@@ -188,7 +232,13 @@ const onSubmit = () => {
 const resetForm = () => {
   if (!formDef.value) return
   formDef.value.fields.forEach((field) => {
-    formData[field.name] = field.type === 'checkbox' ? [] : ''
+    if (field.type === 'checkbox') {
+      formData[field.name] = []
+    } else if (field.type === 'table') {
+      formData[field.name] = []
+    } else {
+      formData[field.name] = ''
+    }
     errors[field.name] = ''
   })
 }
