@@ -19,6 +19,7 @@
                pb-1 text-sm text-slate-800 dark:text-slate-100
                placeholder-slate-400 dark:placeholder-slate-500"
       />
+
       <p v-if="hint && !error" class="mt-1 text-[11px] text-slate-400 dark:text-slate-500">
         {{ hint }}
       </p>
@@ -35,34 +36,35 @@ import { computed } from 'vue'
 const props = defineProps({
   modelValue: {
     type: [String, Number],
-    default: ''
+    default: '',
   },
   label: {
     type: String,
-    required: true
+    required: true,
   },
   placeholder: {
     type: String,
-    default: ''
+    default: '',
   },
   hint: {
     type: String,
-    default: ''
+    default: '',
   },
+  // هنا نخلي الكومبوننت يقبل أي type مثل 'text' أو 'date'
   type: {
     type: String,
-    default: 'text'
+    default: 'text',
   },
   error: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 const model = computed({
   get: () => props.modelValue,
-  set: (val) => emit('update:modelValue', val)
+  set: (val) => emit('update:modelValue', val),
 })
 </script>

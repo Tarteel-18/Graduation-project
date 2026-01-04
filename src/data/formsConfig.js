@@ -4,7 +4,8 @@ export const formsConfig = {
   // 1) 🔹 فورم روج مشروعك
   "promote-project": {
     slug: "promote-project",
-    title: "استمارة تسجيل خدمة روج لمشروعك لدى الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
+    title:
+      "استمارة تسجيل خدمة روج لمشروعك لدى الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
     description: "يمكنك التسجيل في قائمة الراغبين في هذه الخدمة",
     fields: [
       {
@@ -26,187 +27,230 @@ export const formsConfig = {
         type: "text",
         label: "سعر المنتج (اختياري)",
         placeholder: "أدخل السعر التقريبي إن رغبت",
-        required: false, // اختياري
+        required: false,
       },
       {
         name: "files",
         type: "file",
         label: "يرجى إرفاق صور لمنتجاتك (حتى 3 صور)",
-        description: "يمكنك رفع حتى 3 ملفات — صور فقط — الحد الأقصى 10MB للملف الواحد",
-        maxFiles: 3,          // تحتاج تستخدمها في BaseFileUpload لو حبيت تطبّق الحد
+        description:
+          "يمكنك رفع حتى 3 ملفات — صور فقط — الحد الأقصى 10MB للملف الواحد",
+        maxFiles: 3,
         accept: ".jpg,.jpeg,.png",
       },
     ],
   },
 
+  // 2) 🔹 فورم طلب تسجيل مشروع صغير
   "small-project-register": {
-  slug: "small-project-register",
-  title: "طلب تسجيل مشروع صغير",
-  description: "نرجو تعبئة البيانات التالية حول صاحب المشروع ومشروعه.",
-  fields: [
-    // ===== بيانات صاحب المشروع =====
-    {
-      name: "projectType",
-      type: "select",
-      label: "نوع المشاريع",
-      placeholder: "اختر نوع المشروع",
-      options: ["صناعي", "تجاري", "خدمي", "زراعي", "حرفي"],
-      required: false,
-    },
-    
-    {
-      name: "firstName",
-      type: "text",
-      label: "الاسم الأول",
-      placeholder: "اكتب الاسم الأول",
-      required: true,
-    },
-    {
-      name: "middleName",
-      type: "text",
-      label: "الاسم الأوسط",
-      placeholder: "اكتب الاسم الأوسط",
-      required: false,
-    },
-    {
-      name: "lastName",
-      type: "text",
-      label: "اسم العائلة",
-      placeholder: "اكتب اسم العائلة",
-      required: false,
-    },
-    {
-      name: "maritalStatus",
-      type: "select",
-      label: "الحالة",
-      placeholder: "اختر الحالة",
-      options: ["أعزب", "متزوج", "مطلق", "أرمل"],
-      required: false,
-    },
-    {
-      name: "gender",
-      type: "select",
-      label: "الجنس",
-      placeholder: "اختر الجنس",
-      options: ["ذكر", "أنثى"],
-      required: true,
-    },
-    {
-      name: "birthDate",
-      type: "date",
-      label: "تاريخ الميلاد",
-      placeholder: "اختر تاريخ الميلاد",
-      required: true,
-    },
-    {
-      name: "emergencyContactName",
-      type: "text",
-      label: "الطوارئ اسم الاتصال",
-      placeholder: "اسم الشخص للتواصل في الطوارئ",
-      required: false,
-    },
-    {
-      name: "emergencyContactPhone",
-      type: "tel",
-      label: "هاتف حالات الطوارئ",
-      placeholder: "رقم هاتف للطوارئ",
-      required: false,
-    },
-    {
-      name: "emergencyRelation",
-      type: "text",
-      label: "علاقة",
-      placeholder: "صلة القرابة",
-      required: false,
-    },
+    slug: "small-project-register",
+    title: "طلب تسجيل مشروع صغير",
+    description: "نرجو تعبئة البيانات التالية حول صاحب المشروع ومشروعه.",
+    fields: [
+      // ===== بيانات عن المشروع / الجهة =====
+      {
+        name: "projectType",
+        type: "select",
+        label: "نوع المشاريع",
+        placeholder: "نوع المشاريع",
+        options: [
+          "صغيرة",
+          "متناهية الصغر",
+          "مشاريع صغيرة / أسر منتجة",
+        ],
+        required: false,
+      },
 
-    // ===== Contact Details =====
-    {
-      name: "mobile",
-      type: "tel",
-      label: "التليفون المحمول",
-      placeholder: "اكتب رقم الهاتف",
-      required: true,
-    },
-    {
-      name: "email",
-      type: "email",
-      label: "البريد الإلكتروني الشخصية",
-      placeholder: "example@mail.com",
-      required: false,
-    },
-    {
-      name: "familyInfo",
-      type: "textarea",
-      label: "معلومات عن العائلة",
-      placeholder:
-        "يمكنك إدراج تفاصيل عائلية مثل اسم العائلة ومهنة الزوج، الوالدين والأطفال",
-      required: false,
-    },
-
-    // ===== المؤهلات العلمية (جدول) =====
-    {
-      name: "educations",
-      type: "table",
-      label: "المؤهلات العلمية",
-      columns: [
-        { key: "degree", label: "التعليم", type: "text" },
-        { key: "institution", label: "مدرسة / جامعة / معهد", type: "text" },
-        { key: "level", label: "المستوى", type: "text" },
-        { key: "graduationYear", label: "سنة التخرج", type: "text" },
-      ],
-      required: false,
-    },
-
-    // ===== تفاصيل المشروع (جدول) =====
-    {
-      name: "projects",
-      type: "table",
-      label: "تفاصيل المشروع",
-      columns: [
-        { key: "name", label: "اسم المشروع", type: "text" },
-        { key: "sector", label: "قطاع", type: "text" },
-        { key: "subSector", label: "نوع القطاع", type: "text" },
-        { key: "details", label: "تفاصيل المشروع", type: "textarea" },
-      ],
-      required: false,
-    },
-
-    // ===== الإنتاج (جدول) =====
-    {
-      name: "productions",
-      type: "table",
-      label: "الإنتاج",
-      columns: [
-        { key: "unit", label: "وحدة", type: "text" },
-        { key: "quantity", label: "كمية", type: "text" },
-      ],
-      required: false,
-    },
-
-    // ===== العنوان (جدول) =====
-    {
-      name: "addresses",
-      type: "table",
-      label: "العنوان",
-      columns: [
-        { key: "governorate", label: "المحافظة", type: "text" },
-        { key: "district", label: "المديرية", type: "text" },
-        { key: "area", label: "اسم حارة/قرية", type: "text" },
-      ],
-      required: false,
-    },
-
-    // ===== مرفقات =====
-    {
-      name: "idCardImage",
-      type: "file",
-      label: "أرفق صورة البطاقة الشخصية",
-      description: "قم برفع صورة واضحة للبطاقة الشخصية (JPG/PNG, حتى 5MB)",
-      required: true,
-    },
+     {
+  name: "entity",
+  type: "select",
+  label: "الجهة",
+  
+  options: [
+    "الهيئة العامة لتنمية المشاريع الصغيرة والأصغر",
+    "وزارة الصناعة والتجارة",
+    "الغرفة التجارية",
   ],
+  required: false,
 },
+
+
+      // ===== حالة المشروع =====
+      {
+        name: "projectStatus",
+        type: "select",
+        label: "الحالة",
+        placeholder: "الحالة",
+        options: ["نشط", "غير نشط", "معلق", "أغلق"],
+        required: false,
+      },
+
+      // ===== بيانات صاحب المشروع =====
+      {
+        name: "firstName",
+        type: "text",
+        label: "الاسم الأول *",
+        placeholder: "الاسم الأول",
+        required: true,
+      },
+      {
+        name: "middleName",
+        type: "text",
+        label: "الاسم الأوسط",
+        placeholder: "الاسم الأوسط",
+        required: false,
+      },
+      {
+        name: "lastName",
+        type: "text",
+        label: "اسم العائلة",
+        placeholder: "اسم العائلة",
+        required: false,
+      },
+
+      {
+        name: "gender",
+        type: "select",
+        label: "جنس *",
+        placeholder: "جنس",
+        options: ["ذكر", "أنثى"],
+        required: true,
+      },
+{
+  name: "birthDate",
+  type: "date",
+  label: "تاريخ الميلاد *",
+  placeholder: "تاريخ الميلاد",
+  required: true,
+},
+
+{
+  name: "workJoinDate",
+  type: "date",
+  label: "تاريخ الالتحاق بالعمل",
+  placeholder: "تاريخ الالتحاق بالعمل",
+  required: false,
+},
+
+
+      {
+        name: "idNumber",
+        type: "text",
+        label: "رقم البطاقة",
+        placeholder: "رقم البطاقة",
+        required: false,
+      },
+
+      // ===== الاتصال في حالات الطوارئ =====
+      {
+        name: "emergencyContactName",
+        type: "text",
+        label: "الطوارئ اسم الاتصال",
+        placeholder: "الطوارئ اسم الاتصال",
+        required: false,
+      },
+      {
+        name: "emergencyContactPhone",
+        type: "tel",
+        label: "هاتف حالات الطوارئ",
+        placeholder: "هاتف حالات الطوارئ",
+        required: false,
+      },
+      {
+        name: "emergencyRelation",
+        type: "text",
+        label: "علاقة",
+        placeholder: "علاقة",
+        required: false,
+      },
+
+      // ===== Contact Details =====
+      {
+        name: "mobile",
+        type: "tel",
+        label: "التليفون المحمول",
+        placeholder: "التليفون المحمول",
+        required: true,
+      },
+      {
+        name: "email",
+        type: "email",
+        label: "البريد الإلكتروني الشخصية",
+        placeholder: "البريد الإلكتروني الشخصية",
+        required: false,
+      },
+      {
+        name: "familyInfo",
+        type: "textarea",
+        label: "معلومات عن العائلة",
+        placeholder: "معلومات عن العائلة",
+        required: false,
+      },
+
+      // ===== المؤهلات العلمية (جدول) =====
+      {
+        name: "educations",
+        type: "table",
+        label: "المؤهلات العلمية",
+        columns: [
+          { key: "degree", label: "التعليم", type: "text" },
+          { key: "institution", label: "مدرسة / جامعة / معهد", type: "text" },
+          { key: "level", label: "المستوى", type: "text" },
+          { key: "graduationYear", label: "سنة التخرج", type: "text" },
+        ],
+        required: false,
+      },
+
+      // ===== تفاصيل المشروع (جدول) =====
+      {
+        name: "projects",
+        type: "table",
+        label: "تفاصيل المشروع",
+        columns: [
+          { key: "name", label: "اسم المشروع", type: "text" },
+          { key: "sector", label: "قطاع", type: "text" },
+          { key: "subSector", label: "نوع القطاع", type: "text" },
+          { key: "details", label: "تفاصيل المشروع", type: "textarea" },
+        ],
+        required: false,
+      },
+
+      // ===== الإنتاج (جدول) =====
+      {
+        name: "productions",
+        type: "table",
+        label: "الإنتاج",
+        columns: [
+          { key: "unit", label: "وحدة", type: "text" },
+          { key: "quantity", label: "كمية", type: "text" },
+        ],
+        required: false,
+      },
+
+      // ===== العنوان (جدول) =====
+      {
+        name: "addresses",
+        type: "table",
+        label: "العنوان",
+        columns: [
+          { key: "governorate", label: "المحافظة", type: "text" },
+          { key: "district", label: "المديرية", type: "text" },
+          { key: "area", label: "اسم حارة/قرية", type: "text" },
+        ],
+        required: false,
+      },
+
+      // ===== مرفقات =====
+      {
+        name: "idCardImage",
+        type: "file",
+        label: "أرفق صورة البطاقة الشخصية",
+        description:
+          "قم برفع صورة واضحة للبطاقة الشخصية (JPG/PNG, حتى 5MB)",
+        required: true,
+      },
+    ],
+  },
 
 
   // ======================================================
