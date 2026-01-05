@@ -16,11 +16,11 @@
       </option>
 
       <option
-        v-for="option in options"
-        :key="option"
-        :value="option"
+        v-for="option in processedOptions"
+        :key="getOptionKey(option)"
+        :value="getOptionValue(option)"
       >
-        {{ option }}
+        {{ getOptionLabel(option) }}
       </option>
     </select>
 
@@ -35,7 +35,9 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   modelValue: [String, Number],
   label: String,
   placeholder: String,
@@ -50,4 +52,44 @@ defineProps({
   },
   error: String,
 })
+
+defineEmits(['update:modelValue'])
+
+// Process options to handle both string arrays and object arrays
+const processedOptions = computed(() => {
+  if (!props.options || props.options.length === 0) {
+    return []
+  }
+  
+  return props.options.map(option => {
+    // If option is a string, convert to object
+    if (typeof option === 'string') {
+      return {
+        label: option,
+        value: option,
+        key: option
+      }
+    }
+    
+    // If option is already an object, use as is
+    return {
+      label: option.label || option.value || option,
+      value: option.value || option.label || option,
+      key: option.key || option.value || option.label || option,
+      englishValue: option.englishValue // For backend mapping
+    }
+  })
+})
+
+const getOptionKey = (option) => {
+  return option.key || option.value || option.label
+}
+
+const getOptionValue = (option) => {
+  return option.value || option.label
+}
+
+const getOptionLabel = (option) => {
+  return option.label || option.value
+}
 </script>
