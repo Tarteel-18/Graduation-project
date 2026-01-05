@@ -125,6 +125,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { formsConfig } from '@/data/formsConfig'
+import { useFieldOptions } from '@/composables/useFieldOptions'
 
 import BaseTextField from '@/components/form/BaseTextField.vue'
 import BaseTextareaField from '@/components/form/BaseTextareaField.vue'
@@ -136,6 +137,15 @@ import BaseSelectField from '@/components/form/BaseSelectField.vue'
 
 const route = useRoute()
 const router = useRouter()
+
+// Use field options composable
+const { 
+  fieldOptions, 
+  loading: optionsLoading, 
+  fetchFieldOptions, 
+  getFieldOptions,
+  processFormDataForSubmission 
+} = useFieldOptions()
 
 const formDef = ref(null)
 const loading = ref(true)
@@ -169,29 +179,64 @@ const resolveFieldComponent = (field) => {
   }
 }
 
-const loadForm = () => {
+const loadForm = async () => {
   loading.value = true
   error.value = ''
 
-  const slug = route.params.slug
-  const def = formsConfig[slug]
+  try {
+    // Load field options first
+    await fetchFieldOptions()
+    
+    const slug = route.params.slug
+    const def = formsConfig[slug]
 
-  if (!def) {
-    error.value = 'عذراً، هذا النموذج غير متوفر حالياً.'
-    formDef.value = null
-  } else {
-    formDef.value = def
-    def.fields.forEach((field) => {
-      if (field.type === 'checkbox' || field.type === 'table') {
-        formData[field.name] = []
-      } else {
-        formData[field.name] = ''
-      }
-      errors[field.name] = ''
-    })
+    if (!def) {
+      error.value = 'عذراً، هذا النموذج غير متوفر حالياً.'
+      formDef.value = null
+    } else {
+      // Clone the form definition to avoid mutating the original
+      formDef.value = JSON.parse(JSON.stringify(def))
+      
+      // Populate dynamic options for fields
+      formDef.value.fields.forEach((field) => {
+        if (field.dynamicOptions) {
+          const options = getFieldOptions(field.dynamicOptions)
+          field.options = options.map(opt => ({
+            label: opt.label,
+            value: opt.label, // Use Arabic label as value for frontend
+            englishValue: opt.value || opt.english // Store English value for backend
+          }))
+        }
+        
+        // Handle table fields with dynamic options
+        if (field.type === 'table' && field.columns) {
+          field.columns.forEach(column => {
+            if (column.dynamicOptions) {
+              const options = getFieldOptions(column.dynamicOptions)
+              column.options = options.map(opt => ({
+                label: opt.label,
+                value: opt.label, // Use Arabic label as value for frontend
+                englishValue: opt.value || opt.english // Store English value for backend
+              }))
+            }
+          })
+        }
+        
+        // Initialize form data
+        if (field.type === 'checkbox' || field.type === 'table') {
+          formData[field.name] = []
+        } else {
+          formData[field.name] = ''
+        }
+        errors[field.name] = ''
+      })
+    }
+  } catch (err) {
+    console.error('Error loading form:', err)
+    error.value = 'حدث خطأ في تحميل النموذج'
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 const validate = () => {
@@ -217,7 +262,7 @@ const validate = () => {
   return ok
 }
 
-const onSubmit = () => {
+const onSubmit = async () => {
   if (!validate()) return
 
   const slug = route.params.slug
@@ -227,9 +272,50 @@ const onSubmit = () => {
     data: { ...formData },
   })
 
-  alert('تم إرسال النموذج (واجهة فقط – جاهز للربط مع الباك لاحقاً).')
-
-  router.push({ name: 'home' })
+  // If this is the small-project-register form, use the enhanced submission
+  if (slug === 'small-project-register') {
+    try {
+      // Import the form submission utility
+      const { submitSmallProjectForm, validateSmallProjectForm } = await import('@/utils/formSubmission.js')
+      
+      // Process form data to map Arabic values to English for backend
+      const processedData = processFormDataForSubmission(formData)
+      
+      console.log('Original form data:', formData)
+      console.log('Processed form data for backend:', processedData)
+      
+      // Validate form data
+      const validation = validateSmallProjectForm(processedData)
+      if (!validation.isValid) {
+        console.error('Form validation failed:', validation.errors)
+        alert('يرجى تصحيح الأخطاء في النموذج قبل الإرسال')
+        return
+      }
+      
+      // Extract file if present
+      const idCardFile = processedData.idCardImage
+      
+      // Submit form
+      console.log('Submitting to Frappe API...')
+      const result = await submitSmallProjectForm(processedData, idCardFile)
+      
+      if (result.success) {
+        alert(`تم إرسال النموذج بنجاح! رقم المرجع: ${result.tokenId}`)
+        router.push({ name: 'home' })
+      } else {
+        console.error('Submission failed:', result.error)
+        alert(`فشل في إرسال النموذج: ${result.error}`)
+      }
+      
+    } catch (error) {
+      console.error('Form submission error:', error)
+      alert(`خطأ في إرسال النموذج: ${error.message}`)
+    }
+  } else {
+    // For other forms, show the placeholder message
+    alert('تم إرسال النموذج (واجهة فقط – جاهز للربط مع الباك لاحقاً).')
+    router.push({ name: 'home' })
+  }
 }
 
 const resetForm = () => {
