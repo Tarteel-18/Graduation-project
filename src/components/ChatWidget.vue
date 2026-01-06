@@ -253,6 +253,8 @@ const sendSuggested = (q) => {
 const sendMessage = async () => {
   if (!message.value.trim() || isLoading.value) return
 
+  showSuggestions.value = false   // 👈 هنا الإخفاء مباشرة
+
   const userMessage = message.value.trim()
   message.value = ''
 
@@ -282,10 +284,6 @@ const sendMessage = async () => {
       body: JSON.stringify({ message: userMessage })
     })
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
-
     const data = await response.json()
 
     const loadingIndex = messages.value.findIndex(m => m.loading)
@@ -294,18 +292,15 @@ const sendMessage = async () => {
         type: 'bot',
         text: data.response || 'عذراً، لم أتمكن من توليد إجابة.',
         loading: false,
-        typeBot: true,
         timestamp: new Date()
       }
     }
   } catch (error) {
-    console.error('Error sending message:', error)
-
     const loadingIndex = messages.value.findIndex(m => m.loading)
     if (loadingIndex !== -1) {
       messages.value[loadingIndex] = {
         type: 'bot',
-        text: 'عذراً، حدث خطأ في الاتصال بالخادم. يرجى المحاولة لاحقاً.',
+        text: 'عذراً، حدث خطأ في الاتصال بالخادم.',
         loading: false,
         timestamp: new Date()
       }
@@ -315,6 +310,7 @@ const sendMessage = async () => {
     scrollToBottom()
   }
 }
+
 
 // التمرير للأسفل
 const scrollToBottom = () => {
