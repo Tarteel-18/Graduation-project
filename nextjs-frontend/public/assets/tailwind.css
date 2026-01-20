@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* قِيَم ألوان قابلة للتعديل بسرعة لو احتجت */
+:root{
+  --brand-500:#0ea5a6;  /* تركوازي الأزرار */
+  --brand-600:#0d9488;
+  --brand-50:#ecfeff;
+  --text:#0f172a;       /* slate-900 */
+  --muted:#64748b;      /* slate-500 */
+  --footer:#0b1220;     /* خلفية داكنة للفوتر قريبة للصورة */
+}
+
+/* خط أساسي واتجاه */
+@layer base{
+  html{ font-family: "Tajawal", system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", sans-serif; }
+  body{ color: var(--text); background:#ffffff; }
+}
+
+/* كبسولات outline بنفس الصورة */
+.btn-pill{
+  @apply inline-flex items-center justify-center rounded-full border-2 px-4 py-2 text-[15px] font-semibold transition;
+  border-color: var(--brand-500);
+  color: var(--brand-600);
+}
+.btn-pill:hover{ background: var(--brand-50); }
+
+/* روابط الهيدر */
+.nav-link{
+  @apply px-3 py-2 rounded-lg text-[15px] font-medium transition;
+}
+.nav-link:hover{ @apply bg-slate-100; }
+
+/* صندوق منسدل */
+.dropdown{
+  @apply absolute top-full end-0 mt-2 w-60 bg-white border rounded-xl shadow-xl overflow-hidden;
+}
+:root {
+  --bg: #ffffff;
+  --text: #1e293b;
+  --card: #f1f5f9;
+  --border: #dce3e8;
+  --primary: #165C75;
+  --secondary: #27AEB9;
+}
+
+:root.dark {
+  --bg: #0b1220;
+  --text: #e2e8f0;
+  --card: #1e293b;
+  --border: #334155;
+  --primary: #38bdf8;
+  --secondary: #34d399;
+}
+.card {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.section-bg {
+  background: var(--bg);
+  color: var(--text);
+}
