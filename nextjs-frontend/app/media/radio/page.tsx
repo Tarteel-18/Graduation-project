@@ -6,22 +6,22 @@ export default function MediaRadio() {
   const radios = [
     {
       id: 1,
-      title: 'الحلقة الأولى',
-      description: 'وصف الحلقة الإذاعية الأولى',
+      title: 'حلقة 1: نكتفي لنرتقي',
+      description: 'تسهيلات حكومية للمشاريع الصغيرة.',
       audioUrl: '/assets/audio/episode1.mp3',
       main: true,
     },
     {
       id: 2,
-      title: 'الحلقة الثانية',
-      description: 'وصف الحلقة الإذاعية الثانية',
+      title: 'حلقة 2: طريق النجاح',
+      description: 'تمكين رواد الأعمال وتحفيز المشاريع الإنتاجية.',
       audioUrl: '/assets/audio/episode2.mp3',
       main: false,
     },
     {
       id: 3,
-      title: 'الحلقة الثالثة',
-      description: 'وصف الحلقة الإذاعية الثالثة',
+      title: 'حلقة 3: وطن ينتج',
+      description: 'قصة نجاح ملهمة لمشروع صغير أصبح علامة تجارية.',
       audioUrl: '/assets/audio/episode3.mp3',
       main: false,
     },

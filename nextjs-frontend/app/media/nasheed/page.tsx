@@ -3,7 +3,8 @@ import Breadcrumb from '@/components/Breadcrumb'
 
 export default function MediaNasheed() {
   const nasheed = {
-    title: 'نشيد الهيئة',
+    id: 1,
+    title: 'كليب ربيعك يا طه (المولد النبوي الشريف)',
     videoUrl: '/assets/videos/splash.mp4',
   }
 

@@ -2,7 +2,9 @@ import BaseLayout from '@/components/BaseLayout'
 import Breadcrumb from '@/components/Breadcrumb'
 import FlashesCategoryLayout from '@/components/FlashesCategoryLayout'
 
-export default function MediaFlashesCategory({ params }: { params: { category: string } }) {
+export default async function MediaFlashesCategory({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params
+  
   const CATEGORIES: Record<string, any> = {
     'home-industry': {
       breadcrumbLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
@@ -42,7 +44,7 @@ export default function MediaFlashesCategory({ params }: { params: { category: s
     },
   }
 
-  const current = CATEGORIES[params.category] || CATEGORIES['home-industry']
+  const current = CATEGORIES[category] || CATEGORIES['home-industry']
 
   return (
     <BaseLayout>
@@ -51,7 +53,7 @@ export default function MediaFlashesCategory({ params }: { params: { category: s
         breadcrumbLabel={current.breadcrumbLabel}
         description={current.description}
         videos={current.videos}
-        categorySlug={params.category}
+        categorySlug={category}
       />
     </BaseLayout>
   )

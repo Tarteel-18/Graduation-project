@@ -6,7 +6,7 @@ export const flashVideos = [
     title: 'إنتاج الجبن السائل (الكريمي) في البيت',
     categoryLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'شرح مختصر عن خطوات إنتاج الجبن السائل (الكريمي) في المنزل بطريقة آمنة.',
-    videoUrl: '/videos/cream-cheese.mp4',
+    videoUrl: '/assets/videos/cream-cheese.mp4',
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const flashVideos = [
     title: 'إنتاج الجبن المالح في البيت',
     categoryLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'شرح مبسط لكيفية إنتاج الجبن المالح في البيت باستخدام أدوات بسيطة.',
-    videoUrl: '/videos/salty-cheese.mp4',
+    videoUrl: '/assets/videos/salty-cheese.mp4',
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const flashVideos = [
     title: 'إنتاج الزبادي من الحليب البودرة في المنزل',
     categoryLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'خطوات عملية لتحضير الزبادي من الحليب البودرة داخل المطبخ المنزلي.',
-    videoUrl: '/videos/milk-powder.mp4',
+    videoUrl: '/assets/videos/milk-powder.mp4',
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ export const flashVideos = [
     title: 'إنتاج مربى التفاح الطبيعي في البيت',
     categoryLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'طريقة إعداد مربى التفاح الطبيعي في البيت مع مراعاة معايير السلامة الغذائية.',
-    videoUrl: '/videos/apple-jam.mp4',
+    videoUrl: '/assets/videos/apple-jam.mp4',
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ export const flashVideos = [
     title: 'إنتاج مربى الفراولة الطبيعي في البيت',
     categoryLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'شرح لخطوات إنتاج مربى الفراولة بنكهة طبيعية وجودة عالية.',
-    videoUrl: '/videos/strawberry-jam.mp4',
+    videoUrl: '/assets/videos/strawberry-jam.mp4',
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ export const flashVideos = [
     title: 'تجفيف الطماطم خلال مواسم الوفرة',
     categoryLabel: 'فيديوهات توعوية (الصناعات المنزلية)',
     description: 'آلية تجفيف الطماطم في مواسم الوفرة للاستفادة منها لفترات أطول.',
-    videoUrl: '/videos/dry-tomato.mp4',
+    videoUrl: '/assets/videos/dry-tomato.mp4',
   },
   {
     id: 7,
@@ -60,7 +60,7 @@ export const flashVideos = [
     title: 'رسالة توعوية لمربي المواشي 1',
     categoryLabel: 'فلاشات توعوية (الصحة الحيوانية)',
     description: 'نصائح أساسية للحفاظ على صحة المواشي ورفع إنتاجيتها.',
-    videoUrl: '/videos/animal-msg-1.mp4',
+    videoUrl: '/assets/videos/animal-msg-1.mp4',
   },
   {
     id: 8,
@@ -69,7 +69,7 @@ export const flashVideos = [
     title: 'رسالة توعوية لمربي المواشي 2',
     categoryLabel: 'فلاشات توعوية (الصحة الحيوانية)',
     description: 'إرشادات حول التغذية السليمة للمواشي وتقليل الأمراض.',
-    videoUrl: '/videos/animal-msg-2.mp4',
+    videoUrl: '/assets/videos/animal-msg-2.mp4',
   },
   {
     id: 9,
@@ -78,7 +78,7 @@ export const flashVideos = [
     title: 'رسالة توعوية لمربي المواشي 3',
     categoryLabel: 'فلاشات توعوية (الصحة الحيوانية)',
     description: 'توعية بأهمية التحصينات الدورية ومتابعة الطبيب البيطري.',
-    videoUrl: '/videos/animal-msg-3.mp4',
+    videoUrl: '/assets/videos/animal-msg-3.mp4',
   },
   {
     id: 10,
@@ -87,7 +87,7 @@ export const flashVideos = [
     title: 'مهارة 1',
     categoryLabel: 'سلسلة تعلّم في دقيقة',
     description: 'مهارة سريعة لأصحاب المشاريع الصغيرة تساعد على تحسين العمل.',
-    videoUrl: '/videos/skill-1.mp4',
+    videoUrl: '/assets/videos/skill-1.mp4',
   },
   {
     id: 11,
@@ -96,7 +96,7 @@ export const flashVideos = [
     title: 'مهارة 2',
     categoryLabel: 'سلسلة تعلّم في دقيقة',
     description: 'نصيحة عملية يمكن تنفيذها خلال دقيقة واحدة لدعم مشروعك.',
-    videoUrl: '/videos/skill-2.mp4',
+    videoUrl: '/assets/videos/skill-2.mp4',
   },
   {
     id: 12,
@@ -105,7 +105,7 @@ export const flashVideos = [
     title: 'مهارة 3',
     categoryLabel: 'سلسلة تعلّم في دقيقة',
     description: 'إضاءة سريعة على فكرة تساعد في تطوير مشروعك الصغير.',
-    videoUrl: '/videos/skill-3.mp4',
+    videoUrl: '/assets/videos/skill-3.mp4',
   },
   {
     id: 13,
@@ -114,7 +114,7 @@ export const flashVideos = [
     title: 'مهارة 4',
     categoryLabel: 'سلسلة تعلّم في دقيقة',
     description: 'نصيحة تطبيقية تعزز من كفاءة إدارة المشروع.',
-    videoUrl: '/videos/skill-4.mp4',
+    videoUrl: '/assets/videos/skill-4.mp4',
   },
   {
     id: 14,
@@ -123,7 +123,7 @@ export const flashVideos = [
     title: 'مهارة 5',
     categoryLabel: 'سلسلة تعلّم في دقيقة',
     description: 'فكرة سريعة تساعد في تحسين التسويق لمشروعك.',
-    videoUrl: '/videos/skill-5.mp4',
+    videoUrl: '/assets/videos/skill-5.mp4',
   },
   {
     id: 15,
@@ -132,7 +132,7 @@ export const flashVideos = [
     title: 'مهارة 6',
     categoryLabel: 'سلسلة تعلّم في دقيقة',
     description: 'خطوة عملية قصيرة يمكن أن ترفع من جودة منتجاتك.',
-    videoUrl: '/videos/skill-6.mp4',
+    videoUrl: '/assets/videos/skill-6.mp4',
   },
 ]
 

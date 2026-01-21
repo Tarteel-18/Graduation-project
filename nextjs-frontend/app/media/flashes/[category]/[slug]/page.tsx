@@ -2,13 +2,14 @@ import BaseLayout from '@/components/BaseLayout'
 import Breadcrumb from '@/components/Breadcrumb'
 import { flashVideos } from '@/data/flashVideos'
 
-export default function MediaFlashVideoDetail({
+export default async function MediaFlashVideoDetail({
   params,
 }: {
-  params: { category: string; slug: string }
+  params: Promise<{ category: string; slug: string }>
 }) {
+  const { category, slug } = await params
   const video = flashVideos.find(
-    (v) => v.category === params.category && v.slug === params.slug
+    (v) => v.category === String(category) && v.slug === String(slug)
   )
 
   if (!video) {
