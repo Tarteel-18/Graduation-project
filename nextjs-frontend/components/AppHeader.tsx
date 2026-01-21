@@ -23,15 +23,15 @@ export default function AppHeader() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = sessionStorage.getItem('theme')
-      if (saved === 'dark') {
-        setIsDark(true)
-      } else if (saved === 'light') {
-        setIsDark(false)
+      const shouldBeDark = saved === 'dark'
+      setIsDark(shouldBeDark)
+      // Apply dark mode immediately based on saved preference
+      const html = document.documentElement
+      if (shouldBeDark) {
+        html.classList.add('dark')
       } else {
-        setIsDark(false)
-        sessionStorage.setItem('theme', 'light')
+        html.classList.remove('dark')
       }
-      applyDarkMode()
     }
   }, [])
 
@@ -61,15 +61,12 @@ export default function AppHeader() {
     setIsDark(newIsDark)
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('theme', newIsDark ? 'dark' : 'light')
-    }
-    applyDarkMode()
-  }
-
-  const applyDarkMode = () => {
-    if (typeof window !== 'undefined') {
       const html = document.documentElement
-      if (isDark) html.classList.add('dark')
-      else html.classList.remove('dark')
+      if (newIsDark) {
+        html.classList.add('dark')
+      } else {
+        html.classList.remove('dark')
+      }
     }
   }
 
@@ -266,9 +263,9 @@ export default function AppHeader() {
 
       {/* منيو الموبايل */}
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex justify-start bg-white/60 dark:bg-[#0f172a]/70 backdrop-blur-sm">
+        <div className="lg:hidden fixed inset-0 z-50 flex justify-start bg-white/60 dark:bg-[#020617]/90 backdrop-blur-sm">
           <div
-            className="relative w-[78%] max-w-xs h-full bg-white/90 dark:bg-[#0f172a]/95 border-r border-slate-100 dark:border-slate-700 pt-6 pb-8 px-4 space-y-4"
+            className="relative w-[78%] max-w-xs h-full bg-white dark:bg-[#020617] border-r border-slate-200 dark:border-slate-700 pt-6 pb-8 px-4 space-y-4"
             style={{ color: headColor }}
             dir="rtl"
           >

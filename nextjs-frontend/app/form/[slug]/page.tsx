@@ -230,7 +230,7 @@ export default function DynamicForm() {
   if (loading || optionsLoading) {
     return (
       <BaseLayout>
-        <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
+        <div className="min-h-screen bg-[#F4FAFB] dark:bg-[#020617] py-10 flex items-center justify-center">
           <div className="text-center text-slate-500 dark:text-slate-300">جاري تحميل النموذج...</div>
         </div>
       </BaseLayout>
@@ -240,7 +240,7 @@ export default function DynamicForm() {
   if (error) {
     return (
       <BaseLayout>
-        <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
+        <div className="min-h-screen bg-[#F4FAFB] dark:bg-[#020617] py-10 flex items-center justify-center">
           <div className="text-center text-red-500">{error}</div>
         </div>
       </BaseLayout>
@@ -250,7 +250,7 @@ export default function DynamicForm() {
   if (!formDef) {
     return (
       <BaseLayout>
-        <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
+        <div className="min-h-screen bg-[#F4FAFB] dark:bg-[#020617] py-10 flex items-center justify-center">
           <div className="text-center text-slate-500 dark:text-slate-300">النموذج غير متوفر</div>
         </div>
       </BaseLayout>
@@ -259,7 +259,7 @@ export default function DynamicForm() {
 
   return (
     <BaseLayout>
-      <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 transition-colors duration-300" dir="rtl">
+      <div className="min-h-screen bg-[#F4FAFB] dark:bg-[#020617] py-10 transition-colors duration-300" dir="rtl">
         <div className="mx-auto max-w-[900px] px-4">
           <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm overflow-hidden mb-6 border border-slate-100 dark:border-slate-700">
             <div className="h-3 bg-[#06A6C8]"></div>

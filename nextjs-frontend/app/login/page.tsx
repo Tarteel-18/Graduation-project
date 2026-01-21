@@ -27,7 +27,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#F6F9F9] dark:bg-slate-950 py-10 transition-colors duration-300">
+    <div className="min-h-screen flex items-center justify-center bg-[#F6F9F9] dark:bg-[#020617] py-10 transition-colors duration-300">
       <div className="bg-white dark:bg-slate-900 shadow-xl rounded-[32px] px-10 py-10 w-full max-w-[650px] border border-[#DDE7EA] dark:border-slate-700">
         <div className="text-center mb-6">
           <Image src="/assets/logo.png" alt="logo" width={80} height={80} className="mx-auto mb-3" />

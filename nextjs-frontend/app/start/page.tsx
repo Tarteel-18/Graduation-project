@@ -73,7 +73,7 @@ export default function StartProject() {
             {posts.map((post) => (
               <article
                 key={post.id}
-                className="bg-[#E9F4F5] dark:bg-slate-800 rounded-[30px] border border-[#D0E6E8] dark:border-slate-700 shadow-sm overflow-hidden"
+                className="start-project-card bg-[#E9F4F5] dark:bg-slate-800 rounded-[30px] border border-[#D0E6E8] dark:border-slate-700 shadow-sm overflow-hidden"
               >
                 <div className="relative">
                   <Image

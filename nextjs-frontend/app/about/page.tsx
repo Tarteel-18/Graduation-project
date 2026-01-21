@@ -27,7 +27,7 @@ export default function About() {
         <div className="mx-auto max-w-[1300px] bg-white dark:bg-slate-900 rounded-[40px] border border-[#E5EDF0] dark:border-slate-700 shadow-sm px-6 md:px-10 py-10 space-y-10">
           {/* من نحن */}
           <section>
-            <div className="bg-[#E6F4F7] dark:bg-slate-700 rounded-3xl p-6 md:p-8 border border-[#EAF4F5] dark:border-slate-600" dir="rtl">
+            <div className="about-card bg-[#E6F4F7] dark:bg-slate-700 rounded-3xl p-6 md:p-8 border border-[#EAF4F5] dark:border-slate-600" dir="rtl">
               <h2 className="text-xl font-bold text-[#165C75] dark:text-[#7BD4FF] mb-3 flex items-center gap-2">
                 <Image src="/assets/images/icon-hex.png" alt="" width={24} height={24} />
                 من نحن
@@ -40,7 +40,7 @@ export default function About() {
 
           {/* الرؤية والرسالة */}
           <section className="grid md:grid-cols-2 gap-6" dir="rtl">
-            <div className="bg-[#E6F4F7] dark:bg-slate-700 p-6 rounded-3xl border border-[#EAF4F5] dark:border-slate-600">
+            <div className="about-card bg-[#E6F4F7] dark:bg-slate-700 p-6 rounded-3xl border border-[#EAF4F5] dark:border-slate-600">
               <h3 className="text-xl font-bold text-[#165C75] dark:text-[#7BD4FF] mb-3 flex items-center gap-2">
                 <Image src="/assets/images/icon-hex.png" alt="" width={24} height={24} />
                 الرؤية
@@ -50,7 +50,7 @@ export default function About() {
               </p>
             </div>
 
-            <div className="bg-[#E6F4F7] dark:bg-slate-700 p-6 rounded-3xl border border-[#D0E7EB] dark:border-slate-600">
+            <div className="about-card bg-[#E6F4F7] dark:bg-slate-700 p-6 rounded-3xl border border-[#D0E7EB] dark:border-slate-600">
               <h3 className="text-xl font-bold text-[#165C75] dark:text-[#7BD4FF] mb-3 flex items-center gap-2">
                 <Image src="/assets/images/icon-hex.png" alt="" width={24} height={24} />
                 الرسالة
@@ -63,7 +63,7 @@ export default function About() {
 
           {/* الأهداف */}
           <section>
-            <div className="bg-[#E6F4F7] dark:bg-slate-700 rounded-3xl p-6 md:p-8 border border-[#D0E7EB] dark:border-slate-600" dir="rtl">
+            <div className="about-card bg-[#E6F4F7] dark:bg-slate-700 rounded-3xl p-6 md:p-8 border border-[#D0E7EB] dark:border-slate-600" dir="rtl">
               <h2 className="text-xl font-bold text-[#165C75] dark:text-[#7BD4FF] mb-4 flex items-center gap-2">
                 <Image src="/assets/images/icon-hex.png" alt="" width={24} height={24} />
                 الأهداف
@@ -79,7 +79,7 @@ export default function About() {
 
           {/* قيمنا */}
           <section className="mt-4" dir="rtl">
-            <div className="bg-[#E9F5F6] dark:bg-slate-700 rounded-[32px] px-10 py-8 border border-[#D8EDEE] dark:border-slate-600">
+            <div className="about-card bg-[#E9F5F6] dark:bg-slate-700 rounded-[32px] px-10 py-8 border border-[#D8EDEE] dark:border-slate-600">
               <h3 className="text-xl font-bold text-[#165C75] dark:text-[#7BD4FF] mb-6 flex items-center gap-2">
                 <Image src="/assets/images/icon-hex.png" alt="" width={24} height={24} />
                 قيمنا

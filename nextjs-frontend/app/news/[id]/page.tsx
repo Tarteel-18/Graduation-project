@@ -39,7 +39,7 @@ export default function NewsDetail({ params }: { params: { id: string } }) {
         />
 
         <div className="mx-auto max-w-[1300px] bg-white dark:bg-slate-900 rounded-[32px] border border-[#E5EDF0] dark:border-slate-700 shadow-sm p-8 md:p-10">
-          <div className="bg-[#ECF6F7] dark:bg-slate-800 rounded-[26px] border border-[#D8EDEE] dark:border-slate-700 shadow p-8 md:p-10">
+          <div className="news-detail-card bg-[#ECF6F7] dark:bg-slate-800 rounded-[26px] border border-[#D8EDEE] dark:border-slate-700 shadow p-8 md:p-10">
             <h1 className="text-3xl font-bold text-[#165C75] dark:text-cyan-300 mb-3 text-right">
               {newsItem.title}
             </h1>

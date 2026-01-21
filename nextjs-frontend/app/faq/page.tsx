@@ -46,7 +46,7 @@ export default function Faq() {
               <div key={index} className="mb-4">
                 <div
                   onClick={() => toggle(index)}
-                  className="cursor-pointer bg-[#DFF1F4] dark:bg-slate-800 hover:bg-[#d7edf0] dark:hover:bg-slate-700 transition-all rounded-xl px-5 py-4 border border-[#cae6ea] dark:border-slate-700 hover:shadow-md"
+                  className="faq-question cursor-pointer bg-[#DFF1F4] dark:bg-slate-800 hover:bg-[#d7edf0] dark:hover:bg-slate-700 transition-all rounded-xl px-5 py-4 border border-[#cae6ea] dark:border-slate-700 hover:shadow-md"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[#165C75] dark:text-cyan-300 font-semibold text-lg">
@@ -73,7 +73,7 @@ export default function Faq() {
                     active[index] ? 'max-h-[300px]' : 'max-h-0'
                   }`}
                 >
-                  <div className="bg-[#F7FCFD] dark:bg-slate-800 rounded-xl px-5 py-4 mt-2 border border-[#D6E8EB] dark:border-slate-700">
+                  <div className="faq-answer bg-[#F7FCFD] dark:bg-slate-800 rounded-xl px-5 py-4 mt-2 border border-[#D6E8EB] dark:border-slate-700">
                     <p className="text-slate-700 dark:text-slate-100 leading-7 text-[16px]">
                       {item.a}
                     </p>

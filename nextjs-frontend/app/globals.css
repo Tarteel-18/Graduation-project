@@ -8,6 +8,78 @@ body {
     'Segoe UI', sans-serif;
 }
 
+/* Dark mode base styles - ensure site-wide coverage */
+.dark {
+  color-scheme: dark;
+  --ad-card-bg: rgb(30 41 59); /* slate-800 */
+}
+
+.dark body {
+  background-color: #020617;
+  color: #f1f5f9;
+}
+
+/* Ensure proper dark mode contrast for common elements */
+.dark .bg-white {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+.dark .bg-slate-800 {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+}
+
+.dark .bg-slate-700 {
+  background-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+.dark .text-slate-600 {
+  color: rgb(203 213 225) !important; /* slate-300 */
+}
+
+.dark .text-slate-700 {
+  color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+.dark .text-slate-800 {
+  color: rgb(241 245 249) !important; /* slate-100 */
+}
+
+.dark .border-slate-700 {
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+.dark .border-slate-600 {
+  border-color: rgb(71 85 105) !important; /* slate-600 */
+}
+
+.dark .border-slate-200 {
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+.dark .border-slate-100 {
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+.dark .bg-slate-50 {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+.dark .bg-slate-100 {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+.dark .text-slate-500 {
+  color: rgb(148 163 184) !important; /* slate-400 */
+}
+
+.dark .text-slate-400 {
+  color: rgb(148 163 184) !important; /* slate-400 */
+}
+
+.dark .divide-slate-100 > * + * {
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
 /* ألوانك الخاصة */
 :root{
   --brand-soft: #D8EAEC22;
@@ -93,6 +165,14 @@ header {
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(24, 89, 116, 0.12);
 }
+.dark .btn-outline {
+  background: rgb(15 23 42); /* slate-900 */
+  color: #27aeb9;
+  border-color: #27aeb9;
+}
+.dark .btn-outline:hover {
+  background: rgb(30 41 59); /* slate-800 */
+}
 
 .btn-long-full {
   display: flex;
@@ -162,10 +242,19 @@ header {
   background-color: #d8eaec;
   color: #185974;
 }
+.dark .dd-item:hover {
+  background-color: #1e293b;
+  color: #e5f4f7;
+}
 .dd-item:active,
 .dd-item:focus {
   background-color: #b2dade;
   color: #185974;
+}
+.dark .dd-item:active,
+.dark .dd-item:focus {
+  background-color: #334155;
+  color: #e5f4f7;
 }
 
 .nav-link {
@@ -583,4 +672,229 @@ header {
 .card-hover:hover {
   transform: translateY(-8px);
   filter: drop-shadow(0 22px 40px rgba(15,76,92,0.18));
+}
+
+/* Additional dark mode overrides for better visibility */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+  color: rgb(241 245 249) !important; /* slate-100 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: rgb(148 163 184) !important; /* slate-400 */
+}
+
+.dark a {
+  color: rgb(203 213 225); /* slate-300 */
+}
+
+.dark a:hover {
+  color: #27aeb9;
+}
+
+/* Ensure footer text is visible in dark mode */
+.dark footer {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+  color: white !important;
+}
+
+.dark footer a {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dark footer a:hover {
+  color: white !important;
+}
+
+/* Ensure header is visible in dark mode */
+.dark header {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Table styles for dark mode */
+.dark table {
+  color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+.dark table thead {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+}
+
+.dark table tbody tr:hover {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+}
+
+/* Ensure main content area has dark background */
+.dark main {
+  background-color: #020617 !important;
+}
+
+/* Ensure all page containers have dark backgrounds */
+.dark .mx-auto {
+  /* This will be handled by individual components, but ensure no light backgrounds leak through */
+}
+
+/* Override any remaining light backgrounds */
+.dark [class*="bg-white"],
+.dark [class*="bg-slate-50"],
+.dark [class*="bg-slate-100"] {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+/* Force dark backgrounds on all card components - highest priority */
+.dark .ad-card,
+.dark .service-card,
+.dark .partner-card,
+.dark .gov-card,
+.dark .study-card {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Target RadioCard - it has rounded-[26px] and contains audio */
+.dark div[class*="rounded-"]:has(audio) {
+  background-color: rgb(30 41 59) !important;
+  border-color: rgb(51 65 85) !important;
+}
+
+/* Force ad detail page inner card to be dark */
+.dark div[class*="rounded-\\[26px\\]"]:has(h1[class*="text-3xl"]) {
+  background-color: rgb(30 41 59) !important;
+  border-color: rgb(51 65 85) !important;
+}
+
+/* Target ad detail card specifically */
+.dark .ad-detail-card {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Target start page project cards */
+.dark .start-project-card {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Target about page cards */
+.dark .about-card {
+  background-color: rgb(51 65 85) !important; /* slate-700 */
+  border-color: rgb(71 85 105) !important; /* slate-600 */
+}
+
+/* Target FAQ page cards */
+.dark .faq-question,
+.dark .faq-answer {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Target news detail page card */
+.dark .news-detail-card {
+  background-color: rgb(30 41 59) !important; /* slate-800 */
+  border-color: rgb(51 65 85) !important; /* slate-700 */
+}
+
+/* Ensure black/dark text colors are light and readable in dark mode */
+.dark .text-black {
+  color: rgb(241 245 249) !important; /* slate-100 - very light */
+}
+
+/* Target elements with black text color via style attribute or computed color */
+.dark [style*="color: rgb(0, 0, 0)"],
+.dark [style*="color: #000"],
+.dark [style*="color: #000000"],
+.dark [style*="color: #1A1A1A"] {
+  color: rgb(241 245 249) !important; /* slate-100 */
+}
+
+/* Ensure breadcrumb text is readable in dark mode */
+.dark nav span.text-slate-800 {
+  color: rgb(103 232 249) !important; /* cyan-300 */
+}
+
+/* Ensure h1 headings are readable in dark mode */
+.dark h1.text-black {
+  color: rgb(103 232 249) !important; /* cyan-300 */
+}
+
+/* Target h1 elements that have black color values in their class name */
+.dark h1[class*="000000"],
+.dark h1[class*="1A1A1A"] {
+  color: rgb(103 232 249) !important; /* cyan-300 */
+}
+
+/* General rule: ensure h1 elements are light in dark mode */
+/* This will be overridden by dark:text- classes which have higher specificity */
+.dark h1 {
+  color: rgb(203 213 225); /* slate-300 - light default for h1 */
+}
+
+/* Ensure text-slate-600, text-slate-700, text-gray-600, text-gray-700 are light in dark mode */
+.dark .text-slate-600,
+.dark .text-slate-700,
+.dark .text-gray-600,
+.dark .text-gray-700 {
+  color: rgb(203 213 225) !important; /* slate-300 */
+}
+
+/* Ensure text-slate-800 and text-gray-800 are light */
+.dark .text-slate-800,
+.dark .text-gray-800 {
+  color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+/* Text that should be lighter for secondary content */
+.dark .text-slate-500,
+.dark .text-gray-500 {
+  color: rgb(148 163 184) !important; /* slate-400 */
+}
+
+/* Ensure paragraphs and list items without explicit color classes are readable */
+.dark p:not([class*="text-"]),
+.dark li:not([class*="text-"]),
+.dark span:not([class*="text-"]) {
+  color: rgb(226 232 240) !important; /* slate-200 */
+}
+
+/* Ensure form containers have dark backgrounds */
+.dark form {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+.dark form > div[class*="bg-white"] {
+  background-color: rgb(15 23 42) !important; /* slate-900 */
+}
+
+/* Force form page backgrounds to be dark - target any div with these backgrounds */
+.dark div.min-h-screen {
+  /* Check if it has light blue/green background and override */
+}
+
+/* More specific: target form and login page containers */
+.dark div.min-h-screen.flex.items-center.justify-center,
+.dark div.min-h-screen.py-10 {
+  background-color: rgb(2 6 23) !important; /* #020617 */
+}
+
+/* Target BaseLayout's main background */
+.dark div.min-h-screen.flex.flex-col {
+  background-color: rgb(2 6 23) !important; /* #020617 */
+}
+
+/* Most aggressive: Target any element with light blue backgrounds by checking computed style */
+/* Since we can't do that in CSS, we'll use a JavaScript approach or ensure all components have dark classes */
+/* For now, let's ensure the card classes work */
+
+/* Ensure text is visible on dark backgrounds */
+.dark [class*="text-slate-600"],
+.dark [class*="text-slate-700"],
+.dark [class*="text-slate-800"],
+.dark [class*="text-gray-600"],
+.dark [class*="text-gray-700"] {
+  color: rgb(203 213 225) !important; /* slate-300 */
 }

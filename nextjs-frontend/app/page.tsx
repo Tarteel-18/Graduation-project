@@ -477,18 +477,18 @@ export default function Home() {
 
               {/* قائمة الأخبار */}
               <aside className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col reveal">
-                <div className="px-6 py-4 border-b border-slate-100">
+                <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-700">
                   <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-100">
                     أحدث الأخبار
                   </h3>
                 </div>
 
-                <div className="flex-1 divide-y divide-slate-100">
+                <div className="flex-1 divide-y divide-slate-100 dark:divide-slate-700">
                   {news.map((item, i) => (
                     <Link
                       key={i}
                       href={item.link}
-                      className="group flex items-start gap-3 px-6 py-4 hover:bg-slate-50 transition-colors relative"
+                      className="group flex items-start gap-3 px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors relative"
                     >
                       <span className="absolute right-0 top-0 h-full w-[3px] bg-[#27AEB9] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                       <div className="flex-1">
@@ -511,9 +511,9 @@ export default function Home() {
         <section className="relative py-16 overflow-hidden bg-section dark:bg-slate-950">
           <div className="mx-auto max-w-[1280px] px-6 pb-4 pt-0 text-center reveal">
             <h3 className="section-title section-title-wide">{mapSection.title}</h3>
-            <p className="text-slate-600 mb-3">{mapSection.description}</p>
+            <p className="text-slate-600 dark:text-slate-300 mb-3">{mapSection.description}</p>
 
-            <div className="rounded-2xl overflow-hidden border border-slate-200">
+            <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
               <iframe
                 className="w-full h-[380px]"
                 style={{ border: 0 }}
