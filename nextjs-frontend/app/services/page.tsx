@@ -6,28 +6,28 @@ export default function Services() {
   const services = [
     {
       id: 1,
-      image: '/assets/images/logo.png',
+      image: '/assets/images/training.jpg',
       title: 'خدمة التدريب',
       desc: 'تقدم الهيئة برامج تدريبية متخصصة تهدف إلى تطوير مهارات رواد الأعمال...',
       link: '/services/training',
     },
     {
       id: 2,
-      image: '/assets/services/marketing.jpg',
+      image: '/assets/images/training.jpg',
       title: 'خدمة التسويق',
       desc: 'نسعى لتسويق منتجات المشاريع الصغيرة عبر المعارض والفعاليات...',
       link: '/services/marketing',
     },
     {
       id: 3,
-      image: '/assets/services/funding.jpg',
+      image: '/assets/images/training.jpg',
       title: 'خدمة التمويل',
       desc: 'تقدم الهيئة قروضاً بيضاء عبر الجمعيات الشريكة لدعم المشاريع...',
       link: '/services/funding',
     },
     {
       id: 4,
-      image: '/assets/services/consulting.jpg',
+      image: '/assets/images/training.jpg',
       title: 'خدمة الاستشارات',
       desc: 'نقدم استشارات متخصصة تساعد أصحاب المشاريع على النمو...',
       link: '/services/consulting',

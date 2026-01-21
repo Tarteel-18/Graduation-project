@@ -17,8 +17,13 @@ function LoginForm() {
     e.preventDefault()
     login()
     localStorage.setItem('token', 'demo-token')
+    localStorage.setItem('userLogged', '1') // Ensure this is set
     const redirect = searchParams.get('redirect') || '/'
-    router.push(redirect)
+    
+    // Small delay to ensure localStorage is set and auth state updates
+    setTimeout(() => {
+      router.push(redirect)
+    }, 50)
   }
 
   return (

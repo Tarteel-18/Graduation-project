@@ -3,7 +3,8 @@
 import { useRef } from 'react'
 
 interface BaseFileUploadProps {
-  modelValue: File[]
+  value?: File[]
+  modelValue?: File[] // Support both for compatibility
   label: string
   description?: string
   buttonLabel?: string
@@ -14,6 +15,7 @@ interface BaseFileUploadProps {
 }
 
 export default function BaseFileUpload({
+  value,
   modelValue,
   label,
   description = '',
@@ -24,6 +26,9 @@ export default function BaseFileUpload({
   onChange,
 }: BaseFileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  
+  // Use value if provided, otherwise fall back to modelValue, default to empty array
+  const files = value || modelValue || []
 
   const trigger = () => {
     fileInputRef.current?.click()
@@ -47,11 +52,11 @@ export default function BaseFileUpload({
 
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="text-xs text-slate-600 dark:text-slate-200 space-y-1">
-          {modelValue.length === 0 ? (
+          {files.length === 0 ? (
             <p>لم تقم باختيار أي ملف بعد.</p>
           ) : (
             <ul className="list-disc pr-4 space-y-1">
-              {modelValue.map((file, index) => (
+              {files.map((file, index) => (
                 <li key={index}>{file.name}</li>
               ))}
             </ul>

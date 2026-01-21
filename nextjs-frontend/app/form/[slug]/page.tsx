@@ -29,10 +29,30 @@ export default function DynamicForm() {
 
   // Check authentication for protected forms (except contact-form)
   useEffect(() => {
-    if (slug !== 'contact-form' && !isLoggedIn) {
-      router.push(`/login?redirect=/form/${slug}`)
+    // Re-check auth state from localStorage directly (in case useAuth hasn't updated yet)
+    const checkAuth = () => {
+      if (typeof window !== 'undefined') {
+        const loggedIn = !!localStorage.getItem('userLogged')
+        if (slug !== 'contact-form' && !loggedIn) {
+          router.push(`/login?redirect=${encodeURIComponent(`/form/${slug}`)}`)
+        }
+      }
     }
-  }, [slug, isLoggedIn, router])
+    
+    // Check immediately
+    checkAuth()
+    
+    // Also listen for auth changes
+    const handleAuthChange = () => {
+      checkAuth()
+    }
+    
+    window.addEventListener('auth-change', handleAuthChange)
+    
+    return () => {
+      window.removeEventListener('auth-change', handleAuthChange)
+    }
+  }, [slug, router])
 
   const resolveFieldComponent = (field: any) => {
     switch (field.type) {
@@ -60,6 +80,15 @@ export default function DynamicForm() {
   }
 
   useEffect(() => {
+    // Don't load form if not authenticated (except contact-form)
+    if (slug !== 'contact-form') {
+      const loggedIn = typeof window !== 'undefined' && !!localStorage.getItem('userLogged')
+      if (!loggedIn) {
+        // Auth check will handle redirect, just return here
+        return
+      }
+    }
+
     const loadForm = async () => {
       setLoading(true)
       setError('')
@@ -74,6 +103,10 @@ export default function DynamicForm() {
           setFormDef(null)
         } else {
           const clonedDef = JSON.parse(JSON.stringify(def))
+
+          // Initialize form data and errors in a single batch
+          const initialFormData: Record<string, any> = {}
+          const initialErrors: Record<string, string> = {}
 
           clonedDef.fields.forEach((field: any) => {
             if (field.dynamicOptions) {
@@ -98,14 +131,18 @@ export default function DynamicForm() {
               })
             }
 
-            if (field.type === 'checkbox' || field.type === 'table') {
-              setFormData((prev) => ({ ...prev, [field.name]: [] }))
+            // Initialize form data based on field type
+            if (field.type === 'checkbox' || field.type === 'table' || field.type === 'file') {
+              initialFormData[field.name] = []
             } else {
-              setFormData((prev) => ({ ...prev, [field.name]: '' }))
+              initialFormData[field.name] = ''
             }
-            setErrors((prev) => ({ ...prev, [field.name]: '' }))
+            initialErrors[field.name] = ''
           })
 
+          // Set form data and errors in a single batch update
+          setFormData(initialFormData)
+          setErrors(initialErrors)
           setFormDef(clonedDef)
         }
       } catch (err: any) {
@@ -117,7 +154,8 @@ export default function DynamicForm() {
     }
 
     loadForm()
-  }, [slug, fetchFieldOptions, getFieldOptions])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]) // Only depend on slug - fetchFieldOptions and getFieldOptions are stable
 
   const validate = () => {
     let ok = true
@@ -191,44 +229,51 @@ export default function DynamicForm() {
 
   if (loading || optionsLoading) {
     return (
-      <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
-        <div className="text-center text-slate-500 dark:text-slate-300">جاري تحميل النموذج...</div>
-      </div>
+      <BaseLayout>
+        <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
+          <div className="text-center text-slate-500 dark:text-slate-300">جاري تحميل النموذج...</div>
+        </div>
+      </BaseLayout>
     )
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
-        <div className="text-center text-red-500">{error}</div>
-      </div>
+      <BaseLayout>
+        <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
+          <div className="text-center text-red-500">{error}</div>
+        </div>
+      </BaseLayout>
     )
   }
 
   if (!formDef) {
     return (
-      <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
-        <div className="text-center text-slate-500 dark:text-slate-300">النموذج غير متوفر</div>
-      </div>
+      <BaseLayout>
+        <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 flex items-center justify-center">
+          <div className="text-center text-slate-500 dark:text-slate-300">النموذج غير متوفر</div>
+        </div>
+      </BaseLayout>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 transition-colors duration-300" dir="rtl">
-      <div className="mx-auto max-w-[900px] px-4">
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm overflow-hidden mb-6 border border-slate-100 dark:border-slate-700">
-          <div className="h-3 bg-[#06A6C8]"></div>
-          <div className="px-8 py-6">
-            <h1 className="text-xl md:text-2xl font-extrabold text-[#163B52] dark:text-cyan-300 mb-2">
-              {formDef.title}
-            </h1>
-            {formDef.description && (
-              <p className="text-sm text-slate-500 dark:text-slate-300">{formDef.description}</p>
-            )}
+    <BaseLayout>
+      <div className="min-h-screen bg-[#F4FAFB] dark:bg-slate-950 py-10 transition-colors duration-300" dir="rtl">
+        <div className="mx-auto max-w-[900px] px-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm overflow-hidden mb-6 border border-slate-100 dark:border-slate-700">
+            <div className="h-3 bg-[#06A6C8]"></div>
+            <div className="px-8 py-6">
+              <h1 className="text-xl md:text-2xl font-extrabold text-[#163B52] dark:text-cyan-300 mb-2">
+                {formDef.title}
+              </h1>
+              {formDef.description && (
+                <p className="text-sm text-slate-500 dark:text-slate-300">{formDef.description}</p>
+              )}
+            </div>
           </div>
-        </div>
 
-        <form onSubmit={onSubmit} className="space-y-5 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 px-6 md:px-8 py-6">
+          <form onSubmit={onSubmit} className="space-y-5 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 px-6 md:px-8 py-6">
           {formDef.fields.map((field: any) => {
             const FieldComponent = resolveFieldComponent(field)
 
@@ -249,7 +294,11 @@ export default function DynamicForm() {
                       type: field.type,
                       error: errors[field.name],
                       ...(field.type === 'select' && { options: field.options || [] }),
-                      ...(field.type === 'file' && { multiple: field.maxFiles > 1, accept: field.accept }),
+                      ...(field.type === 'file' && { 
+                    multiple: field.maxFiles > 1, 
+                    accept: field.accept,
+                    description: field.description
+                  }),
                       ...(field.type === 'table' && { field }),
                     } as any)}
                   />
@@ -274,7 +323,11 @@ export default function DynamicForm() {
                       type: field.type,
                       error: errors[field.name],
                       ...(field.type === 'select' && { options: field.options || [] }),
-                      ...(field.type === 'file' && { multiple: field.maxFiles > 1, accept: field.accept }),
+                      ...(field.type === 'file' && { 
+                    multiple: field.maxFiles > 1, 
+                    accept: field.accept,
+                    description: field.description
+                  }),
                       ...(field.type === 'table' && { field }),
                     } as any)}
                   />
@@ -326,7 +379,7 @@ export default function DynamicForm() {
               <FieldComponent
                 key={field.name}
                 {...({
-                  value: formData[field.name] ?? (field.type === 'checkbox' || field.type === 'table' ? [] : ''),
+                  value: formData[field.name] ?? (field.type === 'checkbox' || field.type === 'table' || field.type === 'file' ? [] : ''),
                   onChange: (value: any) => handleFieldChange(field.name, value),
                   label: field.label,
                   placeholder: field.placeholder,
@@ -334,7 +387,11 @@ export default function DynamicForm() {
                   type: field.type,
                   error: errors[field.name],
                   ...(field.type === 'select' && { options: field.options || [] }),
-                  ...(field.type === 'file' && { multiple: field.maxFiles > 1, accept: field.accept }),
+                  ...(field.type === 'file' && { 
+                    multiple: field.maxFiles > 1, 
+                    accept: field.accept,
+                    description: field.description
+                  }),
                   ...(field.type === 'table' && { field }),
                   ...(field.type === 'checkbox' && { options: field.options || [] }),
                   ...(field.type === 'radio' && { options: field.options || [] }),
@@ -360,8 +417,9 @@ export default function DynamicForm() {
             </button>
           </div>
         </form>
+        </div>
       </div>
-    </div>
+    </BaseLayout>
   )
 }
 

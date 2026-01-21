@@ -13,7 +13,7 @@ export default function ServiceTraining() {
   const goToTrainingForm = () => {
     const target = '/form/training-program'
     if (!isLoggedIn) {
-      router.push(`/login?redirect=${target}`)
+      router.push(`/login?redirect=${encodeURIComponent(target)}`)
     } else {
       router.push(target)
     }

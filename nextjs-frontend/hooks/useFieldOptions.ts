@@ -46,6 +46,10 @@ export function useFieldOptions() {
     try {
       const apiUrl = `${API_BASE_URL}/api/method/override_project_integration.api.field_options.get_field_options`
 
+      // Create abort controller for timeout
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
       const response = await fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -53,7 +57,10 @@ export function useFieldOptions() {
           'Origin': typeof window !== 'undefined' ? window.location.origin : '',
         },
         credentials: 'include',
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -69,8 +76,14 @@ export function useFieldOptions() {
         throw new Error(result.message?.message || 'Failed to fetch field options')
       }
     } catch (err: any) {
-      console.error('Error fetching field options:', err)
-      setError(err.message)
+      // Don't show error to user if it's a network error - just use defaults
+      if (err.name === 'AbortError' || err.name === 'TypeError' || err.message?.includes('fetch') || err.message?.includes('NetworkError')) {
+        console.warn('Field options API unavailable, using default options:', err.message)
+      } else {
+        console.error('Error fetching field options:', err)
+      }
+      
+      // Always set default options so form can still work
       const defaultOpts: Record<string, any[]> = {}
       addDefaultOptions(defaultOpts)
       setFieldOptions(defaultOpts)
