@@ -37,8 +37,14 @@ export default function AppHeader() {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node
       const els = [aboutMenuRef.current, mediaMenuRef.current]
-      if (!els.some(el => el && el.contains(e.target as Node))) {
+      // Check if click is inside dropdown menus
+      const isInsideMenu = els.some(el => el && el.contains(target))
+      // Check if click is on the toggle buttons themselves
+      const targetEl = target as HTMLElement
+      const isToggleButton = targetEl && targetEl.closest && targetEl.closest('button[data-toggle]')
+      if (!isInsideMenu && !isToggleButton) {
         setOpenMenu(null)
       }
     }
@@ -87,29 +93,23 @@ export default function AppHeader() {
         <ul className="hidden lg:flex items-center gap-4 font-medium text-[16px]" style={{ color: headColor }}>
           {/* عن الهيئة */}
           <li className="relative whitespace-nowrap flex items-center">
-            <div className="flex items-center gap-1">
-              <Link
-                href="/about"
-                className="nav-link cursor-pointer hover:opacity-80"
+            <button
+              className="nav-link cursor-pointer hover:opacity-80 flex items-center gap-1"
+              onClick={(e) => {
+                e.stopPropagation()
+                toggle('about')
+              }}
+              data-toggle="about"
+            >
+              <span>عن الهيئة</span>
+              <svg
+                className={`w-4 h-4 transition-transform ${openMenu === 'about' ? 'rotate-180' : ''}`}
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
-                عن الهيئة
-              </Link>
-              <button
-                className="nav-link cursor-pointer hover:opacity-80 flex items-center"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  toggle('about')
-                }}
-              >
-                <svg
-                  className={`w-4 h-4 transition-transform ${openMenu === 'about' ? 'rotate-180' : ''}`}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
-                </svg>
-              </button>
-            </div>
+                <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" />
+              </svg>
+            </button>
 
             {openMenu === 'about' && (
               <div
@@ -157,10 +157,9 @@ export default function AppHeader() {
                 e.stopPropagation()
                 toggle('media')
               }}
+              data-toggle="media"
             >
-              <Link href="/media" className="inline-flex items-center gap-1">
-                <span>قسم الإعلام والتوعية</span>
-              </Link>
+              <span>قسم الإعلام والتوعية</span>
               <svg
                 className={`w-4 h-4 transition-transform ${openMenu === 'media' ? 'rotate-180' : ''}`}
                 viewBox="0 0 20 20"
