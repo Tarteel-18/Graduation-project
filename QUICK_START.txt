@@ -1,0 +1,14 @@
+
+# Quick Start Commands
+
+## Option 1: Use the scripts
+./start-backend.sh    # Terminal 1
+./start-frontend.sh   # Terminal 2
+
+## Option 2: Manual commands
+# Terminal 1 - Backend:
+cd chatbot-backend && source venv/bin/activate && python -m app.main
+
+# Terminal 2 - Frontend:
+npm run dev
+

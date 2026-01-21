@@ -1,0 +1,447 @@
+{
+  "summary": {
+    "total_questions": 31,
+    "successful": 31,
+    "errors": 0,
+    "avg_response_time": 1.23,
+    "avg_sources": 1.0,
+    "correct_out_of_scope": 3,
+    "hallucinations": 0
+  },
+  "results": [
+    {
+      "question": "ماذا تفعل هذه الهيئة بالضبط؟",
+      "category": "about",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 2.07,
+      "num_sources": 1,
+      "sources": [
+        "س: ما الوثائق المطلوبة؟\nج: يتم التوضيح من قبل الجمعية بخصوصها...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "ما هي مهمة الهيئة العامة لتنمية المشاريع؟",
+      "category": "about",
+      "in_scope": true,
+      "response": "مهمة الهيئة العامة لتنمية المشاريع الصغيرة والأصغر هي دعم وتمكين هذه المشاريع عبر التمويل، التدريب، التسويق، والاستشارات.",
+      "response_time": 2.13,
+      "num_sources": 1,
+      "sources": [
+        "س: ما هي الهيئة العامة لتنمية المشاريع الصغيرة والأصغر؟\nج: هيئة حكومية تهدف لدعم وتمكين المشاريع الص..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "أريد معرفة أهداف هذه المؤسسة",
+      "category": "about",
+      "in_scope": true,
+      "response": "أهداف هذه المؤسسة تشمل تعزيز الاقتصاد المحلي، التمكين الاقتصادي للمجتمع، دعم المشاريع الصغيرة وريادة الأعمال، خلق فرص عمل، ومحاربة الفقر.",
+      "response_time": 0.95,
+      "num_sources": 1,
+      "sources": [
+        "س: ما أهداف الهيئة الرئيسية؟\nج: تعزيز الاقتصاد المحلي، التمكين الاقتصادي للمجتمع، دعم المشايع الصغير..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "من يستطيع الحصول على مساعدة منكم؟",
+      "category": "about",
+      "in_scope": true,
+      "response": "يمكن الحصول على مساعدة من الهيئة العامة لتنمية المشاريع الصغيرة والأصغر من خلال برامج الدعم المتاحة.",
+      "response_time": 2.37,
+      "num_sources": 1,
+      "sources": [
+        "س: هل الاستشارات مجانية؟\nج: نعم جانية ضمن برامج الدعم...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "أين مكتبكم الرئيسي؟",
+      "category": "about",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 1.51,
+      "num_sources": 1,
+      "sources": [
+        "س: هل توجد مكاتب في المناطق الريفية؟\nج: نتواجد، عبر جمعيات شريكة...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "كم أكبر مبلغ يمكن أن أحصل عليه كتمويل؟",
+      "category": "funding",
+      "in_scope": true,
+      "response": "أكبر مبلغ يمكن أن تحصل عليه كتمويل يصل حتى مليون ونصف لبعض المشاريع الواعدة.",
+      "response_time": 1.97,
+      "num_sources": 1,
+      "sources": [
+        "س: ما الحد الأعلى للتمويل؟\nج: يصل حتى مليون ونصف لبعض المشاريع الواعدة...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "ما أصغر قرض متاح؟",
+      "category": "funding",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 1.59,
+      "num_sources": 1,
+      "sources": [
+        "س: ما نوع القروض التي تقدمها الهيئة؟\nج: قروض بيضاء صغيرة للمشاريع الإنتاجية والخدمية...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل تفرضون فوائد على القروض؟",
+      "category": "funding",
+      "in_scope": true,
+      "response": "لا، لا نفرض أي فوائد على القروض.",
+      "response_time": 1.2,
+      "num_sources": 1,
+      "sources": [
+        "س: هل القروض بفوائد؟\nج: لا، ليس هناك أي فوائد...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "كم المدة المسموحة لسداد القرض؟",
+      "category": "funding",
+      "in_scope": true,
+      "response": "المدة المسموحة لسداد القرض تتراوح بين 6 أشهر و3 سنوات.",
+      "response_time": 1.13,
+      "num_sources": 1,
+      "sources": [
+        "س: كم مدة سداد القرض؟\nج: تتراوح بين 6 أشهر و3 سنوات...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل يمكنني الحصول على تمويل بدون ضمانات؟",
+      "category": "funding",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 0.92,
+      "num_sources": 1,
+      "sources": [
+        "س: هل يوجد تمويل بدون ضمانات؟\nج: نعم للإفراد الذين تضمنهم الجمعيات التي هم أعضاء فيها...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "ما أنواع التدريبات المتوفرة؟",
+      "category": "training",
+      "in_scope": true,
+      "response": "التدريبات المتوفرة تشمل مجالات التصنيع الغذائي، الخياطة، التربية الحيوانية، ريادة الأعمال، تنمية المهارات الحرفية، الإدارة، التسويق، والتمويل.",
+      "response_time": 1.19,
+      "num_sources": 1,
+      "sources": [
+        "س: ما نوع البرامج التدريبية التي تقدمها الهيئة؟\nج: برامج في التصنيع الغذائي، الخياطة، التربية الحيوا..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل التدريب بدون مقابل؟",
+      "category": "training",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 0.84,
+      "num_sources": 1,
+      "sources": [
+        "س: هل تقدم الهيئة منحاً دراسية؟\nج: لا، ولكنها تدعم التدريب...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "كم تستغرق الدورات التدريبية؟",
+      "category": "training",
+      "in_scope": true,
+      "response": "تستغرق الدورات التدريبية بين 5 أيام و3 أشهر.",
+      "response_time": 0.74,
+      "num_sources": 1,
+      "sources": [
+        "س: كم مدة الدورات؟\nج: تختلف بين 5 أيام و3 أشهر...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل تحصل على شهادة بعد التدريب؟",
+      "category": "training",
+      "in_scope": true,
+      "response": "نعم، تحصل على شهادة بعد التدريب، حيث تمنح الهيئة شهادات مشاركة معتمدة.",
+      "response_time": 1.08,
+      "num_sources": 1,
+      "sources": [
+        "س: هل التدريب يشمل شهادات معتمدة؟\nج: نعم، الهيئة تمنح شهادات مشاركة معتمدة...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل لديكم برامج تدريب خاصة بالنساء؟",
+      "category": "training",
+      "in_scope": true,
+      "response": "نعم، لدينا برامج تدريب خاصة بالنساء، خصوصاً في الحرف المنزلية والصناعات الغذائية.",
+      "response_time": 0.99,
+      "num_sources": 1,
+      "sources": [
+        "س: هل توجد برامج تدريب للنساء فقط؟\nج: نعم، خصوصاً في الحرف المنزلية والصناعات الغذائية...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل تساعدون في بدء مشروع جديد من الصفر؟",
+      "category": "projects",
+      "in_scope": true,
+      "response": "نعم، نحن نقدم المساعدة في بدء مشروع جديد من الصفر من خلال التدريب والتمكين والتسويق والتمويل المبدئي.",
+      "response_time": 1.39,
+      "num_sources": 1,
+      "sources": [
+        "س: هل تساعد الهيئة في إنشاء مشروع من الصفر؟\nج: نعم، من التدريب والتمكين والتسويق والتمويل المبدئي...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل تدعمون المشاريع الزراعية؟",
+      "category": "projects",
+      "in_scope": true,
+      "response": "نعم، نحن ندعم بعض المشاريع الزراعية المحدودة مثل قروض منظومات الطاقة الشمسية.",
+      "response_time": 0.85,
+      "num_sources": 1,
+      "sources": [
+        "س: هل تدعم الهيئة المشاريع الزراعية؟\nج: حالياً، بعض المشاريع الزراعية المحدودة مثل قروض منظومات الطا..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل يمكن للأسر المحتاجة الاستفادة من خدماتكم؟",
+      "category": "projects",
+      "in_scope": true,
+      "response": "نعم، يمكن للأسر المحتاجة الاستفادة من خدماتنا عبر مشاريع التدريب والتمكين والتسويق والقروض البيضاء.",
+      "response_time": 0.99,
+      "num_sources": 1,
+      "sources": [
+        "س: هل يمكن للأسر الفقيرة الاستفادة؟\nج: نعم، عبر مشاريع التدريب والتمكين والتسويق والقروض البيضاء...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل تدعمون المشاريع المنزلية؟",
+      "category": "projects",
+      "in_scope": true,
+      "response": "نعم، تدعم الهيئة العامة لتنمية المشاريع الصغيرة والأصغر المشاريع المنزلية، وهذه إحدى أولوياتها.",
+      "response_time": 1.01,
+      "num_sources": 1,
+      "sources": [
+        "س: هل هناك دعم للمشاريع المنزلية؟\nج: نعم، وهذه إحدى أولويات الهيئة...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل يمكنني تسجيل مشروعي القائم حالياً؟",
+      "category": "projects",
+      "in_scope": true,
+      "response": "نعم، يمكنك تسجيل مشروعك القائم حالياً، حيث إن جميع المشاريع الصغيرة القائمة بلا استثناء مرحب بها للتسجيل وستضاف إلى قاعدة بيانات الهيئة لتشملها البرامج والمشاريع المستقبلية.",
+      "response_time": 2.06,
+      "num_sources": 1,
+      "sources": [
+        "س: هل يقبل تسجيل المشاريع القائمة؟\nج: نعم، جميع المشاريع الصغيرة القائمة بلا استثناء مرحب بها للتسجي..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "ما أنواع الاستشارات التي تقدمونها؟",
+      "category": "consultations",
+      "in_scope": true,
+      "response": "نقدم أنواعاً من الاستشارات تشمل الاستشارات المالية، الإدارية، التسويقية، والقانونية.",
+      "response_time": 0.91,
+      "num_sources": 1,
+      "sources": [
+        "س: ما نوع الاستشارات التي تقدمها الهيئة؟\nج: استشارات مالية، إدارية، تسويقية، وقانونية...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل الاستشارات مجانية؟",
+      "category": "consultations",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 0.95,
+      "num_sources": 1,
+      "sources": [
+        "س: هل الاستشارات مجانية؟\nج: نعم جانية ضمن برامج الدعم...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل تساعدون في التسويق للمشاريع؟",
+      "category": "consultations",
+      "in_scope": true,
+      "response": "نعم، نحن نساعد في التسويق للمشاريع عبر معارض وبازارات.",
+      "response_time": 0.96,
+      "num_sources": 1,
+      "sources": [
+        "س: هل تساعد الهيئة في التسويق؟\nج: نعم، عبر معارض وبازارات...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "كيف أقدم طلب للحصول على قرض؟",
+      "category": "registration",
+      "in_scope": true,
+      "response": "يمكنك تقديم طلب للحصول على قرض من خلال التقديم إلى الجمعيات التي تقدم الهيئة قروض عبرها.",
+      "response_time": 0.91,
+      "num_sources": 1,
+      "sources": [
+        "س: كيف يمكن التسجيل للحصول على قرض؟\nج: عبر التقديم الى الجمعيات التي تقدم الهيئة قروض عبرها...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل التسجيل يكلف مالاً؟",
+      "category": "registration",
+      "in_scope": true,
+      "response": "لا، التسجيل مجاني.",
+      "response_time": 0.86,
+      "num_sources": 1,
+      "sources": [
+        "س: هل توجد رسوم للتسجيل؟\nج: لا، التسجيل مجاني...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "كم يستغرق الرد على طلبي؟",
+      "category": "registration",
+      "in_scope": true,
+      "response": "يستغرق الرد على طلبك بين أسبوع وشهر.",
+      "response_time": 0.69,
+      "num_sources": 1,
+      "sources": [
+        "س: كم يستغرق الرد على الطلب؟\nج: بين أسبوع وشهر...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل توجد فروع في محافظة الحديدة؟",
+      "category": "coverage",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 1.39,
+      "num_sources": 1,
+      "sources": [
+        "س: هل يوجد فرع في الحديدة؟\nج: نعم، لتقديم الدعم للمشاريع في قطاع الثروة الحيوانية وقطاع الصيد البحري..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "هل يمكن التقديم من محافظة تعز؟",
+      "category": "coverage",
+      "in_scope": true,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 2.08,
+      "num_sources": 1,
+      "sources": [
+        "س: هل تغطي الهيئة محافظة تعز؟\nج: نعم، عبر برامج خاصة...."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "likely_accurate"
+    },
+    {
+      "question": "ما هي عاصمة باريس؟",
+      "category": "out_of_scope",
+      "in_scope": false,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 0.64,
+      "num_sources": 1,
+      "sources": [
+        "س: أين يقع المقر الرئيسي للهيئة؟\nج: في العاصمة صنعاء، الدائري، جولة غزة (جولة كنتاكي سابقاً) عمارة ا..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "correct"
+    },
+    {
+      "question": "ما هو الطقس اليوم؟",
+      "category": "out_of_scope",
+      "in_scope": false,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 0.7,
+      "num_sources": 1,
+      "sources": [
+        "س: متى تأسست الهيئة؟\nج: تأسست الهيئة بقرار رئيس المجلس السياسي الأعلى رقم 13 لسنة 2021..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "correct"
+    },
+    {
+      "question": "كيف أطبخ الكبسة؟",
+      "category": "out_of_scope",
+      "in_scope": false,
+      "response": "عذراً، لم أجد هذه المعلومات في قاعدة المعرفة.",
+      "response_time": 1.19,
+      "num_sources": 1,
+      "sources": [
+        "س: هل تساعد الهيئة في كتابة خطة عمل؟\nج: حالياً، لا..."
+      ],
+      "status": "success",
+      "error": null,
+      "accuracy": "correct"
+    }
+  ]
+}

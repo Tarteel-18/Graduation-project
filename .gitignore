@@ -1,0 +1,41 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python backend
+chatbot-backend/venv/
+chatbot-backend/__pycache__/
+chatbot-backend/**/__pycache__/
+chatbot-backend/*.pyc
+chatbot-backend/*.pyo
+chatbot-backend/*.pyd
+chatbot-backend/.Python
+chatbot-backend/vector_db/
+chatbot-backend/.env
+chatbot-backend/*.egg-info/
+chatbot-backend/dist/
+chatbot-backend/build/
+chatbot-backend/.pytest_cache/
+chatbot-backend/.mypy_cache/
+chatbot-backend/.ruff_cache/

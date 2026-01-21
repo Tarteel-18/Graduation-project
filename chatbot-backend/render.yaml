@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: chatbot-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.main
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: USE_CLOUD_EMBEDDINGS
+        value: "True"
+      - key: OPENAI_EMBEDDING_MODEL
+        value: "text-embedding-3-small"
+      - key: OPENAI_MODEL
+        value: "gpt-4o"
+      - key: USE_RERANKING
+        value: "False"
+      - key: PORT
+        value: "10000"  # Render uses port 10000
+      - key: HOST
+        value: "0.0.0.0"
+
+
