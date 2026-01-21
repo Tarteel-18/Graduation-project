@@ -15,9 +15,9 @@ export const successStories = [
   },
   {
     slug: 'story-3',
-    title: 'مبادرة برايد كميونتي',
-    summary: 'نبذة عن مبادرة برايد كميونتي.',
-    content: 'تفاصيل مبادرة برايد كميونتي وتأثيرها...',
+    title: 'تجربتي في الريادة',
+    summary: 'نبذة عن تجربتي في الريادة.',
+    content: 'تفاصيل تجربتي في الريادة وتأثيرها...',
     videoUrl: '/assets/videos/story-3.mp4',
   },
 ]

@@ -573,3 +573,14 @@ header {
   box-shadow: 0 20px 36px rgba(15,76,92,0.18);
   border-color: #C7E4E7;
 }
+
+/* الكروت العامة */
+.card-hover {
+  transition: transform .35s cubic-bezier(.2,.9,.3,1), filter .35s;
+  /* Use filter drop-shadow instead of box-shadow to work with overflow-hidden */
+  filter: drop-shadow(0 8px 22px rgba(15,76,92,0.10));
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  filter: drop-shadow(0 22px 40px rgba(15,76,92,0.18));
+}

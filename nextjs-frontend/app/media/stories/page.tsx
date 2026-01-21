@@ -1,28 +1,15 @@
 import BaseLayout from '@/components/BaseLayout'
 import Breadcrumb from '@/components/Breadcrumb'
 import MediaCard from '@/components/MediaCard'
+import { successStories } from '@/data/successStories'
 
 export default function MediaStories() {
-  const stories = [
-    {
-      id: 1,
-      title: 'قصة نجاح 1',
-      image: '/assets/images/STORY.png',
-      link: '/media/stories/story-1',
-    },
-    {
-      id: 2,
-      title: 'قصة نجاح 2',
-      image: '/assets/images/STORY.png',
-      link: '/media/stories/story-2',
-    },
-    {
-      id: 3,
-      title: 'قصة نجاح 3',
-      image: '/assets/images/STORY.png',
-      link: '/media/stories/story-3',
-    },
-  ]
+  const stories = successStories.map((story, index) => ({
+    id: index + 1,
+    title: story.title,
+    image: '/assets/images/STORY.png',
+    link: `/media/stories/${story.slug}`,
+  }))
 
   return (
     <BaseLayout>

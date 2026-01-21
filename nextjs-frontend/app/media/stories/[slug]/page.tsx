@@ -2,8 +2,9 @@ import BaseLayout from '@/components/BaseLayout'
 import Breadcrumb from '@/components/Breadcrumb'
 import { successStories } from '@/data/successStories'
 
-export default function StoryDetail({ params }: { params: { slug: string } }) {
-  const story = successStories.find((s) => s.slug === params.slug)
+export default async function StoryDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const story = successStories.find((s) => s.slug === slug)
 
   if (!story) {
     return (
