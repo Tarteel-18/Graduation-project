@@ -375,12 +375,12 @@ export default function Home() {
             <div className="partners-viewport reveal">
               <div className="partners-track">
                 {partners.map((logo, i) => (
-                  <div key={`p1-${i}`} className="partner-card">
+                  <div key={`p1-${i}`} className="partner-logo-card">
                     <Image src={logo} alt="شعار شريك" width={150} height={96} className="object-contain" loading="lazy" />
                   </div>
                 ))}
                 {partners.map((logo, i) => (
-                  <div key={`p2-${i}`} className="partner-card">
+                  <div key={`p2-${i}`} className="partner-logo-card">
                     <Image src={logo} alt="شعار شريك" width={150} height={96} className="object-contain" loading="lazy" />
                   </div>
                 ))}

@@ -6,14 +6,14 @@ import Image from 'next/image'
 export default function Partners() {
   const partners = [
     {
-      title: 'الشركاء المنفذون',
-      link: '/partners/executors',
-      desc: 'شركاؤنا المنفذون هم الذراع التنفيذية التي حولت الرؤى إلى واقع ملموس...',
-    },
-    {
       title: 'الشركاء الممولون',
       link: '/partners/funders',
       desc: 'نعتز بشركائنا الممولين الذين أسهموا في دعم وتمويل البرامج والمشاريع...',
+    },
+    {
+      title: 'الشركاء المنفذون',
+      link: '/partners/executors',
+      desc: 'شركاؤنا المنفذون هم الذراع التنفيذية التي حولت الرؤى إلى واقع ملموس...',
     },
   ]
 
