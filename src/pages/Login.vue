@@ -17,9 +17,9 @@
         </h1>
       </div>
 
-      <!-- فورم -->
+      <!-- الفورم -->
       <form class="space-y-6" @submit.prevent="onSubmit">
-        <!-- حقل الايميل -->
+        <!-- البريد الإلكتروني -->
         <div class="relative">
           <input
             v-model="email"
@@ -38,26 +38,32 @@
           />
         </div>
 
-        <!-- حقل كلمة المرور -->
+        <!-- كلمة المرور -->
         <div class="relative">
           <input
             v-model="password"
-            :type="showPass ? 'text' : 'password'"
+            type="password"
             placeholder="كلمة المرور"
             class="w-full border border-[#BFD0D3] dark:border-slate-600
                    bg-white dark:bg-slate-800
                    text-slate-900 dark:text-slate-100
-                   rounded-xl py-3 pr-12 pl-12 text-right
+                   rounded-xl py-3 pr-12 pl-14 text-right
                    focus:border-[#165C75] dark:focus:border-cyan-400
                    outline-none transition-colors duration-200"
           />
+
+          <!-- أيقونة القفل -->
           <img
             src="@/assets/icons/lock.png"
             class="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 opacity-60"
           />
         </div>
 
-        <p class="text-left text-sm text-[#165C75] dark:text-cyan-300 cursor-pointer hover:underline">
+        <!-- نسيت كلمة المرور -->
+        <p
+          class="text-right text-sm text-[#165C75] dark:text-cyan-300
+                 cursor-pointer hover:underline -mt-2"
+        >
           هل نسيت كلمة المرور؟
         </p>
 
@@ -71,17 +77,7 @@
           تسجيل الدخول
         </button>
 
-        <!-- زر إنشاء حساب -->
-        <div class="text-center mt-2">
-          <span class="text-gray-600 dark:text-slate-300 text-sm">ليس لديك حساب؟</span>
-          <RouterLink
-            to="/register"
-            class="text-[#165C75] dark:text-cyan-300 font-semibold hover:underline text-sm ml-1"
-          >
-            إنشاء حساب
-          </RouterLink>
-        </div>
-
+        <!-- فاصل -->
         <div class="flex items-center gap-4 my-3">
           <div class="flex-1 h-px bg-gray-300 dark:bg-slate-700"></div>
           <span class="text-gray-500 dark:text-slate-300">او</span>
@@ -94,6 +90,20 @@
           <img src="@/assets/icons/facebook.png" class="w-10 cursor-pointer">
           <img src="@/assets/icons/apple.png" class="w-10 cursor-pointer">
         </div>
+
+        <!-- إنشاء حساب -->
+        <div class="text-center mt-6">
+          <span class="text-gray-600 dark:text-slate-300 text-sm">
+            ليس لديك حساب؟
+          </span>
+          <RouterLink
+            to="/register"
+            class="text-[#165C75] dark:text-cyan-300
+                   font-semibold hover:underline text-sm mr-1"
+          >
+            إنشاء حساب
+          </RouterLink>
+        </div>
       </form>
     </div>
   </div>
@@ -104,7 +114,6 @@ import { ref } from 'vue'
 import { RouterLink, useRouter, useRoute } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
 
-const showPass = ref(false)
 const email = ref('')
 const password = ref('')
 
@@ -119,3 +128,11 @@ function onSubmit() {
   router.push(redirect)
 }
 </script>
+
+<style scoped>
+/* نخلي أيقونة العين الافتراضية حق المتصفح تظهر في اليسار */
+input[type="password"] {
+  direction: rtl;
+}
+
+</style>

@@ -51,7 +51,8 @@
 
       <!-- محتوى الرسائل -->
       <div
-        class="flex-1 px-4 py-5 overflow-y-auto bg-[#F4F7F8] dark:bg-slate-800"
+        class="flex-1 min-h-0 px-4 py-5 overflow-y-auto bg-[#F4F7F8] dark:bg-slate-800"
+
         dir="rtl"
         ref="messagesContainer"
       >
@@ -128,9 +129,10 @@
      <!-- الأسئلة المقترحة -->
 <div
   v-if="showSuggestions && suggestedQuestions.length"
-  class="px-4 pt-3 pb-4 bg-[#F4F7F8] dark:bg-slate-800 border-t border-slate-200/0"
+  class="shrink-0 px-4 pt-3 pb-4 bg-[#F4F7F8] dark:bg-slate-800 border-t border-slate-200/0"
   dir="rtl"
 >
+
   <div class="flex flex-wrap gap-2">
     <button
       v-for="(q, i) in suggestedQuestions"
@@ -154,11 +156,12 @@
 
 
       <!-- إدخال الرسائل -->
-      <div
-        class="border-t border-slate-200 dark:border-slate-700
-               bg-white dark:bg-slate-900 px-4 py-3"
-        dir="rtl"
-      >
+    <div
+  class="shrink-0 border-t border-slate-200 dark:border-slate-700
+         bg-white dark:bg-slate-900 px-4 py-3"
+  dir="rtl"
+>
+
         <div class="relative">
           <input
             type="text"

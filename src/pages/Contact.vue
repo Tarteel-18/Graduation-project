@@ -100,74 +100,46 @@
         </div>
 
         <!-- السوشال -->
-        <div class="box hover-card">
-          <div class="icon-box ml-auto">
-            <img :src="iconSocial" class="icon" />
-          </div>
+<div class="box hover-card flex flex-col items-start p-4">
+  <div class="icon-box mb-2">
+    <img :src="iconSocial" class="icon" />
+  </div>
 
-          <h3 class="title">وسائل التواصل الاجتماعي</h3>
+  <h3 class="title">وسائل التواصل الاجتماعي</h3>
 
-          <p class="text mb-3">
-            حساباتنا الرسمية على مواقع التواصل
-          </p>
+  <p class="text mb-3">
+    حساباتنا الرسمية على مواقع التواصل
+  </p>
 
-          <div class="flex gap-3 justify-end">
-            <!-- فيسبوك -->
-            <a
-              href="https://www.facebook.com/share/1Lk2sKUtik/"
-              target="_blank" rel="noopener"
-              class="soc"
-              aria-label="Facebook"
-            >
-              <img src="@/assets/icons/facebook.png" alt="Facebook" class="w-6 h-6" />
-            </a>
+  <div class="flex gap-3">
+    <!-- فيسبوك -->
+    <a href="https://www.facebook.com/share/1Lk2sKUtik/" target="_blank" rel="noopener" class="soc" aria-label="Facebook">
+      <img src="@/assets/icons/facebook.png" alt="Facebook" class="w-6 h-6" />
+    </a>
 
-            <!-- تيليغرام -->
-            <a
-              href="https://t.me/samea777"
-              target="_blank" rel="noopener"
-              class="soc"
-              aria-label="Telegram"
-            >
-              <img src="@/assets/icons/telegram.png" alt="Telegram" class="w-6 h-6" />
-            </a>
+    <!-- تيليغرام -->
+    <a href="https://t.me/samea777" target="_blank" rel="noopener" class="soc" aria-label="Telegram">
+      <img src="@/assets/icons/telegram.png" alt="Telegram" class="w-6 h-6" />
+    </a>
 
-            <!-- واتساب رقم -->
-            <a
-              href="https://wa.me/967780040073"
-              target="_blank" rel="noopener"
-              class="soc"
-              aria-label="WhatsApp"
-            >
-              <img src="@/assets/icons/whatsapp.png" alt="WhatsApp" class="w-6 h-6" />
-            </a>
+    <!-- واتساب -->
+    <a href="https://wa.me/967780040073" target="_blank" rel="noopener" class="soc" aria-label="WhatsApp">
+      <img src="@/assets/icons/whatsapp.png" alt="WhatsApp" class="w-6 h-6" />
+    </a>
 
-            <!-- X أسود -->
-            <a
-              href="https://x.com/Gasmed28Gasmed?t=MTnUmxS6FGUDzKghkLtP9A&s=09"
-              target="_blank" rel="noopener"
-              class="soc"
-              aria-label="X"
-            >
-              <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none">
-                <path
-                  d="M4 3h4l4 5 4-5h4l-7 8 7 10h-4l-5-7-5 7H4l7-10z"
-                  fill="#000000"
-                />
-              </svg>
-            </a>
+    <!-- X أسود -->
+    <a href="https://x.com/Gasmed28Gasmed?t=MTnUmxS6FGUDzKghkLtP9A&s=09" target="_blank" rel="noopener" class="soc" aria-label="X">
+      <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none">
+        <path d="M4 3h4l4 5 4-5h4l-7 8 7 10h-4l-5-7-5 7H4l7-10z" fill="#000000"/>
+      </svg>
+    </a>
 
-            <!-- يوتيوب -->
-            <a
-              href="https://youtube.com/channel/UCL-scONsm7whLMk2rc1aCaA?si=AJ-dMnJlO-RLQKGQ"
-              target="_blank" rel="noopener"
-              class="soc"
-              aria-label="YouTube"
-            >
-              <img src="@/assets/icons/youtube.png" alt="YouTube" class="w-6 h-6" />
-            </a>
-          </div>
-        </div>
+    <!-- يوتيوب -->
+    <a href="https://youtube.com/channel/UCL-scONsm7whLMk2rc1aCaA?si=AJ-dMnJlO-RLQKGQ" target="_blank" rel="noopener" class="soc" aria-label="YouTube">
+      <img src="@/assets/icons/youtube.png" alt="YouTube" class="w-6 h-6" />
+    </a>
+  </div>
+</div>
 
         <!-- البريد -->
         <div class="box hover-card">

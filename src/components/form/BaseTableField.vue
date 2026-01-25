@@ -173,7 +173,7 @@
         @click="startAdd"
       >
         <span>➕</span>
-        إضافة صف جديد
+        إضافة بيانات  جديد
       </button>
     </div>
   </div>

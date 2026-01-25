@@ -602,13 +602,7 @@ export const formsConfig = {
         placeholder: "example@mail.com",
         required: false,
       },
-      {
-        name: "subject",
-        type: "text",
-        label: "موضوع الرسالة",
-        placeholder: "اكتب عنواناً قصيراً للرسالة",
-        required: true,
-      },
+   
       {
         name: "message",
         type: "textarea",

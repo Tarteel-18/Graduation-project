@@ -44,9 +44,9 @@
               class="absolute right-0 top-full mt-3 w-56 rounded-xl border border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-lg p-2"
             >
               <RouterLink class="dd-item" :style="{ color: headColor }" to="/about" @click="openMenu = null">من نحن</RouterLink>
+               <RouterLink class="dd-item" :style="{ color: headColor }" to="/partners" @click="openMenu = null">الشركاء</RouterLink>
+                <RouterLink class="dd-item" :style="{ color: headColor }" to="/studies" @click="openMenu = null">الدراسات</RouterLink>
               <RouterLink class="dd-item" :style="{ color: headColor }" to="/faq" @click="openMenu = null">الأسئلة الشائعة</RouterLink>
-              <RouterLink class="dd-item" :style="{ color: headColor }" to="/partners" @click="openMenu = null">الشركاء</RouterLink>
-              <RouterLink class="dd-item" :style="{ color: headColor }" to="/studies" @click="openMenu = null">الدراسات</RouterLink>
               <RouterLink class="dd-item" :style="{ color: headColor }" to="/contact" @click="openMenu = null">تواصل معنا</RouterLink>
             </div>
           </transition>
@@ -466,4 +466,4 @@ function goToRegisterProjectForm() {
 .mobile-item[open] .circle-arrow .chevron {
   transform: rotate(-135deg);
 }
-</style>
+</style> 

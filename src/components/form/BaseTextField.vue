@@ -17,7 +17,8 @@
         class="w-full bg-transparent outline-none border-0
                border-b border-slate-300 dark:border-slate-500
                pb-1 text-sm text-slate-800 dark:text-slate-100
-               placeholder-slate-400 dark:placeholder-slate-500"
+               placeholder-slate-400 dark:placeholder-slate-500
+               text-right" 
       />
 
       <p v-if="hint && !error" class="mt-1 text-[11px] text-slate-400 dark:text-slate-500">

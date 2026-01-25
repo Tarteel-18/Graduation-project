@@ -241,21 +241,33 @@
           </h3>
 
           <div class="space-y-4">
-            <div>
+            <!-- كلمة المرور الحالية -->
+            <div class="relative">
               <label class="block text-sm text-slate-600 dark:text-slate-200 mb-1">
                 كلمة المرور الحالية
               </label>
-              <input type="password" class="input" />
+              <input
+                :type="showCurrent ? 'text' : 'password'"
+                v-model="currentPassword"
+                class="input pr-10"
+              />
+            
             </div>
 
-            <div>
+            <!-- كلمة المرور الجديدة -->
+            <div class="relative">
               <label class="block text-sm text-slate-600 dark:text-slate-200 mb-1">
                 كلمة المرور الجديدة
               </label>
-              <input type="password" class="input" />
+              <input
+                :type="showNew ? 'text' : 'password'"
+                v-model="newPassword"
+                class="input pr-10"
+              />
+           
             </div>
 
-            <button class="btn-primary">حفظ</button>
+            <button class="btn-primary" @click="changePassword">حفظ</button>
           </div>
         </div>
 
@@ -287,11 +299,23 @@
               <input v-model="user.phone" type="tel" class="input" />
             </div>
 
-            <button class="btn-primary">تحديث البيانات</button>
+            <button class="btn-primary" @click="updateProfile">تحديث البيانات</button>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- الرسالة المنبثقة في الوسط -->
+    <transition name="fade">
+      <div
+        v-if="toast.show"
+        class="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+      >
+        <div class="bg-[#165C75] dark:bg-cyan-500 text-white px-6 py-3 rounded-xl shadow-lg pointer-events-auto">
+          {{ toast.message }}
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -310,7 +334,6 @@ const handleLogout = () => {
 }
 
 const tab = ref('overview')
-
 const tabs = [
   { label: 'نظرة عامة', value: 'overview' },
   { label: 'طلباتي', value: 'requests' },
@@ -328,15 +351,8 @@ const user = ref({
   rejectedRequests: 1,
 })
 
-const lastRequest = ref({
-  type: 'دعم فني',
-  daysAgo: 3,
-})
-
-const lastProject = ref({
-  name: 'المشغل اليدوي',
-  location: 'صنعاء — السبعين',
-})
+const lastRequest = ref({ type: 'دعم فني', daysAgo: 3 })
+const lastProject = ref({ name: 'المشغل اليدوي', location: 'صنعاء — السبعين' })
 
 const requests = ref([
   { id: 1, type: 'دعم فني', desc: 'استشارة فنية', date: '2025-07-12', status: 'pending', statusLabel: 'قيد المراجعة' },
@@ -357,8 +373,32 @@ const statusBadgeClass = (status) => ({
 const onAvatarChange = (e) => {
   const file = e.target.files?.[0]
   if (!file) return
-  const url = URL.createObjectURL(file)
-  user.value.avatar = url
+  user.value.avatar = URL.createObjectURL(file)
+}
+
+// ==== الإعدادات ====
+const currentPassword = ref('123456') // مثال كلمة المرور الحالية
+const newPassword = ref('')
+const showCurrent = ref(true)
+const showNew = ref(false)
+
+const toast = ref({ show: false, message: '' })
+const showToast = (msg) => {
+  toast.value.message = msg
+  toast.value.show = true
+  setTimeout(() => (toast.value.show = false), 2000)
+}
+
+const changePassword = () => {
+  if (!newPassword.value) return
+  currentPassword.value = newPassword.value
+  newPassword.value = ''
+  showCurrent.value = true
+  showToast('تم تغيير كلمة المرور بنجاح!')
+}
+
+const updateProfile = () => {
+  showToast('تم تحديث البيانات بنجاح!')
 }
 </script>
 
@@ -380,5 +420,12 @@ const onAvatarChange = (e) => {
   @apply mt-2 w-full md:w-auto px-8 py-2 rounded-xl
          bg-[#165C75] text-white text-sm font-semibold hover:bg-[#0e4257]
          dark:bg-cyan-500 dark:hover:bg-cyan-400;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
 }
 </style>
