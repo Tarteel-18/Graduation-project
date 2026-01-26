@@ -28,3 +28,5 @@ export default function MediaCard({ title, image, link }: MediaCardProps) {
   )
 }
 
+
+

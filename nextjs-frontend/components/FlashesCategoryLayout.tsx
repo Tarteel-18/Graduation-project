@@ -99,3 +99,5 @@ const FlashesCategoryLayout: React.FC<FlashesCategoryLayoutProps> = ({
 }
 
 export default FlashesCategoryLayout
+
+
